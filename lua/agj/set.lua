@@ -26,7 +26,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- half-page scroll with cursor in the middle
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u><<")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- keep search terms in the middle
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
