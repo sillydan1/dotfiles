@@ -61,7 +61,12 @@ require('packer').startup(function(use)
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
+  -- cmake / c++ development
   use 'cdelledonne/vim-cmake'
+  use {
+    'puremourning/vimspector',
+    run = 'python3 install_gadget.py --enable-vscode-cpptools'
+  }
 
   -- Fuzzy Finder (files, lsp, etc)
   use 'BurntSushi/ripgrep'
@@ -480,9 +485,15 @@ require("nvim-tree").setup({
     dotfiles = false,
   },
 })
-vim.keymap.set('n', '<leader>o',  require('nvim-tree').open,  { desc = '[O]pen file' })
 
 -- TODO: Add keybinds for nvim-tree
+vim.keymap.set('n', '<leader>o',  require('nvim-tree').open,  { desc = '[O]pen file' })
+
+-- Used to open nvim-tree
+local function open_nvim_tree()
+  require('nvim-tree.api').tree.open()
+end
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
