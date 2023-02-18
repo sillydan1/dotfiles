@@ -502,9 +502,9 @@ vim.fn.sign_define('DapBreakpointRejected',  {text='',texthl='red',linehl='',
 -- dap keymaps
 vim.keymap.set('n', '<F4>', function() require('dap').close() end)
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+vim.keymap.set('n', '<F6>', function() require('dap').step_over() end)
+vim.keymap.set('n', '<F7>', function() require('dap').step_into() end)
+vim.keymap.set('n', '<F8>', function() require('dap').step_out() end)
 vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
 vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
 vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
