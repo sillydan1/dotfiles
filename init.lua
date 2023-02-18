@@ -17,7 +17,7 @@ require('packer').startup(function(use)
       'nvim-tree/nvim-web-devicons',
     }
   }
-  
+ 
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -166,6 +166,34 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+-- Set dap configuration
+local dap = require('dap')
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+  },
+}
+dap.adapters.codelldb = {
+  type = 'server',
+  host = '127.0.0.1',
+  port = "${port}",
+  executable = {
+    -- CHANGE THIS to your path!
+    command = vim.fn.getenv('HOME') .. '/.local/share/nvim/dap/codelldb/extension/adapter/codelldb',
+    args = {"--port", "${port}"},
+    -- On windows you may have to uncomment this:
+    -- detached = false,
+  }
+}
+dap.defaults.fallback.exception_breakpoints = {}
 
 -- Set lualine as statusline
 -- See `:help lualine.txt`
@@ -329,7 +357,7 @@ local on_attach = function(_, bufnr)
   nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>ss', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -461,36 +489,38 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 -- nvim-dap configurations
-local dap = require('dap')
-dap.adapters.cppdbg = {
-  id = 'cppdbg',
-  type = 'executable',
-  command = '/home/agj/.local/share/vscode-cpptools/extension/debugAdapters/bin/OpenDebugAD7'
-}
-dap.configurations.cpp = {
-  {
-    name = 'Launch File',
-    type = 'cppdbg',
-    request = 'launch',
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    cwd = '${workspaceFolder}',
-    stopAtEntry = true
-  },
-  {
-    name = 'Attach to gdbserver :1234',
-    type = 'cppdbg',
-    request = 'launch',
-    MIMode = 'gdb',
-    miDebuggerServerAddress = 'localhost:1234',
-    miDebuggerPath = '/usr/bin/gdb',
-    cwd = '${workspaceFolder}',
-    program = function ()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end
-  }
-}
+vim.api.nvim_set_hl(0, "blue",   { fg = "#3d59a1" })
+vim.api.nvim_set_hl(0, "green",  { fg = "#9ece6a" })
+vim.api.nvim_set_hl(0, "yellow", { fg = "#FFFF00" })
+vim.api.nvim_set_hl(0, "orange", { fg = "#f09000" })
+vim.api.nvim_set_hl(0, "red",    { fg = "#ff3333" })
+vim.fn.sign_define('DapBreakpoint',          {text='',texthl='red',linehl='',numhl=''})
+vim.fn.sign_define('DapBreakpointCondition', {text='',texthl='orange',linehl='',numhl=''})
+vim.fn.sign_define('DapLogPoint',            {text='',texthl='blue',linehl='',numhl=''})
+vim.fn.sign_define('DapStopped',             {text='',texthl='green',linehl='',numhl=''})
+vim.fn.sign_define('DapBreakpointRejected',  {text='',texthl='red',linehl='',numhl=''})
+-- dap keymaps
+vim.keymap.set('n', '<F4>', function() require('dap').close() end)
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
+vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
+vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
+vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+vim.keymap.set('n', '<leader>dj', function() require('dap.ext.vscode').load_launchjs(vim.fn.input('Path to json: ', vim.fn.getcwd() .. '/', 'file'), { codelldb = { 'c', 'cpp' } }) end)
+vim.keymap.set({'n', 'v'}, '<Leader>dh', function() require('dap.ui.widgets').hover() end)
+vim.keymap.set({'n', 'v'}, '<Leader>dp', function() require('dap.ui.widgets').preview() end)
+vim.keymap.set('n', '<Leader>df', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.frames)
+end)
+vim.keymap.set('n', '<Leader>ds', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.scopes)
+end)
 
 
 -- empty setup using defaults
