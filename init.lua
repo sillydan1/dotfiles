@@ -63,7 +63,7 @@ require('packer').startup(function(use)
 
   -- cmake / c++ development
   use 'cdelledonne/vim-cmake'
-  use 'mfussenegger/nvim-dap'
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
   -- Fuzzy Finder (files, lsp, etc)
   use 'BurntSushi/ripgrep'
@@ -489,6 +489,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 -- nvim-dap configurations
+require("dapui").setup()
+
 vim.api.nvim_set_hl(0, "blue",   { fg = "#3d59a1" })
 vim.api.nvim_set_hl(0, "green",  { fg = "#9ece6a" })
 vim.api.nvim_set_hl(0, "yellow", { fg = "#FFFF00" })
@@ -500,6 +502,8 @@ vim.fn.sign_define('DapLogPoint',            {text='',texthl='blue',linehl=''
 vim.fn.sign_define('DapStopped',             {text='',texthl='green',linehl='',numhl=''})
 vim.fn.sign_define('DapBreakpointRejected',  {text='',texthl='red',linehl='',numhl=''})
 -- dap keymaps
+vim.keymap.set('n', '<F2>', function() require('dapui').open() end)
+vim.keymap.set('n', '<F3>', function() require('dapui').close() end)
 vim.keymap.set('n', '<F4>', function() require('dap').close() end)
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F6>', function() require('dap').step_over() end)
