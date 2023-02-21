@@ -17,7 +17,7 @@ require('packer').startup(function(use)
       'nvim-tree/nvim-web-devicons',
     }
   }
- 
+
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -186,7 +186,6 @@ dap.adapters.codelldb = {
   host = '127.0.0.1',
   port = "${port}",
   executable = {
-    -- CHANGE THIS to your path!
     command = vim.fn.getenv('HOME') .. '/.local/share/nvim/dap/codelldb/extension/adapter/codelldb',
     args = {"--port", "${port}"},
     -- On windows you may have to uncomment this:
