@@ -172,25 +172,30 @@ local dap = require('dap')
 dap.configurations.cpp = {
   {
     name = "Launch file",
-    type = "codelldb",
+    type = "cppdbg",
     request = "launch",
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-  },
-}
-dap.adapters.codelldb = {
-  type = 'server',
-  host = '127.0.0.1',
-  port = "${port}",
-  executable = {
-    command = vim.fn.getenv('HOME') .. '/.local/share/nvim/dap/codelldb/extension/adapter/codelldb',
-    args = {"--port", "${port}"},
-    -- On windows you may have to uncomment this:
-    -- detached = false,
+    stopOnEntry = true,
   }
+}
+-- dap.adapters.codelldb = {
+--   type = 'server',
+--   host = '127.0.0.1',
+--   port = "${port}",
+--   executable = {
+--     command = vim.fn.getenv('HOME') .. '/.local/share/nvim/dap/codelldb/extension/adapter/codelldb',
+--     args = {"--port", "${port}"},
+--     -- On windows you may have to uncomment this:
+--     -- detached = false,
+--   }
+-- }
+dap.adapters.cppdbg = {
+  id = 'cppdbg',
+  type = 'executable',
+  command = vim.fn.getenv('HOME') .. '/.local/share/nvim/dap/cpptools/extension/debugAdapters/bin/OpenDebugAD7'
 }
 dap.defaults.fallback.exception_breakpoints = {}
 
@@ -504,7 +509,7 @@ vim.fn.sign_define('DapBreakpointRejected',  {text='',texthl='red',linehl='ve
 -- dap keymaps
 local continue = function()
   if vim.fn.filereadable('.vscode/launch.json') then
-    require('dap.ext.vscode').load_launchjs(nil, { codelldb = { 'c', 'cpp' }})
+    require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' }})
   end
   require('dap').continue()
 end
