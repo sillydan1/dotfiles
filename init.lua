@@ -178,20 +178,20 @@ dap.configurations.cpp = {
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = '${workspaceFolder}',
-    stopOnEntry = true,
+    stopOnEntry = false,
   }
 }
--- dap.adapters.codelldb = {
---   type = 'server',
---   host = '127.0.0.1',
---   port = "${port}",
---   executable = {
---     command = vim.fn.getenv('HOME') .. '/.local/share/nvim/dap/codelldb/extension/adapter/codelldb',
---     args = {"--port", "${port}"},
---     -- On windows you may have to uncomment this:
---     -- detached = false,
---   }
--- }
+dap.adapters.codelldb = {
+   type = 'server',
+   host = '127.0.0.1',
+   port = "${port}",
+   executable = {
+     command = vim.fn.getenv('HOME') .. '/.local/share/nvim/dap/codelldb/extension/adapter/codelldb',
+     args = {"--port", "${port}"},
+     -- On windows you may have to uncomment this:
+     -- detached = false,
+   }
+}
 dap.adapters.cppdbg = {
   id = 'cppdbg',
   type = 'executable',
@@ -509,7 +509,7 @@ vim.fn.sign_define('DapBreakpointRejected',  {text='',texthl='red',linehl='ve
 -- dap keymaps
 local continue = function()
   if vim.fn.filereadable('.vscode/launch.json') then
-    require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' }})
+    require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' }, codelldb = { 'c', 'cpp' }})
   end
   require('dap').continue()
 end
@@ -525,7 +525,7 @@ vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
 vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
 vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
-vim.keymap.set('n', '<leader>dj', function() require('dap.ext.vscode').load_launchjs(vim.fn.input('Path to json: ', vim.fn.getcwd() .. '/', 'file'), { codelldb = { 'c', 'cpp' } }) end)
+vim.keymap.set('n', '<leader>dj', function() require('dap.ext.vscode').load_launchjs(vim.fn.input('Path to json: ', vim.fn.getcwd() .. '/', 'file'), { cppdbg = { 'c', 'cpp' }, codelldb = { 'c', 'cpp' } }) end)
 vim.keymap.set({'n', 'v'}, '<Leader>dh', function() require('dap.ui.widgets').hover() end)
 vim.keymap.set({'n', 'v'}, '<Leader>dp', function() require('dap.ui.widgets').preview() end)
 vim.keymap.set('n', '<Leader>df', function()
