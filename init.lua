@@ -397,9 +397,12 @@ local on_attach = function(_, bufnr)
   nmap('<leader>cc', function()
     vim.cmd('CMakeGenerate')
   end, '[C]Make project [C]onfigure')
-  nmap('<leader>cb', function() 
+  nmap('<leader>cb', function()
     vim.cmd('CMakeBuild')
   end, '[C]Make project [B]uild')
+  nmap('<leader>cC', function()
+    vim.cmd('CMakeClean')
+  end, '[C]Make project [C]lean')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
