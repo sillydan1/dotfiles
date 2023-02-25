@@ -50,6 +50,9 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
+  -- multiple visual cursors
+  use 'mg979/vim-visual-multi'
+
   -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
@@ -593,7 +596,13 @@ require("nvim-tree").setup({
 })
 
 -- TODO: Add keybinds for nvim-tree
-vim.keymap.set('n', '<leader>o',  require('nvim-tree').open,  { desc = '[O]pen file' })
+vim.keymap.set('n', '<leader>o',  require('nvim-tree').toggle,  { desc = '[O]pen file' })
+
+-- set <tab> to indent 4 spaces!
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
 -- Used to open nvim-tree
 local function open_nvim_tree()
