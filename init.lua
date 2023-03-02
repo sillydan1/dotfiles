@@ -325,6 +325,17 @@ vim.keymap.set('n', '<leader>sG', function()
 end, { desc = '[S]earch all by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
+  -- cmake things
+vim.keymap.set('n', '<leader>cc', function()
+  vim.cmd('CMakeGenerate')
+end, { desc = '[C]Make project [C]onfigure' })
+vim.keymap.set('n', '<leader>cb', function()
+  vim.cmd('CMakeBuild')
+end, { desc = '[C]Make project [B]uild' })
+vim.keymap.set('n', '<leader>cC', function()
+  vim.cmd('CMakeClean')
+end, { desc = '[C]Make project [C]lean' })
+
 vim.keymap.set('n', '<leader>wm', function ()
   vim.cmd(':w')
   vim.cmd(':make')
@@ -412,7 +423,6 @@ local on_attach = function(_, bufnr)
     if desc then
       desc = 'LSP: ' .. desc
     end
-
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
@@ -425,16 +435,6 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  -- cmake things
-  nmap('<leader>cc', function()
-    vim.cmd('CMakeGenerate')
-  end, '[C]Make project [C]onfigure')
-  nmap('<leader>cb', function()
-    vim.cmd('CMakeBuild')
-  end, '[C]Make project [B]uild')
-  nmap('<leader>cC', function()
-    vim.cmd('CMakeClean')
-  end, '[C]Make project [C]lean')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
