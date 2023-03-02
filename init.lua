@@ -18,6 +18,27 @@ require('packer').startup(function(use)
     }
   }
 
+  -- todo list
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {
+        keywords = {
+          TODO = {
+            alt = { "todo:", " todo ", " TODO " }
+          },
+          NOTE = {
+            alt = { "note:" }
+          }
+        }
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -269,6 +290,14 @@ require('telescope').setup {
     },
   },
 }
+
+-- todo list keybinds
+vim.keymap.set('n', '<leader>st', function ()
+    vim.cmd(':TodoTelescope keywords=TODO,FIX')
+end, { desc = '[S]earch [T]odos' })
+vim.keymap.set('n', '<leader>sT', function ()
+    vim.cmd(':TodoTelescope')
+end, { desc = '[S]earch all [T]odos' })
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
