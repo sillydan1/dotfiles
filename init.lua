@@ -344,6 +344,9 @@ vim.keymap.set('n', '<leader>wm', function ()
   vim.cmd(':make')
 end, { desc = '[W]rite buffer and [M]ake' })
 
+-- Ctrl+c should be just the same as pressing escape!
+vim.cmd('imap <C-c> <Esc>')
+
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
@@ -428,9 +431,9 @@ local on_attach = function(client, bufnr)
     end
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
-  local cap = client.server_capabilities
 
-  if cap.document_highlight then
+  local cap = client.server_capabilities -- old value was resolved_capabilities / cap.document_highlight
+  if cap.documentHighlightProvider then
     -- highlight the symbol you've hovering when getting coffee
     vim.api.nvim_create_autocmd({ "CursorHold" }, { callback = vim.lsp.buf.document_highlight })
     vim.api.nvim_create_autocmd({ "CursorHoldI" }, { callback = vim.lsp.buf.document_highlight })
