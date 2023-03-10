@@ -415,7 +415,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -428,11 +428,22 @@ local on_attach = function(_, bufnr)
     end
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
+  local cap = client.server_capabilities
+
+  if cap.document_highlight then
+    -- highlight the symbol you've hovering when getting coffee
+    vim.api.nvim_create_autocmd({ "CursorHold" }, { callback = vim.lsp.buf.document_highlight })
+    vim.api.nvim_create_autocmd({ "CursorHoldI" }, { callback = vim.lsp.buf.document_highlight })
+    vim.api.nvim_create_autocmd({ "CursorMoved" }, { callback = vim.lsp.buf.clear_references })
+  end
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gh',function()
+    vim.cmd(':ClangdSwitchSourceHeader')
+  end, '[G]oto [H]eader')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ss', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
@@ -485,7 +496,6 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Setup mason so it can manage external tooling
 require('mason').setup()
--- require('mason.health').check()
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
@@ -642,6 +652,7 @@ local function open_nvim_tree()
   require('nvim-tree.api').tree.open()
 end
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
 
 -- barbar configuration
 local map = vim.api.nvim_set_keymap
