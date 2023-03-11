@@ -429,12 +429,10 @@ local on_attach = function(client, bufnr)
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
-    local cap = client.server_capabilities -- old value was resolved_capabilities / cap.document_highlight
-    if cap.documentHighlightProvider then
-        -- highlight the symbol you've hovering when getting coffee
-        vim.api.nvim_create_autocmd({ "CursorHold" }, { callback = vim.lsp.buf.document_highlight })
-        vim.api.nvim_create_autocmd({ "CursorHoldI" }, { callback = vim.lsp.buf.document_highlight })
-        vim.api.nvim_create_autocmd({ "CursorMoved" }, { callback = vim.lsp.buf.clear_references })
+    if client.supports_method('textDocument/documentHighlight') then
+        vim.api.nvim_create_autocmd({ "CursorHold" }, { buffer = bufnr, callback = vim.lsp.buf.document_highlight })
+        vim.api.nvim_create_autocmd({ "CursorHoldI" }, { buffer = bufnr, callback = vim.lsp.buf.document_highlight })
+        vim.api.nvim_create_autocmd({ "CursorMoved" }, { buffer = bufnr, callback = vim.lsp.buf.clear_references })
     end
 
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
