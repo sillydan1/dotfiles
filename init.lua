@@ -639,7 +639,7 @@ require("nvim-tree").setup({
 })
 
 -- TODO: Add keybinds for nvim-tree
-vim.keymap.set('n', '<leader>o',  require('nvim-tree').toggle,  { desc = '[O]pen file' })
+vim.keymap.set('n', '<leader>o', require('nvim-tree.api').tree.toggle,  { desc = '[O]pen file' })
 
 vim.opt.smartindent = true
 vim.opt.breakindent = true
