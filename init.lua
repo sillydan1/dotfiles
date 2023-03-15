@@ -658,10 +658,7 @@ vim.opt.cindent = true
 -- set cino=>4,e4,n4,^4,:4,=4
 
 -- Used to open nvim-tree
-local function open_nvim_tree()
-    require('nvim-tree.api').tree.open()
-end
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = require('nvim-tree.api').tree.open })
 
 
 -- barbar configuration
