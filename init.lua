@@ -85,6 +85,8 @@ require('packer').startup(function(use)
     use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
     use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
+    use 'christoomey/vim-tmux-navigator'
+
     -- cmake / c++ development
     use 'cdelledonne/vim-cmake'
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
@@ -131,6 +133,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+vim.cmd("set clipboard+=unnamedplus")
 
 -- Set highlight on search
 vim.o.hlsearch = false
