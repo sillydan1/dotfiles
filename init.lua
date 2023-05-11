@@ -79,22 +79,29 @@ require('packer').startup(function(use)
     use 'tpope/vim-rhubarb'
     use 'lewis6991/gitsigns.nvim'
 
+    -- tmux navigation
+    use 'christoomey/vim-tmux-navigator'
+
     use 'navarasu/onedark.nvim' -- Theme inspired by Atom
     use 'nvim-lualine/lualine.nvim' -- Fancier statusline
     use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
     use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
     use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
-    use 'christoomey/vim-tmux-navigator'
-
     -- cmake / c++ development
     use 'cdelledonne/vim-cmake'
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+
+    -- java development
+    use { "mfussenegger/nvim-jdtls", ft = { "java" } }
 
     -- Fuzzy Finder (files, lsp, etc)
     use 'BurntSushi/ripgrep'
     use 'sharkdp/fd'
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+
+    -- devcontainer support
+    use { "https://codeberg.org/esensar/nvim-dev-container" }
 
     -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
@@ -240,11 +247,16 @@ end
 dap.listeners.after['event_terminated']['me'] = function()
     for _, km in pairs(keymap_restore) do
         vim.api.nvim_buf_set_keymap(
-            km.buffer, km.mode, km.lhs, km.rhs, { silent = keymap.silent == 1 }
+            km.buffer, km.mode, km.lhs, km.rhs, { silent = vim.keymap.silent == 1 }
         )
     end
     keymap_restore = {}
 end
+
+-- setup devcontainer plugin
+require("devcontainer").setup{
+  log_level = 'trace'
+}
 
 -- Set lualine as statusline
 -- See `:help lualine.txt`
@@ -302,6 +314,8 @@ vim.keymap.set('n', '<leader>sT', function ()
     vim.cmd(':TodoTelescope')
 end, { desc = '[S]earch all [T]odos' })
 
+vim.keymap.set('n', '<leader>p', require('nvim-tree.api').tree.find_file, { desc = 'open the current buffer file in nvim tree' })
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
@@ -317,8 +331,7 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
 vim.keymap.set('n', '<leader>sF', function()
-    require('telescope.builtin').find_files({ no_ignore = true })
-end, { desc = '[S]earch All Files' })
+    require('telescope.builtin').find_files({ no_ignore = true }) end, { desc = '[S]earch All Files' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -338,6 +351,9 @@ end, { desc = '[C]Make project [B]uild' })
 vim.keymap.set('n', '<leader>cC', function()
     vim.cmd('CMakeClean')
 end, { desc = '[C]Make project [C]lean' })
+vim.keymap.set('n', '<leader>cv', function()
+    vim.cmd('CMakeClose')
+end, { desc = '[C]Make project close' })
 
 vim.keymap.set('n', '<leader>wm', function ()
     vim.cmd(':w')
@@ -351,7 +367,7 @@ vim.cmd('imap <C-c> <Esc>')
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'jsonc', 'vimdoc', 'vim' },
     highlight = { enable = true },
     -- disable treesitter indentation for languages where it sucks at indenting for me.
     indent = { enable = true, disable = { 'python', 'cpp' } },
@@ -414,7 +430,7 @@ require('nvim-treesitter.configs').setup {
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -453,7 +469,7 @@ local on_attach = function(client, bufnr)
 
     -- See `:help K` for why this keymap
     nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-    nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+    nmap('<leader>k', vim.lsp.buf.signature_help, 'Signature Documentation')
 
     -- Lesser used LSP functionality
     nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
@@ -632,11 +648,6 @@ require("nvim-tree").setup({
     view = {
         adaptive_size = true,
         side = 'right',
-        mappings = {
-            list = {
-                { key = "u", action = "dir_up" },
-            },
-        },
     },
     renderer = {
         group_empty = true,
@@ -689,6 +700,7 @@ map('n', '<leader>0', '<Cmd>BufferLast<CR>', opts)
 map('n', '<leader>tp', '<Cmd>BufferPin<CR>', opts)
 -- Close buffer
 map('n', '<leader>tc', '<Cmd>BufferClose<CR>', opts)
+map('n', '<leader>q', '<Cmd>BufferClose<CR>', opts)
 -- Wipeout buffer
 --                 :BufferWipeout
 -- Close commands
@@ -704,6 +716,9 @@ map('n', '<leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
 map('n', '<leader>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
 map('n', '<leader>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
 map('n', '<leader>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
+
+-- globally available clipboard
+vim.api.nvim_set_option("clipboard","unnamed")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
