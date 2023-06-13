@@ -102,6 +102,7 @@ require('packer').startup(function(use)
 
     -- devcontainer support
     use { "https://codeberg.org/esensar/nvim-dev-container" }
+    use { 'tell-k/vim-autopep8' }
 
     -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
