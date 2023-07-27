@@ -39,15 +39,25 @@ require('packer').startup(function(use)
         end
     }
 
+    use {
+      'j-hui/fidget.nvim',
+      tag = 'legacy',
+      config = function()
+        require("fidget").setup {
+          -- options
+          text = {
+            spinner = "dots",
+          }
+        }
+      end,
+    }
+
     use { -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
         requires = {
             -- Automatically install LSPs to stdpath for neovim
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
-
-            -- Useful status updates for LSP
-            'j-hui/fidget.nvim',
 
             -- Additional lua configuration, makes nvim stuff amazing
             'folke/neodev.nvim',
@@ -532,8 +542,6 @@ mason_lspconfig.setup_handlers {
     end,
 }
 
--- Turn on lsp status information
-require('fidget').setup()
 vim.cmd('let g:cmake_link_compile_commands = 1')
 
 -- nvim-cmp setup
