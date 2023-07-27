@@ -525,7 +525,7 @@ local servers = {
     -- pyright = {},
     -- rust_analyzer = {},
     -- tsserver = {},
-
+    jdtls = {},
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
@@ -557,6 +557,26 @@ mason_lspconfig.setup_handlers {
             capabilities = capabilities,
             on_attach = on_attach,
             settings = servers[server_name],
+        }
+    end,
+    ["jdtls"] = function()
+        require('lspconfig').jdtls.setup {
+            -- Apply the default capabilities and on_attach stuff
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = servers["jdtls"],
+            -- This is a legacy feature, where jdtls used their own progress report format. Disable it to use $/progress.
+            init_options = {
+                extendedClientCapabilities = {
+                    progressReportProvider = false,
+                },
+            },
+            -- TODO: This is the stupidest shim ever. But for some reason it fixes everything
+            handlers = {
+                ["$/progress"] = function(id,msg,info)
+                  vim.lsp.handlers["$/progress"](id,msg,info)
+                end,
+            }
         }
     end,
 }
