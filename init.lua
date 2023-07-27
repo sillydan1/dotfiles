@@ -18,6 +18,9 @@ require('packer').startup(function(use)
         }
     }
 
+    use 'natecraddock/workspaces.nvim'
+    use 'natecraddock/sessions.nvim'
+
     -- todo list
     use {
         "folke/todo-comments.nvim",
@@ -264,6 +267,9 @@ dap.listeners.after['event_terminated']['me'] = function()
     keymap_restore = {}
 end
 
+require('sessions').setup()
+require('workspaces').setup()
+
 -- setup devcontainer plugin
 require("devcontainer").setup{
   log_level = 'trace'
@@ -307,6 +313,11 @@ require('gitsigns').setup {
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
+    extensions = {
+        workspaces = {
+            keep_insert = true,
+        }
+    },
     defaults = {
         mappings = {
             i = {
@@ -373,6 +384,14 @@ end, { desc = '[W]rite buffer and [M]ake' })
 
 -- Ctrl+c should be just the same as pressing escape!
 vim.cmd('imap <C-c> <Esc>')
+
+-- sessions keybinds
+vim.keymap.set('n', '<leader>Ss', function()
+    require('sessions').save('.nvim/session', { silent = true })
+end, { desc = '[S]ession [s]ave' })
+vim.keymap.set('n', '<leader>Sl', function()
+    require('sessions').load('.nvim/session', { silent = true })
+end, { desc = '[S]ession [l]oad' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
