@@ -100,6 +100,7 @@ require('packer').startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
     use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
     use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+    use { 'eliseshaffer/darklight.nvim' } -- darkmode switcher
 
     -- cmake / c++ development
     use 'cdelledonne/vim-cmake'
@@ -107,6 +108,10 @@ require('packer').startup(function(use)
 
     -- java development
     use { "mfussenegger/nvim-jdtls", ft = { "java" } }
+
+    -- javascript development
+    use "maxmellon/vim-jsx-pretty"
+    use "yuezk/vim-js"
 
     -- Fuzzy Finder (files, lsp, etc)
     use 'BurntSushi/ripgrep'
@@ -131,6 +136,11 @@ require('packer').startup(function(use)
     end
 end)
 
+require('darklight').setup({
+  mode = 'colorscheme', -- Sets darklight to colorscheme mode
+  light_mode_colorscheme = 'onedark', -- Sets the colorscheme to use for light mode
+  dark_mode_colorscheme = 'onedark', -- Sets the colorscheme to use for dark mode
+})
 -- When we are bootstrapping a configuration, it doesn't
 -- make sense to execute the rest of the init.lua.
 --
@@ -770,3 +780,4 @@ vim.api.nvim_set_option("clipboard","unnamed")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
