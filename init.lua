@@ -225,6 +225,40 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Set dap configuration
 local dap = require('dap')
+-- Use this in your launch.json file
+-- {
+-- 	"name": "pytest: unit",
+-- 	"type": "python",
+-- 	"request": "launch",
+-- 	"program": "${workspaceFolder}/venv/bin/pytest",
+-- 	"cwd": "${workspaceFolder}",
+-- 	"args": [
+-- 		"${workspaceFolder}/test"
+-- 	]
+-- },
+dap.adapters.python = function(cb, config)
+    if config.request == 'attach' then
+        local port = (config.connect or config).port
+        local host = (config.connect or config).host or '127.0.0.1'
+        cb({
+            type = 'server',
+            port = assert(port, '`connect.port` is required for a python `attach` configuration'),
+            host = host,
+            options = {
+                source_filetype = 'python',
+            },
+        })
+    else
+        cb({
+            type = 'executable',
+            command = os.getenv('VIRTUAL_ENV') .. '/bin/python',
+            args = { '-m', 'debugpy.adapter' },
+            options = {
+                source_filetype = 'python',
+            },
+        })
+    end
+end
 dap.configurations.cpp = {
     {
         name = "Launch file",
@@ -256,26 +290,26 @@ dap.adapters.cppdbg = {
 dap.defaults.fallback.exception_breakpoints = {}
 -- Map K to hover while debug session is active
 local keymap_restore = {}
-dap.listeners.after['event_initialized']['me'] = function()
-    for _, buf in pairs(vim.api.nvim_list_bufs()) do
-        local keymaps = vim.api.nvim_buf_get_keymap(buf, 'n')
-        for _, keymap in pairs(keymaps) do
-            if keymap.lhs == "K" then
-                table.insert(keymap_restore, keymap)
-                vim.api.nvim_buf_del_keymap(buf, 'n', 'K')
-            end
-        end
-    end
-    vim.api.nvim_set_keymap('n', 'K', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
-end
-dap.listeners.after['event_terminated']['me'] = function()
-    for _, km in pairs(keymap_restore) do
-        vim.api.nvim_buf_set_keymap(
-            km.buffer, km.mode, km.lhs, km.rhs, { silent = vim.keymap.silent == 1 }
-        )
-    end
-    keymap_restore = {}
-end
+-- dap.listeners.after['event_initialized']['me'] = function()
+--     for _, buf in pairs(vim.api.nvim_list_bufs()) do
+--         local keymaps = vim.api.nvim_buf_get_keymap(buf, 'n')
+--         for _, keymap in pairs(keymaps) do
+--             if keymap.lhs == "K" then
+--                 table.insert(keymap_restore, keymap)
+--                 vim.api.nvim_buf_del_keymap(buf, 'n', 'K')
+--             end
+--         end
+--     end
+--     vim.api.nvim_set_keymap('n', 'K', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
+-- end
+-- dap.listeners.after['event_terminated']['me'] = function()
+--     for _, km in pairs(keymap_restore) do
+--         vim.api.nvim_buf_set_keymap(
+--             km.buffer, km.mode, km.lhs, km.rhs, { silent = vim.keymap.silent == 1 }
+--         )
+--     end
+--     keymap_restore = {}
+-- end
 
 require('sessions').setup()
 require('workspaces').setup()
