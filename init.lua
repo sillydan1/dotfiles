@@ -91,6 +91,7 @@ require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
     use 'lewis6991/gitsigns.nvim'
+    use 'kdheepak/lazygit.nvim'
 
     -- tmux navigation
     use 'christoomey/vim-tmux-navigator'
@@ -337,6 +338,11 @@ require('telescope').setup {
         },
     },
 }
+
+-- LazyGit summon shortcut
+vim.keymap.set('n', '<leader>gg', function ()
+    vim.cmd('LazyGit')
+end, { desc = 'Open lazy[g]it client' })
 
 -- todo list keybinds
 vim.keymap.set('n', '<leader>st', function ()
