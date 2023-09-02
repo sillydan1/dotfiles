@@ -22,13 +22,14 @@ require("lazy").setup({
   { 'nvim-tree/nvim-tree.lua', dependencies = { 'nvim-tree/nvim-web-devicons' } },
   { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
   { "rcarriga/nvim-dap-ui", dependencies = { 'mfussenegger/nvim-dap' } },
-  { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' } },
   { 'neovim/nvim-lspconfig', dependencies = { 'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim', 'folke/neodev.nvim' } },
-  { 'hrsh7th/nvim-cmp', dependencies = { 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip','L3MON4D3/LuaSnip', 'rafamadriz/friendly-snippets' } },
+  { 'hrsh7th/nvim-cmp', dependencies = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip','L3MON4D3/LuaSnip', 'rafamadriz/friendly-snippets' } },
   { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-  {'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
+  { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
   { "mfussenegger/nvim-jdtls", ft = 'java' },
   { 'j-hui/fidget.nvim', tag = 'legacy' },
+  { 'stevearc/dressing.nvim', event = 'VeryLazy' },
   'nvim-tree/nvim-web-devicons',
   'aca/marp.nvim',
   'natecraddock/workspaces.nvim',
@@ -51,7 +52,6 @@ require("lazy").setup({
   'sharkdp/fd',
   "https://codeberg.org/esensar/nvim-dev-container",
   'tell-k/vim-autopep8',
-  'nvim-telescope/telescope-fzf-native.nvim', -- , run = 'make', cond = vim.fn.executable 'make' == 1 },
   'tpope/vim-dadbod',
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
@@ -335,8 +335,8 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-  }, {
     { name = 'buffer' },
+    { name = 'path' },
   })
 })
 
