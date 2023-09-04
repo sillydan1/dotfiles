@@ -483,8 +483,6 @@ vim.keymap.set('n', '<Leader>ds', function()
   widgets.centered_float(widgets.frames)
 end, { desc = 'Debugger summon centered_float' })
 
-
--- TODO: Add keybinds for nvim-tree
 vim.keymap.set('n', '<leader>o', require('nvim-tree.api').tree.toggle,  { desc = '[O]pen file' })
 
 local opts = { noremap = true, silent = true }
