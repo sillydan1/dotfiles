@@ -30,6 +30,8 @@ require("lazy").setup({
   { "mfussenegger/nvim-jdtls", ft = 'java' },
   { 'j-hui/fidget.nvim', tag = 'legacy' },
   { 'stevearc/dressing.nvim', event = 'VeryLazy' },
+  -- TODO: Write my own, because this sucks
+  -- { 'jackMort/ChatGPT.nvim', event = 'VeryLazy', config = function() setup_chatgpt() end, dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } },
   'nvim-tree/nvim-web-devicons',
   'aca/marp.nvim',
   'natecraddock/workspaces.nvim',
@@ -57,7 +59,7 @@ require("lazy").setup({
   'kristijanhusak/vim-dadbod-completion',
 })
 
--- [[ Setting options ]]
+-- [[ Setting options ]
 -- See `:help vim.o`
 vim.cmd("set clipboard+=unnamedplus")
 -- Ctrl+c should be just the same as pressing escape!
@@ -406,7 +408,16 @@ dap.adapters.cppdbg = {
 }
 dap.defaults.fallback.exception_breakpoints = {}
 
+function setup_chatgpt()
+  local home = vim.fn.expand("$HOME")
+  local pass = vim.fn.inputsecret('key password: ')
+  require('chatgpt').setup({
+    api_key_cmd = 'echo "' .. pass .. '" | gpg --batch --yes --passphrase-fd 0 -d ' .. home .. '/.openai-secrets.gpg',
+  })
+end
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+vim.keymap.set('n', '<leader>gp', function() vim.cmd(':ChatGPT') end, { desc = 'Open Chat[GP]T' })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -486,8 +497,8 @@ end, { desc = 'Debugger summon centered_float' })
 vim.keymap.set('n', '<leader>o', require('nvim-tree.api').tree.toggle,  { desc = '[O]pen file' })
 
 local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap('n', '<leader>hh', '<Cmd>BufferPrevious<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>ll', '<Cmd>BufferNext<CR>', opts)
+vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', opts)
+vim.api.nvim_set_keymap('n', 'L', '<Cmd>BufferNext<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>q', '<Cmd>BufferClose<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader><', '<Cmd>BufferMovePrevious<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>>', '<Cmd>BufferMoveNext<CR>', opts)
