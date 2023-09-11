@@ -58,6 +58,7 @@ require("lazy").setup({
   'tpope/vim-dadbod',
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
+  'https://codeberg.org/esensar/nvim-dev-container',
 })
 
 -- [[ Setting options ]
