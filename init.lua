@@ -32,6 +32,7 @@ require("lazy").setup({
   { 'stevearc/dressing.nvim', event = 'VeryLazy' },
   -- TODO: Write my own, because this sucks
   -- { 'jackMort/ChatGPT.nvim', event = 'VeryLazy', config = function() setup_chatgpt() end, dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } },
+  'f-person/git-blame.nvim',
   'nvim-tree/nvim-web-devicons',
   'aca/marp.nvim',
   'natecraddock/workspaces.nvim',
