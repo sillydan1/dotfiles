@@ -59,6 +59,7 @@ require("lazy").setup({
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
   'https://codeberg.org/esensar/nvim-dev-container',
+  'ThePrimeagen/harpoon', -- debatable if this is good
 })
 
 -- [[ Setting options ]
@@ -235,7 +236,7 @@ local on_attach = function(client, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<leader>k', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>K', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
@@ -419,6 +420,15 @@ function setup_chatgpt()
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local mark = require('harpoon.mark')
+local ui = require('harpoon.ui')
+vim.keymap.set('n', '<leader>a', mark.add_file)
+vim.keymap.set('n', '<leader>e', ui.toggle_quick_menu)
+vim.keymap.set('n', '<leader>h', function() ui.nav_file(1) end)
+vim.keymap.set('n', '<leader>j', function() ui.nav_file(2) end)
+vim.keymap.set('n', '<leader>k', function() ui.nav_file(3) end)
+vim.keymap.set('n', '<leader>l', function() ui.nav_file(4) end)
+
 vim.keymap.set('n', '<leader>gp', function() vim.cmd(':ChatGPT') end, { desc = 'Open Chat[GP]T' })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -454,7 +464,7 @@ vim.keymap.set('n', '<leader>Ss', function() require('sessions').save('.nvim/ses
 vim.keymap.set('n', '<leader>Sl', function() require('sessions').load('.nvim/session', { silent = true }) end, { desc = '[S]ession [l]oad' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,         { desc = 'Next diagnostic' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next,         { desc = 'Previous diagnostic' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostics floating window' })
+vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = 'Open diagnostics floating window' })
 vim.keymap.set('n', '<leader>r', vim.diagnostic.setloclist, { desc = 'Add ' })
 
 vim.api.nvim_set_hl(0, "blue",   { fg = "#3d59a1" })
@@ -485,7 +495,7 @@ vim.keymap.set('n', '<Leader>b', require('dap').toggle_breakpoint, { desc = 'Deb
 vim.keymap.set('n', '<Leader>dr', require('dap').repl.open,   { desc = 'Debugger open REPL' })
 vim.keymap.set('n', '<Leader>dl', require('dap').run_last,    { desc = 'Debugger run last run executable' })
 vim.keymap.set('n', '<Leader>df', require('dap').focus_frame, { desc = 'Debugger focus to current stack' })
-vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = 'Debugger new logpoint' })
+vim.keymap.set('n', '<Leader>db', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = 'Debugger new logpoint' })
 vim.keymap.set('n', '<leader>dj', function()
   require('dap.ext.vscode').load_launchjs(vim.fn.input('Path to json: ', vim.fn.getcwd() .. '/', 'file'), { cppdbg = { 'c', 'cpp' }, codelldb = { 'c', 'cpp' } })
 end, { desc = 'Debugger Load launch specification file' })
