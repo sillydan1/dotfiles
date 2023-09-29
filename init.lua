@@ -100,6 +100,14 @@ vim.o.shiftwidth = 4
 vim.o.cindent = true
 vim.api.nvim_set_option("clipboard","unnamed")
 
+-- files named "Jenkinsfile" should be set to use the groovy syntax highlighter
+-- Not setting filetype=groovy, because groovy-language-server is not too happy with jenkinsfiles
+-- TODO: Write a better jenkinsfile language-server / linter.
+vim.cmd[[
+  augroup groovy_filetype
+    autocmd BufNewFile,BufRead Jenkinsfile set syntax=groovy
+  augroup END
+]]
 
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -411,7 +419,7 @@ dap.adapters.cppdbg = {
 }
 dap.defaults.fallback.exception_breakpoints = {}
 
-function setup_chatgpt()
+local function setup_chatgpt()
   local home = vim.fn.expand("$HOME")
   local pass = vim.fn.inputsecret('key password: ')
   require('chatgpt').setup({
