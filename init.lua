@@ -59,7 +59,6 @@ require("lazy").setup({
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
   'https://codeberg.org/esensar/nvim-dev-container',
-  'ThePrimeagen/harpoon', -- debatable if this is good
 })
 
 -- [[ Setting options ]
@@ -261,7 +260,7 @@ end
 local servers = {
   clangd = {},
   -- gopls = {},
-  pyright = {},
+  -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
   jdtls = {},
@@ -428,15 +427,6 @@ local function setup_chatgpt()
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-local mark = require('harpoon.mark')
-local ui = require('harpoon.ui')
-vim.keymap.set('n', '<leader>a', mark.add_file)
-vim.keymap.set('n', '<leader>e', ui.toggle_quick_menu)
-vim.keymap.set('n', '<leader>h', function() ui.nav_file(1) end)
-vim.keymap.set('n', '<leader>j', function() ui.nav_file(2) end)
-vim.keymap.set('n', '<leader>k', function() ui.nav_file(3) end)
-vim.keymap.set('n', '<leader>l', function() ui.nav_file(4) end)
-
 vim.keymap.set('n', '<leader>gp', function() vim.cmd(':ChatGPT') end, { desc = 'Open Chat[GP]T' })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
