@@ -59,6 +59,7 @@ require("lazy").setup({
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
   'https://codeberg.org/esensar/nvim-dev-container',
+  'mfussenegger/nvim-dap-python'
 })
 
 -- [[ Setting options ]
@@ -353,6 +354,8 @@ cmp.setup({
 })
 
 require('luasnip/loaders/from_vscode').load()
+
+require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 
 local dap = require('dap')
 -- NOTE: Use this in your launch.json file
