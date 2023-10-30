@@ -59,7 +59,8 @@ require("lazy").setup({
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
   'https://codeberg.org/esensar/nvim-dev-container',
-  'mfussenegger/nvim-dap-python'
+  'mfussenegger/nvim-dap-python',
+  'pixelneo/vim-python-docstring'
 })
 
 -- [[ Setting options ]
@@ -261,7 +262,7 @@ end
 local servers = {
   clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
   jdtls = {},
