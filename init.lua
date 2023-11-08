@@ -61,7 +61,8 @@ require("lazy").setup({
   'https://codeberg.org/esensar/nvim-dev-container',
   'mfussenegger/nvim-dap-python',
   'pixelneo/vim-python-docstring',
-  'andythigpen/nvim-coverage'
+  'andythigpen/nvim-coverage',
+  'klen/nvim-test'
 })
 
 -- [[ Setting options ]
@@ -160,7 +161,8 @@ require("nvim-tree").setup({
 require('sessions').setup()
 require("dapui").setup()
 require('workspaces').setup()
-require("coverage").setup()
+require('nvim-test').setup()
+require('coverage').setup()
 require("devcontainer").setup({
   log_level = 'trace'
 })
