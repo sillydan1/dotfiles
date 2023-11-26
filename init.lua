@@ -310,6 +310,11 @@ require('mason-lspconfig').setup_handlers({
       }
     })
   end,
+  ["clangd"] = function()
+    require('lspconfig').clangd.setup({
+      filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', --[[ 'proto' --]] }, -- TODO: clangd's proto stuff is seriously borked, re-enable when it works again
+    })
+  end,
 })
 -- nvim-cmp setup
 local cmp = require('cmp')
