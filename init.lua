@@ -161,7 +161,7 @@ require("nvim-tree").setup({
 require('sessions').setup()
 require("dapui").setup()
 require('workspaces').setup()
-require('nvim-test').setup()
+require('nvim-test').setup({})
 require('coverage').setup()
 require("devcontainer").setup({
   log_level = 'trace'
@@ -267,8 +267,14 @@ local servers = {
   clangd = {},
   -- gopls = {},
   pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
+  rust_analyzer = {
+    ['rust-analyzer'] = {
+      cargo = {
+        allFeatures = true,
+      }
+    }
+  },
+  tsserver = {},
   jdtls = {},
   lua_ls = {
     Lua = {
@@ -316,6 +322,8 @@ require('mason-lspconfig').setup_handlers({
     })
   end,
 })
+
+
 -- nvim-cmp setup
 local cmp = require('cmp')
 local luasnip = require('luasnip')
