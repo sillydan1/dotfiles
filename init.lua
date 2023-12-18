@@ -319,6 +319,9 @@ require('mason-lspconfig').setup_handlers({
   ["clangd"] = function()
     require('lspconfig').clangd.setup({
       filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', --[[ 'proto' --]] }, -- TODO: clangd's proto stuff is seriously borked, re-enable when it works again
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = servers["clangd"],
     })
   end,
 })
