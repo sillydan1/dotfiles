@@ -488,6 +488,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,         { desc = 'Next diagn
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next,         { desc = 'Previous diagnostic' })
 vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = 'Open diagnostics floating window' })
 vim.keymap.set('n', '<leader>r', vim.diagnostic.setloclist, { desc = 'Add ' })
+vim.keymap.set('n', '<C-w>h', function() vim.cmd(':sp') end, { desc = 'split horizontally' })
 
 vim.api.nvim_set_hl(0, "blue",   { fg = "#3d59a1" })
 vim.api.nvim_set_hl(0, "green",  { fg = "#9ece6a" })
