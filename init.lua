@@ -62,7 +62,8 @@ require("lazy").setup({
   'mfussenegger/nvim-dap-python',
   'pixelneo/vim-python-docstring',
   'andythigpen/nvim-coverage',
-  'klen/nvim-test'
+  'klen/nvim-test',
+  'github/copilot.vim'
 })
 
 -- [[ Setting options ]
@@ -451,6 +452,13 @@ local function setup_chatgpt()
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- press <C-D> to accept the completion
+vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
+
 vim.keymap.set('n', '<leader>gp', function() vim.cmd(':ChatGPT') end, { desc = 'Open Chat[GP]T' })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
