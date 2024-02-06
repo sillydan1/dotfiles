@@ -77,7 +77,6 @@ vim.o.termguicolors = true
 -- Set highlight on search
 vim.o.hlsearch = false
 -- Make line numbers default
--- vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.nu = true
 -- Enable mouse mode
@@ -443,14 +442,6 @@ dap.adapters.cppdbg = {
 }
 dap.defaults.fallback.exception_breakpoints = {}
 
-local function setup_chatgpt()
-  local home = vim.fn.expand("$HOME")
-  local pass = vim.fn.inputsecret('key password: ')
-  require('chatgpt').setup({
-    api_key_cmd = 'echo "' .. pass .. '" | gpg --batch --yes --passphrase-fd 0 -d ' .. home .. '/.openai-secrets.gpg',
-  })
-end
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- press <C-D> to accept the completion
 vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
@@ -459,13 +450,14 @@ vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
 })
 vim.g.copilot_no_tab_map = true
 
-vim.keymap.set('n', '<leader>gp', function() vim.cmd(':ChatGPT') end, { desc = 'Open Chat[GP]T' })
+-- vim.keymap.set('n', '<leader>gp', function() vim.cmd(':ChatGPT') end, { desc = 'Open Chat[GP]T' })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', '½', '$')
+vim.keymap.set('n', '<leader>fp', ':Format<CR>', { desc = '[F]ormat [P]age' })
 vim.keymap.set('n', '<leader>gg', function() vim.cmd('LazyGit') end,                          { desc = 'Open lazy[g]it client' })
-vim.keymap.set('n', '<leader>st', function() vim.cmd(':TodoTelescope keywords=TODO,FIX') end, { desc = '[S]earch [T]odos' })
+vim.keymap.set('n', '<leader>st', function() vim.cmd(':TodoTelescope keywords=TODO,FIX,NOTE') end, { desc = '[S]earch [T]odos' })
 vim.keymap.set('n', '<leader>sT', function() vim.cmd(':TodoTelescope') end,                   { desc = '[S]earch all [T]odos' })
 vim.keymap.set('n', '<leader>p', require('nvim-tree.api').tree.find_file,                     { desc = 'open the current buffer file in nvim tree' })
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles,                       { desc = '[?] Find recently opened files' })
