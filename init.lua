@@ -63,7 +63,8 @@ require("lazy").setup({
   'pixelneo/vim-python-docstring',
   'andythigpen/nvim-coverage',
   'klen/nvim-test',
-  'github/copilot.vim'
+  'github/copilot.vim',
+  'mbbill/undotree',
 })
 
 -- [[ Setting options ]
@@ -455,6 +456,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', '½', '$')
+vim.keymap.set('n', '<leader>uu', ':UndotreeToggle<CR>', { desc = '[U]ndotree toggle' })
 vim.keymap.set('n', '<leader>ff', ':Format<CR>', { desc = '[F]ormat' })
 vim.keymap.set('n', '<leader>gg', function() vim.cmd('LazyGit') end,                          { desc = 'Open lazy[g]it client' })
 vim.keymap.set('n', '<leader>st', function() vim.cmd(':TodoTelescope keywords=TODO,FIX,NOTE') end, { desc = '[S]earch [T]odos' })
