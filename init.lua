@@ -414,6 +414,31 @@ dap.adapters.python = function(cb, config)
     })
   end
 end
+-- dap.configurations.python = {
+--   {
+--     name = "Run",
+--     type = "python",
+--     request = "launch",
+--     program = function()
+--       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--     end,
+--     pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python',
+--     cwd = "${workspaceFolder}",
+--     stopOnEntry = false,
+--   },
+-- }
+dap.configurations.c = {
+  {
+    name = "Launch file",
+    type = "cppdbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+  }
+}
 dap.configurations.cpp = {
   {
     name = "Launch file",
@@ -458,6 +483,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '½', '$')
 vim.keymap.set('n', '<leader>uu', ':UndotreeToggle<CR>', { desc = '[U]ndotree toggle' })
 vim.keymap.set('n', '<leader>ff', ':Format<CR>', { desc = '[F]ormat' })
+vim.keymap.set('n', '<leader>bl', ':!black .<CR>', { desc = '[Bl]ack formatting' })
 vim.keymap.set('n', '<leader>gg', function() vim.cmd('LazyGit') end,                          { desc = 'Open lazy[g]it client' })
 vim.keymap.set('n', '<leader>st', function() vim.cmd(':TodoTelescope keywords=TODO,FIX') end, { desc = '[S]earch [T]odos' })
 vim.keymap.set('n', '<leader>sT', function() vim.cmd(':TodoTelescope') end,                   { desc = '[S]earch all [T]odos' })
