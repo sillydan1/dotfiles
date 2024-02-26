@@ -48,7 +48,8 @@ require("lazy").setup({
   'numToStr/Comment.nvim',
   'tpope/vim-sleuth',
   'eliseshaffer/darklight.nvim',
-  'cdelledonne/vim-cmake',
+  -- 'cdelledonne/vim-cmake',
+  'civitasv/cmake-tools.nvim',
   "maxmellon/vim-jsx-pretty",
   "yuezk/vim-js",
   'BurntSushi/ripgrep',
@@ -158,6 +159,8 @@ require("nvim-tree").setup({
     dotfiles = false,
   },
 })
+
+require('cmake-tools').setup({})
 
 require('sessions').setup()
 require("dapui").setup()
