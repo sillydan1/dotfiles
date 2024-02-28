@@ -1,4 +1,5 @@
 \.git
 \.gitignore
 scripts
+secrets
 README.md

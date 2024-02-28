@@ -118,6 +118,11 @@ if [ -x "$(command -v eza)" ]; then
   alias ll="eza -lah"
 fi
 
+# Load all the secrets from the secrets folder (assuming this repo is in $HOME/dotfiles)
+for f in $HOME/dotfiles/secrets/*; do
+  source $f
+done
+
 # Load Node Version Manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
