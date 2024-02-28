@@ -21,6 +21,10 @@ cd ~/dotfiles
 stow .
 ```
 
+## Secrets
+If you have any aliases, paths, env variables or anything else that you don't want to share, you can put them in a file called `secrets` in the root of the dotfiles directory.
+This file will be ignored by git, but still loaded automatically by the shell-rc file(s) so you can put whatever you want in there.
+
 ## tmux
 Install tmux and the tmux plugin manager
 ```sh
