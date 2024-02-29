@@ -119,9 +119,11 @@ if [ -x "$(command -v eza)" ]; then
 fi
 
 # Load all the secrets from the secrets folder (assuming this repo is in $HOME/dotfiles)
-for f in $HOME/dotfiles/secrets/*; do
-  source $f
-done
+if [ -d $HOME/dotfiles/secrets ]; then
+  for f in $HOME/dotfiles/secrets/*; do
+    source $f
+  done
+fi
 
 # Load Node Version Manager
 export NVM_DIR="$HOME/.nvm"
