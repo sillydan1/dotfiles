@@ -566,6 +566,7 @@ local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', opts)
 vim.api.nvim_set_keymap('n', 'L', '<Cmd>BufferNext<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>q', '<Cmd>BufferClose<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Q', '<Cmd>BufferClose!<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader><', '<Cmd>BufferMovePrevious<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>>', '<Cmd>BufferMoveNext<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>tp', '<Cmd>BufferPin<CR>', opts)
