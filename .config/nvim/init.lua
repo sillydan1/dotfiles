@@ -66,6 +66,7 @@ require("lazy").setup({
   'klen/nvim-test',
   'github/copilot.vim',
   'mbbill/undotree',
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
 })
 
 -- [[ Setting options ]
@@ -93,7 +94,7 @@ vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
+vim.cmd [[colorscheme catppuccin]]
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 vim.o.smartindent = true
@@ -142,8 +143,8 @@ require('fidget').setup({
 
 require('darklight').setup({
   mode = 'colorscheme', -- Sets darklight to colorscheme mode
-  light_mode_colorscheme = 'onedark', -- Sets the colorscheme to use for light mode
-  dark_mode_colorscheme = 'onedark', -- Sets the colorscheme to use for dark mode
+  light_mode_colorscheme = 'catppuccin', -- Sets the colorscheme to use for light mode
+  dark_mode_colorscheme = 'catppuccin', -- Sets the colorscheme to use for dark mode
 })
 
 require("nvim-tree").setup({
