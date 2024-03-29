@@ -66,7 +66,8 @@ require("lazy").setup({
   'klen/nvim-test',
   'github/copilot.vim',
   'mbbill/undotree',
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  'sillydan1/luajava.nvim',
 })
 
 -- [[ Setting options ]
@@ -283,8 +284,12 @@ local servers = {
   jdtls = {},
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = false },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false
+      },
       telemetry = { enable = false },
+      diagnostics = { globals = { 'vim' } },
     },
   },
 }
