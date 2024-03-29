@@ -112,8 +112,36 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
 # ==============================================================================
+# Weather comment
+# WTTR_PARAMS is space-separated URL parameters, many of which are single characters that can be
+# lumped together. For example, "F q m" behaves the same as "Fqm".
+if [[ -z "$WTTR_PARAMS" ]]; then
+  # Form localized URL parameters for curl
+  if [[ -t 1 ]] && [[ "$(tput cols)" -lt 125 ]]; then
+      WTTR_PARAMS+='n'
+  fi 2> /dev/null
+  for _token in $( locale LC_MEASUREMENT ); do
+    case $_token in
+      1) WTTR_PARAMS+='m' ;;
+      2) WTTR_PARAMS+='u' ;;
+    esac
+  done 2> /dev/null
+  unset _token
+  export WTTR_PARAMS
+fi
+
+# --- Custom commands
+wttr() {
+  local location="${1// /+}"
+  command shift
+  local args=""
+  for p in $WTTR_PARAMS "$@"; do
+    args+=" --data-urlencode $p "
+  done
+  curl -fGsS -H "Accept-Language: ${LANG%_*}" $args --compressed "wttr.in/${location}"
+}
+
 export HISTTIMEFORMAT="%d/%m/%y %T "
 export PATH="$PATH:/home/agj/Applications/nvim-linux64/bin"
 export PATH="$PATH:/home/agj/Applications/"
@@ -142,6 +170,8 @@ if [ -x "$(command -v eza)" ]; then
   alias ls="eza"
   alias ll="eza -lah"
 fi
+alias minimum_brightness="xbacklight -set 0.12%"
+alias maximum_brightness="xbacklight -set 100%"
 
 # Load all the secrets from the secrets folder (assuming this repo is in $HOME/dotfiles)
 if [ -d $HOME/dotfiles/secrets ]; then
