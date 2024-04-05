@@ -68,7 +68,8 @@ require("lazy").setup({
   'mbbill/undotree',
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   'sillydan1/luajava.nvim',
-  'kelly-lin/ranger.nvim'
+  'kelly-lin/ranger.nvim',
+  'igankevich/mesonic'
 })
 
 -- [[ Setting options ]
@@ -542,8 +543,8 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics,     
 vim.keymap.set('n', '<leader>cc', function() vim.cmd('CMakeGenerate') end, { desc = '[C]Make project [C]onfigure' })
 vim.keymap.set('n', '<leader>cb', function() vim.cmd('CMakeBuild') end,    { desc = '[C]Make project [B]uild' })
 vim.keymap.set('n', '<leader>cC', function() vim.cmd('CMakeClean') end,    { desc = '[C]Make project [C]lean' })
-vim.keymap.set('n', '<leader>cv', function() vim.cmd('CMakeToggle') end,   { desc = '[C]Make project Toggle' })
-vim.keymap.set('n', '<leader>wm', function () vim.cmd(':w') vim.cmd(':make') end, { desc = '[W]rite buffer and [M]ake' })
+vim.keymap.set('n', '<leader>mm', function() vim.cmd('MesonInit') end,     { desc = '[C]Make project [C]onfigure' })
+vim.keymap.set('n', '<leader>mb', function() vim.cmd('make') end,    { desc = '[C]Make project [B]uild' })
 vim.keymap.set('n', '<leader>Ss', function() require('sessions').save('.nvim/session', { silent = true }) end, { desc = '[S]ession [s]ave' })
 vim.keymap.set('n', '<leader>Sl', function() require('sessions').load('.nvim/session', { silent = true }) end, { desc = '[S]ession [l]oad' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,         { desc = 'Next diagnostic' })
