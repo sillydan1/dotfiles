@@ -68,6 +68,7 @@ require("lazy").setup({
   'mbbill/undotree',
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   'sillydan1/luajava.nvim',
+  'kelly-lin/ranger.nvim'
 })
 
 -- [[ Setting options ]
@@ -139,6 +140,25 @@ require('todo-comments').setup({
 require('fidget').setup({
   text = {
     spinner = 'dots'
+  }
+})
+
+local ranger_nvim = require('ranger-nvim')
+ranger_nvim.setup({
+  enable_cmds = false,
+  replace_netrw = false,
+  keybinds = {
+    ["ov"] = ranger_nvim.OPEN_MODE.vsplit,
+    ["oh"] = ranger_nvim.OPEN_MODE.split,
+    ["ot"] = ranger_nvim.OPEN_MODE.tabedit,
+    ["or"] = ranger_nvim.OPEN_MODE.rifle,
+  },
+  ui = {
+    border = "rounded",
+    height = 0.8,
+    width = 0.8,
+    x = 0.5,
+    y = 0.5,
   }
 })
 
@@ -491,7 +511,7 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', '½', '$')
 vim.keymap.set('n', '<leader>uu', ':UndotreeToggle<CR>', { desc = '[U]ndotree toggle' })
-vim.keymap.set('n', '<leader>ff', ':Format<CR>', { desc = '[F]ormat' })
+vim.keymap.set('n', '<leader>ff', function() ranger_nvim.open(true) end, { desc = 'Open [F]ile using ranger' })
 vim.keymap.set('n', '<leader>bl', ':!black .<CR>', { desc = '[Bl]ack formatting' })
 vim.keymap.set('n', '<leader>gb', function() vim.cmd('GitBlameToggle') end,                   { desc = '[G]it [B]lame Toggle' })
 vim.keymap.set('n', '<leader>gg', function() vim.cmd('LazyGit') end,                          { desc = 'Open lazy[g]it client' })
