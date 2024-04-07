@@ -73,10 +73,11 @@ require("lazy").setup({
 
 -- [[ Setting options ]
 -- See `:help vim.o`
-vim.cmd("set clipboard+=unnamedplus")
+vim.cmd('set clipboard+=unnamedplus')
 -- Ctrl+c should be just the same as pressing escape!
 vim.cmd('imap <C-c> <Esc>')
 vim.cmd('let g:cmake_link_compile_commands = 1')
+vim.cmd('set colorcolumn=120')
 -- set termguicolors to enable highlight groups
 vim.o.termguicolors = true
 -- Set highlight on search
@@ -499,10 +500,13 @@ dap.defaults.fallback.exception_breakpoints = {}
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- press <C-D> to accept the completion
+vim.cmd(':Copilot disable')
 vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
   expr = true,
   replace_keycodes = false
 })
+vim.keymap.set('i', '<C-W>', '<Plug>(copilot-suggest)')
+vim.keymap.set('i', '<C-Q>', '<Plug>(copilot-dismiss)')
 vim.g.copilot_no_tab_map = true
 
 -- vim.keymap.set('n', '<leader>gp', function() vim.cmd(':ChatGPT') end, { desc = 'Open Chat[GP]T' })
