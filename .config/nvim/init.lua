@@ -68,6 +68,7 @@ require("lazy").setup({
   'mbbill/undotree',
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   'sillydan1/luajava.nvim',
+  'sillydan1/graphedit-lua.nvim',
   'kelly-lin/ranger.nvim',
   'igankevich/mesonic'
 })
