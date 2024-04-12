@@ -70,6 +70,7 @@ require("lazy").setup({
   'sillydan1/luajava.nvim',
   'sillydan1/graphedit-lua.nvim',
   'kelly-lin/ranger.nvim',
+  'tamton-aquib/duck.nvim',
   'igankevich/mesonic'
 })
 
@@ -504,6 +505,7 @@ dap.adapters.cppdbg = {
 dap.defaults.fallback.exception_breakpoints = {}
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+vim.api.nvim_create_user_command('HatchDuck', 'lua require("duck").hatch()', {})
 -- press <C-D> to accept the completion
 vim.cmd(':Copilot disable')
 vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
