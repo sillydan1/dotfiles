@@ -505,7 +505,8 @@ dap.adapters.cppdbg = {
 dap.defaults.fallback.exception_breakpoints = {}
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-vim.api.nvim_create_user_command('HatchDuck', 'lua require("duck").hatch()', {})
+vim.api.nvim_create_user_command('DuckHatch', 'lua require("duck").hatch()', {})
+vim.api.nvim_create_user_command('DuckCook', 'lua require("duck").cook()', {})
 -- press <C-D> to accept the completion
 vim.cmd(':Copilot disable')
 vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
