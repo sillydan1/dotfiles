@@ -471,6 +471,10 @@ dap.configurations.c = {
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
+    args = function()
+      local a = vim.fn.input('Arguments: ')
+      return { a }
+    end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
   }
@@ -482,6 +486,10 @@ dap.configurations.cpp = {
     request = "launch",
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    args = function()
+      local a = vim.fn.input('Arguments: ')
+      return { a }
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
