@@ -466,7 +466,7 @@ end
 dap.configurations.c = {
   {
     name = "Launch file",
-    type = "cppdbg",
+    type = (vim.fn.has('macunix') and "codelldb" or "cppdbg"),
     request = "launch",
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
@@ -482,7 +482,7 @@ dap.configurations.c = {
 dap.configurations.cpp = {
   {
     name = "Launch file",
-    type = "cppdbg",
+    type = (vim.fn.has('macunix') and "codelldb" or "cppdbg"),
     request = "launch",
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
@@ -495,6 +495,7 @@ dap.configurations.cpp = {
     stopOnEntry = false,
   }
 }
+-- codelldb is better on MacOS
 dap.adapters.codelldb = {
   type = 'server',
   host = '127.0.0.1',
@@ -505,6 +506,7 @@ dap.adapters.codelldb = {
     -- detached = false, --  NOTE: On windows you may have to uncomment this:
   }
 }
+-- cppdbg is better on non-MacOS
 dap.adapters.cppdbg = {
   id = 'cppdbg',
   type = 'executable',
