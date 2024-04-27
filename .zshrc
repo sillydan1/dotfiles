@@ -105,6 +105,7 @@ export CMAKE_LIBRARY_PATH="/opt/homebrew/opt/bison/lib;$CMAKE_LIBRARY_PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Git/private/AALTITOAD/Debug:$PATH"  # BUG: This may not work on your computer
 export PATH="$HOME/Git/private/AALTITOAD/out/Debug:$PATH"  # BUG: This may not work on your computer
+export PATH="$HOME/Git/private/aaltitoad/out/Debug:$PATH"  # BUG: This may not work on your computer
 
 # Aliases (Dont put any IPs here please)
 alias localip="ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'"
