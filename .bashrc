@@ -190,4 +190,13 @@ fi
 xset r rate 200 75
 
 # Pretty print some information
-clear && neofetch
+clear
+if [ -x "$(command -v pfetch)" ]; then
+  pfetch
+elif [ -x "$(command -v neofetch)" ]; then
+  neofecth
+elif [ -x "$(command -v cowsay)" ]; then
+  cowsay "Greetings $USER!"
+else
+  echo "Hello $USER!"
+fi
