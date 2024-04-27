@@ -149,6 +149,7 @@ export PATH="$PATH:/home/agj/Applications/gradle-8.5/bin"
 export PATH="$PATH:/home/agj/.local/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 export EDITOR=vi
+export CMAKE_GENERATOR=Ninja
 
 # Load node version manager
 if [ -d $HOME/.config/nvm ]; then
