@@ -49,7 +49,7 @@ require("lazy").setup({
   'tpope/vim-sleuth',
   'eliseshaffer/darklight.nvim',
   -- 'cdelledonne/vim-cmake',
-  'civitasv/cmake-tools.nvim',
+  { 'civitasv/cmake-tools.nvim', commit = '015be0e' }, -- TODO: Remove this pinning when they have fixed their shit
   "maxmellon/vim-jsx-pretty",
   "yuezk/vim-js",
   'BurntSushi/ripgrep',
