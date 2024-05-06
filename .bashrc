@@ -201,6 +201,8 @@ if [ -x "$(command -v pfetch)" ]; then
   pfetch
 elif [ -x "$(command -v neofetch)" ]; then
   neofetch
+elif [ -x "$(command -v fastfetch)" ]; then
+  fastfetch
 elif [ -x "$(command -v cowsay)" ]; then
   cowsay "Greetings $USER!"
 else
