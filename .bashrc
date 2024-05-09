@@ -189,6 +189,12 @@ if [ -d $HOME/dotfiles/secrets ]; then
   done
 fi
 
+# ruby shit
+if [ -x "$(command -v gem)" ]; then
+  export GEM_HOME="$(gem env user_gemhome)"
+  export PATH="$PATH:$GEM_HOME/bin"
+fi
+
 # if secrets dir exists, source the .env file
 [ -d ~/.config/secrets ] && source ~/.config/secrets/.env
 
