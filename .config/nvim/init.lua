@@ -524,6 +524,7 @@ vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
   replace_keycodes = false
 })
 vim.keymap.set('i', '<C-W>', '<Plug>(copilot-suggest)')
+vim.keymap.set('n', '<leader>cp', function() vim.cmd(':Copilot panel') end)
 vim.keymap.set('i', '<C-Q>', '<Plug>(copilot-dismiss)')
 vim.g.copilot_no_tab_map = true
 
