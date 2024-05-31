@@ -1,4 +1,16 @@
 line-length = 120
 
+[lint]
+select = [
+    # pydocstyle
+    "D",
+    # isort
+    "I001"
+]
+extend-select = ["D413"]
+
 [lint.isort]
 force-single-line = true
+
+[lint.pydocstyle]
+convention = "google"
