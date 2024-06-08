@@ -136,4 +136,15 @@ nvm use 20
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Pretty print some information
-clear && pfetch
+clear
+if [ -x "$(command -v pfetch)" ]; then
+  pfetch
+elif [ -x "$(command -v neofetch)" ]; then
+  neofetch
+elif [ -x "$(command -v fastfetch)" ]; then
+  fastfetch
+elif [ -x "$(command -v cowsay)" ]; then
+  cowsay "Greetings $USER!"
+else
+  echo "Hello $USER!"
+fi

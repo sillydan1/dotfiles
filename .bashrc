@@ -165,11 +165,6 @@ if [ -d $HOME/.nvm ]; then
   nvm use 20
 fi
 
-# TODO: start up in tmux (comment this line if you are having issues)
-# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-#   exec tmux
-# fi
-
 # aliasses
 alias lg="lazygit"
 if [ -x "$(command -v fzf)" ]; then
@@ -196,9 +191,6 @@ if [ -x "$(command -v gem)" ]; then
   export GEM_HOME="$(gem env user_gemhome)"
   export PATH="$PATH:$GEM_HOME/bin"
 fi
-
-# if secrets dir exists, source the .env file
-[ -d ~/.config/secrets ] && source ~/.config/secrets/.env
 
 # set repeat rate.
 xset r rate 200 75
