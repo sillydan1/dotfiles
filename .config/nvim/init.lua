@@ -551,6 +551,11 @@ vim.keymap.set('n', '<leader>/', function()
   }))
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
+-- Coverage shit
+vim.keymap.set('n', '<leader>co', function()
+  require("coverage").load_lcov("coverage.info", true)
+end, { desc = '[CO]verage Toggle' })
+
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files,                                                        { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sF', function() require('telescope.builtin').find_files({ no_ignore = true }) end,                   { desc = '[S]earch All Files' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep,                                                         { desc = '[S]earch by [G]rep' })
@@ -561,8 +566,8 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics,     
 vim.keymap.set('n', '<leader>cc', function() vim.cmd('CMakeGenerate') end, { desc = '[C]Make project [C]onfigure' })
 vim.keymap.set('n', '<leader>cb', function() vim.cmd('CMakeBuild') end,    { desc = '[C]Make project [B]uild' })
 vim.keymap.set('n', '<leader>cC', function() vim.cmd('CMakeClean') end,    { desc = '[C]Make project [C]lean' })
-vim.keymap.set('n', '<leader>mm', function() vim.cmd('MesonInit') end,     { desc = '[C]Make project [C]onfigure' })
-vim.keymap.set('n', '<leader>mb', function() vim.cmd('make') end,    { desc = '[C]Make project [B]uild' })
+vim.keymap.set('n', '<leader>mm', function() vim.cmd('MesonInit') end,     { desc = '[M]eson project configure' })
+vim.keymap.set('n', '<leader>mb', function() vim.cmd('make') end,          { desc = '[M]eson project [B]uild' })
 vim.keymap.set('n', '<leader>Ss', function() require('sessions').save('.nvim/session', { silent = true }) end, { desc = '[S]ession [s]ave' })
 vim.keymap.set('n', '<leader>Sl', function() require('sessions').load('.nvim/session', { silent = true }) end, { desc = '[S]ession [l]oad' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,         { desc = 'Next diagnostic' })
