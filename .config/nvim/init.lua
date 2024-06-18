@@ -295,7 +295,13 @@ end
 local servers = {
   clangd = {},
   -- gopls = {},
-  pyright = {},
+  pylsp = {
+    pylsp = {
+      plugins = {
+        rope_autoimport = { enabled = true }
+      }
+    }
+  },
   rust_analyzer = {
     ['rust-analyzer'] = {
       cargo = {
@@ -361,7 +367,6 @@ require('mason-lspconfig').setup_handlers({
     })
   end,
 })
-
 
 -- nvim-cmp setup
 local cmp = require('cmp')
