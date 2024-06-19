@@ -81,3 +81,10 @@ Then install and use node 20 (latest is a bit too snazzy) like so:
 nvm i 20
 nvm use node
 ```
+
+## Global gitignore
+This repo contains a global gitignore that ignores some things that you should never ever ever commit.
+You can enable it after you've `stow .`'d with the following command:
+```sh
+git config --global core.excludesfile ~/.gitignore_global
+```
