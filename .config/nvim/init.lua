@@ -295,13 +295,13 @@ end
 local servers = {
   clangd = {},
   -- gopls = {},
-  pylsp = {
-    pylsp = {
-      plugins = {
-        rope_autoimport = { enabled = true }
-      }
-    }
-  },
+  -- pylsp = {
+  --   pylsp = {
+  --     plugins = {
+  --       rope_autoimport = { enabled = true }
+  --     }
+  --   }
+  -- },
   rust_analyzer = {
     ['rust-analyzer'] = {
       cargo = {
