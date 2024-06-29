@@ -63,7 +63,8 @@ require("lazy").setup({
   { 'danymat/neogen', config = true },
   'andythigpen/nvim-coverage',
   'klen/nvim-test',
-  'github/copilot.vim',
+  -- 'github/copilot.vim',
+  'supermaven-inc/supermaven-nvim',
   'mbbill/undotree',
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   'sillydan1/luajava.nvim',
@@ -518,19 +519,22 @@ dap.adapters.cppdbg = {
 }
 dap.defaults.fallback.exception_breakpoints = {}
 
+-- set up supermaven
+require('supermaven-nvim').setup({})
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 vim.api.nvim_create_user_command('DuckHatch', 'lua require("duck").hatch()', {})
 vim.api.nvim_create_user_command('DuckCook', 'lua require("duck").cook()', {})
 -- press <C-D> to accept the completion
-vim.cmd(':Copilot disable')
-vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false
-})
-vim.keymap.set('i', '<C-W>', '<Plug>(copilot-suggest)')
-vim.keymap.set('n', '<leader>cp', function() vim.cmd(':Copilot panel') end)
-vim.keymap.set('i', '<C-Q>', '<Plug>(copilot-dismiss)')
-vim.g.copilot_no_tab_map = true
+-- vim.cmd(':Copilot disable')
+-- vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
+--   expr = true,
+--   replace_keycodes = false
+-- })
+-- vim.keymap.set('i', '<C-W>', '<Plug>(copilot-suggest)')
+-- vim.keymap.set('n', '<leader>cp', function() vim.cmd(':Copilot panel') end)
+-- vim.keymap.set('i', '<C-Q>', '<Plug>(copilot-dismiss)')
+-- vim.g.copilot_no_tab_map = true
 
 -- vim.keymap.set('n', '<leader>gp', function() vim.cmd(':ChatGPT') end, { desc = 'Open Chat[GP]T' })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
