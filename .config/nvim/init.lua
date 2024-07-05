@@ -70,7 +70,8 @@ require("lazy").setup({
   'sillydan1/graphedit-lua.nvim',
   'kelly-lin/ranger.nvim',
   'tamton-aquib/duck.nvim',
-  'igankevich/mesonic'
+  'igankevich/mesonic',
+  'pwntester/octo.nvim'
 })
 
 -- [[ Setting options ]
@@ -192,6 +193,7 @@ require("dapui").setup()
 require('workspaces').setup()
 require('nvim-test').setup({})
 require('coverage').setup()
+require('octo').setup()
 require("devcontainer").setup({
   log_level = 'trace'
 })
