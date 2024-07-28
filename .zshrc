@@ -101,6 +101,7 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export CMAKE_INCLUDE_PATH="/opt/homebrew/opt/flex/include"
 export CMAKE_LIBRARY_PATH="/opt/homebrew/opt/flex/lib;$CMAKE_LIBRARY_PATH"
 export CMAKE_LIBRARY_PATH="/opt/homebrew/opt/bison/lib;$CMAKE_LIBRARY_PATH"
+export DYLD_FALLBACK_LIBRARY_PATH="$DYLD_FALLBACK_LIBRARY_PATH:/opt/homebrew/lib"
 # Home based PATHs
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Git/private/AALTITOAD/Debug:$PATH"  # BUG: This may not work on your computer

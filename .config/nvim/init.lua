@@ -18,6 +18,7 @@ vim.g.maplocalleader = ' '
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+local is_macos = vim.fn.has('macunix')
 require("lazy").setup({
   { 'nvim-tree/nvim-tree.lua', dependencies = { 'nvim-tree/nvim-web-devicons' } },
   { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -71,7 +72,17 @@ require("lazy").setup({
   'kelly-lin/ranger.nvim',
   'tamton-aquib/duck.nvim',
   'igankevich/mesonic',
-  'pwntester/octo.nvim'
+  'pwntester/octo.nvim',
+  { 'p5quared/apple-music.nvim',
+    cond = is_macos,
+    config = true,
+    keys = {
+        { "<leader>mm", function() require("apple-music").toggle_play() end,               desc = "Toggle [M]usic [P]layback" },
+        { "<leader>mp", function() require("apple-music").select_playlist_telescope() end, desc = "[F]ind [P]laylists" },
+        { "<leader>ma", function() require("apple-music").select_album_telescope() end,    desc = "[F]ind [A]lbum" },
+        { "<leader>mc", function() require("apple-music").cleanup_all() end,               desc = "Cleanup Temp Playlists" },
+    },
+  }
 })
 
 -- [[ Setting options ]
@@ -540,6 +551,7 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', '½', '$')
 vim.keymap.set('n', '<leader>n', ':cnext<CR>', { desc = '[N]ext quickfix item' })
+vim.keymap.set('n', '<leader>N', ':cprevious<CR>', { desc = '[N]ext quickfix item (backwards)' })
 vim.keymap.set('n', '<leader>DD', ':Neogen<CR>', { desc = 'Generate [D]ocstring' })
 vim.keymap.set('n', '<leader>tt', ':DarkLightSwitch<CR>', { desc = '[T]oggle [T]heme' })
 vim.keymap.set('n', '<leader>uu', ':UndotreeToggle<CR>', { desc = '[U]ndotree toggle' })
