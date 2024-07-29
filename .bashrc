@@ -177,7 +177,7 @@ fi
 alias minimum_brightness="xbacklight -set 0.12%"
 alias maximum_brightness="xbacklight -set 100%"
 
-alias vev="python3 -m venv venv && source venv/bin/activate && python3 -m pip install -e .[dev] && python3 -m pip install neovim"
+alias vev="uv v && source .venv/bin/activate && uv pip install -e .[dev] && uv pip install neovim"
 
 # Load all the secrets from the secrets folder (assuming this repo is in $HOME/dotfiles)
 if [ -d $HOME/dotfiles/secrets ]; then
