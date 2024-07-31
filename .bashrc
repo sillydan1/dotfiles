@@ -143,10 +143,10 @@ wttr() {
 }
 
 export HISTTIMEFORMAT="%d/%m/%y %T "
-export PATH="$PATH:/home/agj/Applications/nvim-linux64/bin"
-export PATH="$PATH:/home/agj/Applications/"
-export PATH="$PATH:/home/agj/Applications/gradle-8.5/bin"
-export PATH="$PATH:/home/agj/.local/bin"
+export PATH="$PATH:$HOME/Applications/nvim-linux64/bin"
+export PATH="$PATH:$HOME/Applications/"
+export PATH="$PATH:$HOME/Applications/gradle-8.5/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 export EDITOR=vi
 export CMAKE_GENERATOR=Ninja
