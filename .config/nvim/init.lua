@@ -34,6 +34,7 @@ require("lazy").setup({
   -- TODO: Write my own, because this sucks
   -- { 'jackMort/ChatGPT.nvim', event = 'VeryLazy', config = function() setup_chatgpt() end, dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } },
   'f-person/git-blame.nvim',
+  'jay-babu/mason-nvim-dap.nvim',
   'nvim-tree/nvim-web-devicons',
   'aca/marp.nvim',
   'natecraddock/workspaces.nvim',
@@ -60,7 +61,6 @@ require("lazy").setup({
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
   'https://codeberg.org/esensar/nvim-dev-container',
-  'mfussenegger/nvim-dap-python',
   { 'danymat/neogen', config = true },
   'andythigpen/nvim-coverage',
   'klen/nvim-test',
@@ -256,6 +256,11 @@ require('nvim-treesitter.configs').setup({
 
 require('neodev').setup()
 require('mason').setup()
+require('mason-nvim-dap').setup({
+  ensure_installed = {},
+  automatic_installation = false,
+  handlers = {}
+})
 local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
@@ -430,107 +435,6 @@ cmp.setup({
 
 require('luasnip/loaders/from_vscode').load()
 
-require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-
-local dap = require('dap')
--- NOTE: Use this in your launch.json file
---        {
---        	"name": "pytest: unit",
---        	"type": "python",
---        	"request": "launch",
---        	"program": "${workspaceFolder}/venv/bin/pytest",
---        	"cwd": "${workspaceFolder}",
---        	"args": [
---        		"${workspaceFolder}/test"
---        	]
---        },
-dap.adapters.python = function(cb, config)
-  if config.request == 'attach' then
-    local port = (config.connect or config).port
-    local host = (config.connect or config).host or '127.0.0.1'
-    cb({
-      type = 'server',
-      port = assert(port, '`connect.port` is required for a python `attach` configuration'),
-      host = host,
-      options = {
-        source_filetype = 'python',
-      },
-    })
-  else
-    cb({
-      type = 'executable',
-      command = os.getenv('VIRTUAL_ENV') .. '/bin/python',
-      args = { '-m', 'debugpy.adapter' },
-      options = {
-        source_filetype = 'python',
-      },
-    })
-  end
-end
--- dap.configurations.python = {
---   {
---     name = "Run",
---     type = "python",
---     request = "launch",
---     program = function()
---       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
---     end,
---     pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python',
---     cwd = "${workspaceFolder}",
---     stopOnEntry = false,
---   },
--- }
-dap.configurations.c = {
-  {
-    name = "Launch file",
-    type = (vim.fn.has('macunix') and "codelldb" or "cppdbg"),
-    request = "launch",
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    args = function()
-      local a = vim.fn.input('Arguments: ')
-      return { a }
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-  }
-}
-dap.configurations.cpp = {
-  {
-    name = "Launch file",
-    type = (vim.fn.has('macunix') and "codelldb" or "cppdbg"),
-    request = "launch",
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    args = function()
-      local a = vim.fn.input('Arguments: ')
-      return { a }
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-  }
-}
--- codelldb is better on MacOS
-dap.adapters.codelldb = {
-  type = 'server',
-  host = '127.0.0.1',
-  port = "${port}",
-  executable = {
-    command = vim.fn.getenv('HOME') .. '/.local/share/nvim/dap/codelldb/extension/adapter/codelldb',
-    args = {"--port", "${port}"},
-    -- detached = false, --  NOTE: On windows you may have to uncomment this:
-  }
-}
--- cppdbg is better on non-MacOS
-dap.adapters.cppdbg = {
-  id = 'cppdbg',
-  type = 'executable',
-  command = vim.fn.getenv('HOME') .. '/.local/share/nvim/dap/cpptools/extension/debugAdapters/bin/OpenDebugAD7'
-}
-dap.defaults.fallback.exception_breakpoints = {}
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 vim.api.nvim_create_user_command('DuckHatch', 'lua require("duck").hatch()', {})
 vim.api.nvim_create_user_command('DuckCook', 'lua require("duck").cook()', {})
@@ -616,7 +520,7 @@ vim.keymap.set('n', '<F5>', function()
     require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' }, codelldb = { 'c', 'cpp' }})
   end
   require('dap').continue()
-end, { desc = 'Debugger Continue' })
+end, { desc = 'Debugger Continue, or launch' })
 vim.keymap.set('n', '<F6>', require('dap').step_over, { desc = 'Debugger Step Over' })
 vim.keymap.set('n', '<F7>', require('dap').step_into, { desc = 'Debugger Step Into' })
 vim.keymap.set('n', '<F8>', require('dap').step_out,  { desc = 'Debugger Step Out' })
