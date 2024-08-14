@@ -72,6 +72,7 @@ require("lazy").setup({
   'kelly-lin/ranger.nvim',
   'tamton-aquib/duck.nvim',
   'igankevich/mesonic',
+  'mfussenegger/nvim-dap-python',
   'pwntester/octo.nvim',
   { 'p5quared/apple-music.nvim',
     cond = is_macos,
@@ -434,6 +435,8 @@ cmp.setup({
 })
 
 require('luasnip/loaders/from_vscode').load()
+local python_path = table.concat({ vim.fn.stdpath('data'),  'mason', 'packages', 'debugpy', 'venv', 'bin', 'python'}, '/'):gsub('//+', '/')
+require('dap-python').setup(python_path)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 vim.api.nvim_create_user_command('DuckHatch', 'lua require("duck").hatch()', {})
