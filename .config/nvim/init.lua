@@ -74,16 +74,6 @@ require("lazy").setup({
   'igankevich/mesonic',
   'mfussenegger/nvim-dap-python',
   'pwntester/octo.nvim',
-  { 'p5quared/apple-music.nvim',
-    cond = is_macos,
-    config = true,
-    keys = {
-        { "<leader>mm", function() require("apple-music").toggle_play() end,               desc = "Toggle [M]usic [P]layback" },
-        { "<leader>mp", function() require("apple-music").select_playlist_telescope() end, desc = "[F]ind [P]laylists" },
-        { "<leader>ma", function() require("apple-music").select_album_telescope() end,    desc = "[F]ind [A]lbum" },
-        { "<leader>mc", function() require("apple-music").cleanup_all() end,               desc = "Cleanup Temp Playlists" },
-    },
-  }
 })
 
 -- [[ Setting options ]
