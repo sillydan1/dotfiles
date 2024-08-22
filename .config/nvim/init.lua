@@ -481,6 +481,7 @@ vim.keymap.set('n', '<leader>sG', function() require('telescope.builtin').live_g
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags,                                                         { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string,                                                       { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics,                                                       { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands,                                                          { desc = '[S]earch [C]ommands' })
 vim.keymap.set('n', '<leader>cc', function() vim.cmd('CMakeGenerate') end, { desc = '[C]Make project [C]onfigure' })
 vim.keymap.set('n', '<leader>cb', function() vim.cmd('CMakeBuild') end,    { desc = '[C]Make project [B]uild' })
 vim.keymap.set('n', '<leader>cC', function() vim.cmd('CMakeClean') end,    { desc = '[C]Make project [C]lean' })
@@ -491,7 +492,6 @@ vim.keymap.set('n', '<leader>Sl', function() require('sessions').load('.nvim/ses
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,         { desc = 'Next diagnostic' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next,         { desc = 'Previous diagnostic' })
 vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = 'Open diagnostics floating window' })
-vim.keymap.set('n', '<leader>r', vim.diagnostic.setloclist, { desc = 'Add ' })
 vim.keymap.set('n', '<C-w>h', function() vim.cmd(':sp') end, { desc = 'split horizontally' })
 
 vim.api.nvim_set_hl(0, "blue",   { fg = "#3d59a1" })
