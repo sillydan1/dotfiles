@@ -178,6 +178,7 @@ alias minimum_brightness="xbacklight -set 0.12%"
 alias maximum_brightness="xbacklight -set 100%"
 alias flip_coin="echo \$((1 + \$RANDOM % 2))"
 alias vev="uv v && source .venv/bin/activate && uv pip install -e .[dev] && uv pip install neovim"
+alias v="source .venv/bin/activate"
 
 # Load all the secrets from the secrets folder (assuming this repo is in $HOME/dotfiles)
 if [ -d $HOME/dotfiles/secrets ]; then
