@@ -136,6 +136,11 @@ nvm use 20
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# enable fzf
+if [ -x "$(command -v fzf)" ]; then
+  source <(fzf --zsh)
+fi
+
 # Pretty print some information
 clear
 if [ -x "$(command -v pfetch)" ]; then

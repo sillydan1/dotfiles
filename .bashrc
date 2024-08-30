@@ -169,6 +169,7 @@ fi
 alias lg="lazygit"
 if [ -x "$(command -v fzf)" ]; then
   alias fman="compgen -c | fzf | xargs man"
+  eval "$(fzf --bash)"
 fi
 if [ -x "$(command -v eza)" ]; then
   alias ls="eza"
