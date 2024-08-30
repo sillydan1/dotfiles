@@ -318,6 +318,25 @@ local servers = {
       }
     }
   },
+  -- TODO: Consider using mypy
+  basedpyright = {
+    basedpyright = {
+      analysis = {
+        include = {
+          "src"
+        },
+        diagnosticSeverityOverrides = {
+          reportAny = false,
+          reportUnknownMemberType = false,
+          reportMissingImports = "error",
+          reportMissingTypeStubs = false,
+          reportUnknownVariableType = false,
+          reportUnknownArgumentType = false,
+          reportImplicitOverride = false, -- python3.12 is a bit too new for some projects.
+        }
+      }
+    }
+  },
   tsserver = {},
   jdtls = {},
   lua_ls = {
@@ -374,7 +393,7 @@ require('mason-lspconfig').setup_handlers({
       on_attach = on_attach,
       settings = servers["clangd"],
     })
-  end,
+  end
 })
 
 -- nvim-cmp setup
