@@ -22,13 +22,13 @@ local is_macos = vim.fn.has('macunix')
 require("lazy").setup({
   { 'nvim-tree/nvim-tree.lua', dependencies = { 'nvim-tree/nvim-web-devicons' } },
   { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
-  { "rcarriga/nvim-dap-ui", dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } },
+  { "rcarriga/nvim-dap-ui", dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' }, lazy = true },
   { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' } },
   { 'neovim/nvim-lspconfig', dependencies = { 'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim', 'folke/neodev.nvim' } },
   { 'hrsh7th/nvim-cmp', dependencies = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip','L3MON4D3/LuaSnip', 'rafamadriz/friendly-snippets' } },
   { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
-  { "mfussenegger/nvim-jdtls", ft = 'java' },
+  { "mfussenegger/nvim-jdtls", ft = 'java', lazy = true },
   { 'j-hui/fidget.nvim', tag = 'legacy' },
   { 'stevearc/dressing.nvim', event = 'VeryLazy' },
   -- TODO: Write my own, because this sucks
@@ -334,6 +334,7 @@ local servers = {
           reportUnknownArgumentType = false,
           reportImplicitOverride = false, -- python3.12 is a bit too new for some projects.
           reportUnusedCallResult = false,
+          reportPrivateLocalImportUsage = false, -- a bit aggressive, even though I empathize
         }
       }
     }
