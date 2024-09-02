@@ -333,6 +333,7 @@ local servers = {
           reportUnknownVariableType = false,
           reportUnknownArgumentType = false,
           reportImplicitOverride = false, -- python3.12 is a bit too new for some projects.
+          reportUnusedCallResult = false,
         }
       }
     }
