@@ -339,7 +339,6 @@ local servers = {
       }
     }
   },
-  tsserver = {},
   jdtls = {},
   lua_ls = {
     Lua = {
