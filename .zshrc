@@ -98,6 +98,8 @@ export PATH="/opt/homebrew/opt/flex/bin:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export CMAKE_INCLUDE_PATH="/opt/homebrew/opt/flex/include"
 export CMAKE_LIBRARY_PATH="/opt/homebrew/opt/flex/lib;$CMAKE_LIBRARY_PATH"
 export CMAKE_LIBRARY_PATH="/opt/homebrew/opt/bison/lib;$CMAKE_LIBRARY_PATH"
@@ -135,6 +137,15 @@ nvm use 20
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Custom thing that helps you create .epub files from manpages
+if [ -x "$(command -v manbook)" ]; then
+  mantoepub ()
+  {
+    manbook $1
+    pandoc -f html -t epub3 -o $1.epub $1.html
+  }
+fi
 
 # enable fzf
 if [ -x "$(command -v fzf)" ]; then
