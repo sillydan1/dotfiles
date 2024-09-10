@@ -197,6 +197,15 @@ fi
 # set repeat rate.
 xset r rate 200 75
 
+# Custom thing that helps you create .epub files from manpages
+if [ -x "$(command -v manbook)" ]; then
+  mantoepub ()
+  {
+    manbook $1
+    pandoc -f html -t epub3 -o $1.epub $1.html
+  }
+fi
+
 # Pretty print some information
 clear
 if [ -x "$(command -v pfetch)" ]; then
