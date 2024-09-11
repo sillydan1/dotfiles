@@ -335,6 +335,7 @@ local servers = {
           reportImplicitOverride = false, -- python3.12 is a bit too new for some projects.
           reportUnusedCallResult = false,
           reportPrivateLocalImportUsage = false, -- a bit aggressive, even though I empathize
+          reportImplicitRelativeImport = false,
         }
       }
     }
