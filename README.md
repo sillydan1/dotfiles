@@ -25,6 +25,14 @@ stow .
 If you have any aliases, paths, env variables or anything else that you don't want to share, you can put them in a file called `secrets` in the root of the dotfiles directory.
 This file will be ignored by git, but still loaded automatically by the shell-rc file(s) so you can put whatever you want in there.
 
+## alacritty
+I personally like `alacritty`, so this repo also adds a config file for that. However, you may need to clone the alacritty-theme repository in order to get proper colors.
+```sh
+git clone git@github.com:alacritty/alacritty-theme.git .config/alacritty/alacritty-theme
+# remember to call stow after the clone
+```
+Note that the font size may have to be adjusted depending on your display. The [documentation](https://alacritty.org/config-alacritty.html) says that the size is meant to be in "points per inch", but that is a blatant [lie](https://github.com/alacritty/alacritty/issues/5505) - so just edit the font size as you desire.
+
 ## tmux
 Install tmux and the tmux plugin manager
 ```sh

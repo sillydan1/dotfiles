@@ -3,3 +3,4 @@ Debug
 secrets
 lazy-lock.json
 .luarc.json
+.config/alacritty/alacritty-theme/

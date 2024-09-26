@@ -1,2 +1,13 @@
+import = [
+    "~/.config/alacritty/alacritty-theme/themes/hyper.toml"
+]
+
 [font]
 size = 9.25
+
+[font.normal]
+family = "MesloLGS Nerd Font Mono"
+style = "Regular"
+
+[window]
+opacity = 0.9
