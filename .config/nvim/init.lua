@@ -336,6 +336,7 @@ local servers = {
           reportUnusedCallResult = false,
           reportPrivateLocalImportUsage = false, -- a bit aggressive, even though I empathize
           reportImplicitRelativeImport = false,
+          reportUnusedFunction = "warning",
         }
       }
     }
