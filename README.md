@@ -96,3 +96,30 @@ You can enable it after you've `stow .`'d with the following command:
 ```sh
 git config --global core.excludesfile ~/.gitignore_global
 ```
+
+
+# Arch linux
+I am using arch linux. Sometimes you just want to use one of the tty's.
+This is a general guide for myself, as I tend to forget things.
+
+## Missing Programs
+A fresh arch linux (with no gui) is missing a lot.
+ - `iwd` - install this (if you have an intel wifi-card (you very likely do)) using the installer.
+   Make sure to create the `/etc/iwd/main.conf` file:
+   ```
+   [General]
+   EnableEntworkConfiguration=true
+   ```
+   This can be done using raw `echo` and pipes.
+   Truth be told, I have no idea how you're reading this document with no internet, but here we are.
+   Also:
+   ```sh
+   systemctl enable systemd-resolved
+   systemctl start systemd-resolved
+   ```
+- `neovim`
+- `tmux` (see above)
+- `git`
+- `openssh` (use to generate ssh key and get going)
+- `nvm` (see above)
+- `lynx`
