@@ -119,10 +119,11 @@ Dont install `hyprland` yet, make sure you have done these prerequisites first:
 
  - You have to be in the `seat` and `input` groups, you should also enable `seatd`:
  - Install `alacritty`, as that is my preferred terminal, this can be changed in the hyprland config
- - Install hyprland apps `waybar` and `wmenu`
+ - Install hyprland apps `waybar`, `hyprpaper` and `wmenu`
+ - Install other random garbage such as `wl-clipboard`
 
 ```sh
-sudo pacman -S alacritty waybar hyprpaper wmenu
+sudo pacman -S alacritty waybar hyprpaper wmenu wl-clipboard
 sudo usermod seat input <user>
 systemctl enable seatd
 systemctl start seatd
