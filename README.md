@@ -1,6 +1,14 @@
 # GTZs devmachine setup
 This is where I keep all my magic. These files expect a UNIX based system.
 
+Please note: I basically live all my life in the terminal - only to occasionally open `firefox`.
+If I could have a firefox rendering engine _inside_ my terminal, I would prefer that.
+This may be possible through `ghostty` or `alacritty` in the future, as they allow for direct GPU accelarated rendering.
+This means that the only real thing that I need a windowing manager for is to manage my displays, be a GPU interface and
+open the occasional GUI application that may be needed for drawing diagrams, viewing PDFs, playing games etc.
+
+This means that my real "window manager" is `tmux` - so most of this config is very focused around that workflow.
+
 ## Installation
 
 ### stow
@@ -31,7 +39,9 @@ I personally like `alacritty`, so this repo also adds a config file for that. Ho
 git clone git@github.com:alacritty/alacritty-theme.git .config/alacritty/alacritty-theme
 # remember to call stow after the clone
 ```
-Note that the font size may have to be adjusted depending on your display. The [documentation](https://alacritty.org/config-alacritty.html) says that the size is meant to be in "points per inch", but that is a blatant [lie](https://github.com/alacritty/alacritty/issues/5505) - so just edit the font size as you desire.
+Note that the font size may have to be adjusted depending on your display.
+The [documentation](https://alacritty.org/config-alacritty.html) says that the size is meant to be in "points per inch",
+but that is a blatant [lie](https://github.com/alacritty/alacritty/issues/5505) - so just edit the font size as you desire.
 
 ## tmux
 Install tmux and the tmux plugin manager
@@ -47,7 +57,7 @@ Then install the plugin manager
 ```sh
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
-Then start tmux, press `Ctrl+a, I` to install the plugins.
+Then start tmux, press `Ctrl+a, I` to install the plugins (these dotfile rebind `Ctrl+b` to `Ctrl+a`).
 
 ## neovim
 Install the latest neovim from https://github.com/neovim/neovim
@@ -101,6 +111,22 @@ git config --global core.excludesfile ~/.gitignore_global
 # Arch linux
 I am using arch linux. Sometimes you just want to use one of the tty's.
 This is a general guide for myself, as I tend to forget things.
+
+## Hyprland
+I also have a hyprland configuration (mostly just default where I removed some bloat).
+When arch linux is just freshly installed (literally only `iwd` and perhaps a text editor is installed), hyprland may not work.
+Dont install `hyprland` yet, make sure you have done these prerequisites first:
+
+ - You have to be in the `seat` and `input` groups, you should also enable `seatd`:
+ - Install `alacritty`, as that is my preferred terminal, this can be changed in the hyprland config
+ - Install hyprland apps `waybar` and `wmenu`
+
+```sh
+sudo pacman -S alacritty waybar wmenu
+sudo usermod seat input <user>
+systemctl enable seatd
+systemctl start seatd
+```
 
 ## Missing Programs
 A fresh arch linux (with no gui) is missing a lot.
