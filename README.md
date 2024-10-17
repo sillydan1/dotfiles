@@ -122,7 +122,7 @@ Dont install `hyprland` yet, make sure you have done these prerequisites first:
  - Install hyprland apps `waybar` and `wmenu`
 
 ```sh
-sudo pacman -S alacritty waybar wmenu
+sudo pacman -S alacritty waybar hyprpaper wmenu
 sudo usermod seat input <user>
 systemctl enable seatd
 systemctl start seatd
