@@ -55,12 +55,10 @@ require("lazy").setup({
   "yuezk/vim-js",
   'BurntSushi/ripgrep',
   'sharkdp/fd',
-  "https://codeberg.org/esensar/nvim-dev-container",
   'tell-k/vim-autopep8',
   'tpope/vim-dadbod',
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
-  'https://codeberg.org/esensar/nvim-dev-container',
   { 'danymat/neogen', config = true },
   'andythigpen/nvim-coverage',
   'klen/nvim-test',
@@ -196,9 +194,6 @@ require('workspaces').setup()
 require('nvim-test').setup({})
 require('coverage').setup()
 require('octo').setup()
-require("devcontainer").setup({
-  log_level = 'trace'
-})
 require('lualine').setup({
   options = {
     icons_enabled = false,
