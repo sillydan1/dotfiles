@@ -123,7 +123,7 @@ Dont install `hyprland` yet, make sure you have done these prerequisites first:
  - Install other random garbage such as `wl-clipboard`
 
 ```sh
-sudo pacman -S alacritty waybar hyprpaper wmenu wl-clipboard
+sudo pacman -S alacritty waybar hyprpaper wmenu wl-clipboard ttf-meslo-nerd
 sudo usermod seat input <user>
 systemctl enable seatd
 systemctl start seatd
