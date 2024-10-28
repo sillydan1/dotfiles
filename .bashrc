@@ -195,7 +195,9 @@ if [ -x "$(command -v gem)" ]; then
 fi
 
 # set repeat rate.
-xset r rate 200 75
+if [[ "$XDG_SESSION_TYPE" == "x11" ]]; then
+  xset r rate 200 75
+fi
 
 # Custom thing that helps you create .epub files from manpages
 if [ -x "$(command -v manbook)" ]; then

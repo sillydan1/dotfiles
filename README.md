@@ -129,6 +129,15 @@ systemctl enable seatd
 systemctl start seatd
 ```
 
+## Sway
+Sometimes, I find myself on a Ubuntu install - and hyprland is not available there.
+So I must use `sway` instead.
+```sh
+sudo apt install sway waybar light
+```
+The sway config is decent, but I cant get rounded corners. Also, I am missing the randomized wallpapers.
+
+
 ## Missing Programs
 A fresh arch linux (with no gui) is missing a lot.
  - `iwd` - install this (if you have an intel wifi-card (you very likely do)) using the installer.
