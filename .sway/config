@@ -11,6 +11,14 @@ set $menu dmenu_path | wmenu | xargs swaymsg exec --
 include /etc/sway/config-vars.d/*
 
 output * bg ~/.config/.wallpapers/wallpaper.png fill
+
+# Workstation
+output "Lenovo Group Limited P24q-10 0x01010101" pos 0 0 transform 90
+output "Lenovo Group Limited LEN P24h-20 V307WLT6" pos 1440 657
+
+# Laptop
+# <nothing>
+
 focus_follows_mouse yes
 mouse_warping container
 
@@ -53,6 +61,7 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+bindsym Mod4+l exec dm-tool lock
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
 bindsym $mod+3 workspace number 3
