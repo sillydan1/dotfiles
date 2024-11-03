@@ -6,3 +6,4 @@ lazy-lock.json
 .config/alacritty/alacritty-theme/
 .config/go/
 .config/lazygit/
+.config/dconf/
