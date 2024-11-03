@@ -10,7 +10,7 @@ set $menu dmenu_path | wmenu -f "Meslo 11" | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
-output * bg ~/.config/.wallpapers/wallpaper.png fill
+output * bg $(find ~/.config/.wallpapers/ -type f | shuf -n1) fill
 
 # Workstation
 output "Lenovo Group Limited P24q-10 0x01010101" pos 0 0 transform 90

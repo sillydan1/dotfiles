@@ -7,3 +7,4 @@ lazy-lock.json
 .config/go/
 .config/lazygit/
 .config/dconf/
+.config/btop/
