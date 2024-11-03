@@ -4,3 +4,5 @@ secrets
 lazy-lock.json
 .luarc.json
 .config/alacritty/alacritty-theme/
+.config/go/
+.config/lazygit/
