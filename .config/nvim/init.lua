@@ -442,7 +442,7 @@ cmp.setup({
   })
 })
 
-require('luasnip/loaders/from_vscode').load()
+require('luasnip/loaders/from_vscode').lazy_load()
 local python_path = table.concat({ vim.fn.stdpath('data'),  'mason', 'packages', 'debugpy', 'venv', 'bin', 'python'}, '/'):gsub('//+', '/')
 require('dap-python').setup(python_path)
 
