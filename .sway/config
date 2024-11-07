@@ -93,6 +93,8 @@ bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
 bindsym XF86MonBrightnessUp exec light -A 5
 bindsym XF86MonBrightnessDown exec light -U 5
 
+
+### Resize mode
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
@@ -113,10 +115,44 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
 
+### Control the mouse with the keyboard (sometimes I dont have a mouse available)
+# TODO: According to `man sway-input`, we should use the wayland-pointer protocol instead...
+mode "mousemode" {
+    bindsym --to-code {
+        h seat - cursor move -100 0
+        j seat - cursor move 0 100
+        k seat - cursor move 0 -100
+        l seat - cursor move 100 0
+        Shift+h seat - cursor move -10 0
+        Shift+j seat - cursor move 0 10
+        Shift+k seat - cursor move 0 -10
+        Shift+l seat - cursor move 10 0
+        a seat - cursor press button1
+        s seat - cursor press button2
+        d seat - cursor press button3
+
+        # Return to default mode
+        Return mode "default"
+        Escape mode "default"
+        Control+c mode "default"
+    }
+    bindsym --release {
+        a seat - cursor release button1
+        s seat - cursor release button2
+        d seat - cursor release button3
+    }
+}
+
+
+# Mode swtich binds
+bindsym $mod+r mode "resize"
+bindsym $mod+Shift+w mode "mousemode"
+bindsym $mod+Shift+a seat - cursor press button1
+
+
+### Bar and other non-specific stuff
 bar {
     swaybar_command waybar
 }
-
 include /etc/sway/config.d/*
