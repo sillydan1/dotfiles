@@ -12,12 +12,18 @@ include /etc/sway/config-vars.d/*
 
 output * bg $(find ~/.config/.wallpapers/ -type f | shuf -n1) fill
 
-# Workstation
+# When setting up a new office / workstation
+# - swaymsg -t get_outputs
+
+# Work office
 output "Lenovo Group Limited P24q-10 0x01010101" pos 0 0 transform 90
 output "Lenovo Group Limited LEN P24h-20 V307WLT6" pos 1440 657
 
-# Laptop
-# <nothing>
+# Mom's office
+
+# Laptop (just turn off the display when closed)
+bindswitch lid:on output eDP-1 disable
+bindswitch lid:off output eDP-1 enable
 
 focus_follows_mouse yes
 mouse_warping container
@@ -114,6 +120,7 @@ mode "resize" {
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym Control+c mode "default"
 }
 
 ### Control the mouse with the keyboard (sometimes I dont have a mouse available)
