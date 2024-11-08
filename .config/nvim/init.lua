@@ -333,6 +333,7 @@ local servers = {
           reportPrivateLocalImportUsage = false, -- a bit aggressive, even though I empathize
           reportImplicitRelativeImport = false,
           reportUnusedFunction = "warning",
+          reportUnannotatedClassAttribute = false, -- https://peps.python.org/pep-0591/ is quite aggressive
         }
       }
     }
