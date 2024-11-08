@@ -181,6 +181,7 @@ alias flip_coin="echo \$((1 + \$RANDOM % 2))"
 alias vev="uv v && source .venv/bin/activate && uv pip install -e .[dev] && uv pip install neovim"
 alias v="source .venv/bin/activate"
 alias scim="TERM=xterm-256color sc-im"
+alias n="nvim"
 
 # Load all the secrets from the secrets folder (assuming this repo is in $HOME/dotfiles)
 if [ -d $HOME/dotfiles/secrets ]; then
