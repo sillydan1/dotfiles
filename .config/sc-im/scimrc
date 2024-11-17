@@ -35,3 +35,7 @@ color "type=FILENM fg=YELLOW bg=BLACK bold=0"
 # To not italicize strings, replace italic=1 with italic=0 on following line
 color "type=STRG fg=CYAN bg=BLACK bold=0 italic=0"
 color "type=DATEF fg=YELLOW bg=BLACK"
+
+# Keymaps
+nmap "<C-n>" ":nextsheet<CR>"
+nmap "<C-p>" ":prevsheet<CR>"
