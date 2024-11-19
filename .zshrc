@@ -113,6 +113,8 @@ export PATH="$HOME/Git/private/aaltitoad/out/Debug:$PATH"  # BUG: This may not w
 # Aliases (Dont put any IPs here please)
 alias localip="ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'"
 alias lg="lazygit"
+alias scim="TERM=xterm-256color sc-im"
+alias n="nvim"
 if [ -x "$(command -v fzf)" ]; then
   alias fman="compgen -c | fzf | xargs man"
 fi
