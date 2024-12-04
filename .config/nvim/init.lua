@@ -358,6 +358,8 @@ require('mason-lspconfig').setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 require('mason-lspconfig').setup_handlers({
+  -- CLI arguments (e.g. -log=verbose) is done like so:
+  -- clangd = { cmd = { "clangd", "-log=verbose" } }
   function(server_name)
     require('lspconfig')[server_name].setup({
       capabilities = capabilities,
@@ -392,6 +394,7 @@ require('mason-lspconfig').setup_handlers({
         unpack(capabilities),
         offsetEncoding = "utf-16",
       },
+      -- cmd = { "clangd", "-log=verbose" },
       on_attach = on_attach,
       settings = servers["clangd"],
     })
