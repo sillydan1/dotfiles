@@ -33,6 +33,14 @@ require("lazy").setup({
   { 'stevearc/dressing.nvim', event = 'VeryLazy' },
   -- TODO: Write my own, because this sucks
   -- { 'jackMort/ChatGPT.nvim', event = 'VeryLazy', config = function() setup_chatgpt() end, dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } },
+  {
+    '2kabhishek/nerdy.nvim',
+    dependencies = {
+      'stevearc/dressing.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    cmd = 'Nerdy',
+  },
   "dstein64/vim-startuptime",
   'f-person/git-blame.nvim',
   'jay-babu/mason-nvim-dap.nvim',
@@ -229,6 +237,7 @@ require('telescope').setup({
   },
 })
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'nerdy')
 require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'java', 'rust', 'typescript', 'jsonc', 'vimdoc', 'vim' },
@@ -558,6 +567,7 @@ vim.keymap.set('n', '<Leader>ds', function()
 end, { desc = 'Debugger summon centered_float' })
 
 vim.keymap.set('n', '<leader>o', require('nvim-tree.api').tree.toggle,  { desc = '[O]pen file' })
+vim.keymap.set('n', '<leader>nf', require('telescope').extensions.nerdy.nerdy, { desc = 'Discover [N]erd [F]onts' })
 
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', opts)
@@ -568,6 +578,7 @@ vim.api.nvim_set_keymap('n', '<leader><', '<Cmd>BufferMovePrevious<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>>', '<Cmd>BufferMoveNext<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>tp', '<Cmd>BufferPin<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+
 -- Wipeout buffer
 --                 :BufferWipeout
 -- Close commands
