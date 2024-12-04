@@ -298,6 +298,8 @@ local on_attach = function(client, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 local servers = {
+  -- Use this to lock the thing
+  -- ["package@version"]
   clangd = {},
   -- gopls = {},
   -- pylsp = {
