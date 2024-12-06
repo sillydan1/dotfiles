@@ -51,7 +51,6 @@ require("lazy").setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
   'lewis6991/gitsigns.nvim',
-  'kdheepak/lazygit.nvim',
   'christoomey/vim-tmux-navigator',
   'navarasu/onedark.nvim',
   'nvim-lualine/lualine.nvim',
@@ -81,6 +80,80 @@ require("lazy").setup({
   'igankevich/mesonic',
   'mfussenegger/nvim-dap-python',
   'pwntester/octo.nvim',
+  {
+    'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      bigfile = { enabled = true },
+      dashboard = { enabled = false },
+      notifier = {
+        enabled = true,
+        timeout = 3000,
+      },
+      quickfile = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+      styles = {
+        notification = {
+          wo = { wrap = true } -- Wrap notifications
+        }
+      }
+    },
+    keys = {
+      { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+      { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+      { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
+      { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
+      { "<leader>dd", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+      {
+        "<leader>1",  -- Still debating this...
+        desc = "Neovim News",
+        function()
+          Snacks.win({
+            file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+            width = 0.6,
+            height = 0.6,
+            wo = {
+              spell = false,
+              wrap = false,
+              signcolumn = "yes",
+              statuscolumn = " ",
+              conceallevel = 3,
+            },
+          })
+        end,
+      }
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          -- Setup some globals for debugging (lazy-loaded)
+          _G.dd = function(...)
+            Snacks.debug.inspect(...)
+          end
+          _G.bt = function()
+            Snacks.debug.backtrace()
+          end
+          vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+          -- Create some toggle mappings
+          Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+          Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+          Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+          Snacks.toggle.diagnostics():map("<leader>ud")
+          Snacks.toggle.line_number():map("<leader>ul")
+          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+          Snacks.toggle.treesitter():map("<leader>uT")
+          Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+          Snacks.toggle.inlay_hints():map("<leader>uh")
+        end,
+      })
+    end,
+  },
 })
 
 -- [[ Setting options ]
@@ -487,8 +560,6 @@ vim.keymap.set('n', '<leader>tt', ':DarkLightSwitch<CR>', { desc = '[T]oggle [T]
 vim.keymap.set('n', '<leader>uu', ':UndotreeToggle<CR>', { desc = '[U]ndotree toggle' })
 vim.keymap.set('n', '<leader>ff', function() ranger_nvim.open(true) end, { desc = 'Open [F]ile using ranger' })
 vim.keymap.set('n', '<leader>bl', ':!black .<CR>', { desc = '[Bl]ack formatting' })
-vim.keymap.set('n', '<leader>gb', function() vim.cmd('GitBlameToggle') end,                   { desc = '[G]it [B]lame Toggle' })
-vim.keymap.set('n', '<leader>gg', function() vim.cmd('LazyGit') end,                          { desc = 'Open lazy[g]it client' })
 vim.keymap.set('n', '<leader>st', function() vim.cmd(':TodoTelescope keywords=TODO,FIX') end, { desc = '[S]earch [T]odos' })
 vim.keymap.set('n', '<leader>sT', function() vim.cmd(':TodoTelescope') end,                   { desc = '[S]earch all [T]odos' })
 vim.keymap.set('n', '<leader>p', require('nvim-tree.api').tree.find_file,                     { desc = 'open the current buffer file in nvim tree' })
@@ -567,7 +638,7 @@ vim.keymap.set('n', '<Leader>ds', function()
 end, { desc = 'Debugger summon centered_float' })
 
 vim.keymap.set('n', '<leader>o', require('nvim-tree.api').tree.toggle,  { desc = '[O]pen file' })
-vim.keymap.set('n', '<leader>nf', require('telescope').extensions.nerdy.nerdy, { desc = 'Discover [N]erd [F]onts' })
+vim.keymap.set('n', '<leader>fn', require('telescope').extensions.nerdy.nerdy, { desc = 'Discover [N]erd [F]onts' })
 
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', opts)
