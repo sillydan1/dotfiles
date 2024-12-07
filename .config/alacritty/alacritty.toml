@@ -1,7 +1,4 @@
 [general]
-import = [
-    "~/.config/alacritty/alacritty-theme/themes/hyper.toml"
-]
 
 [font]
 size = 9.25

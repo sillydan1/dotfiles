@@ -210,6 +210,9 @@ if [ -x "$(command -v manbook)" ]; then
   }
 fi
 
+# enable syntax highlighting in the manpages
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
+
 # Pretty print some information
 clear
 if [ -x "$(command -v pfetch)" ]; then
