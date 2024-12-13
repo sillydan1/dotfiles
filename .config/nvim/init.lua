@@ -559,6 +559,7 @@ vim.keymap.set('n', '<leader>DD', ':Neogen<CR>', { desc = 'Generate [D]ocstring'
 vim.keymap.set('n', '<leader>tt', ':DarkLightSwitch<CR>', { desc = '[T]oggle [T]heme' })
 vim.keymap.set('n', '<leader>uu', ':UndotreeToggle<CR>', { desc = '[U]ndotree toggle' })
 vim.keymap.set('n', '<leader>ff', function() ranger_nvim.open(true) end, { desc = 'Open [F]ile using ranger' })
+vim.keymap.set('n', '<leader>FF', function() vim.lsp.buf.format() end, { desc = '[F]ile [F]ormat' })
 vim.keymap.set('n', '<leader>bl', ':!black .<CR>', { desc = '[Bl]ack formatting' })
 vim.keymap.set('n', '<leader>st', function() vim.cmd(':TodoTelescope keywords=TODO,FIX') end, { desc = '[S]earch [T]odos' })
 vim.keymap.set('n', '<leader>sT', function() vim.cmd(':TodoTelescope') end,                   { desc = '[S]earch all [T]odos' })
