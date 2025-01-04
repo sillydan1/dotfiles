@@ -214,6 +214,9 @@ fi
 # enable syntax highlighting in the manpages
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
+# Set firefox as default browser
+export BROWSER="firefox"
+
 # Pretty print some information
 clear
 if [ -x "$(command -v pfetch)" ]; then
