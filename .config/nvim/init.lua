@@ -91,6 +91,7 @@ require("lazy").setup({
       notifier = {
         enabled = true,
         timeout = 3000,
+        top_down = false,
       },
       quickfile = { enabled = true },
       statuscolumn = { enabled = true },
