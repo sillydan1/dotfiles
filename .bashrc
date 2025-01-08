@@ -176,8 +176,15 @@ if [ -x "$(command -v eza)" ]; then
   alias ls="eza"
   alias ll="eza -lah"
 fi
-alias minimum_brightness="xbacklight -set 0.12%"
-alias maximum_brightness="xbacklight -set 100%"
+
+if [ -x "$(command -v xbacklight)" ]; then
+  alias minimum_brightness="xbacklight -set 0.12%"
+  alias maximum_brightness="xbacklight -set 100%"
+elif [[ -x "$(command -v brightnessctl)" ]]; then
+  alias minimum_brightness="brightnessctl s 1"
+  alias maximum_brightness="brightnessctl s 100%"
+fi
+
 alias flip_coin="echo \$((1 + \$RANDOM % 2))"
 alias vev="uv v && source .venv/bin/activate && uv pip install -e .[dev] && uv pip install neovim"
 alias v="source .venv/bin/activate"
