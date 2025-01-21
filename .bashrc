@@ -218,6 +218,11 @@ if [ -x "$(command -v manbook)" ]; then
   }
 fi
 
+# Emacs shit (experimental)
+if [ -x "$(command -v emacs)" ]; then
+  alias emacs="emacs -nw"
+fi
+
 # enable syntax highlighting in the manpages
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
