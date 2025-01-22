@@ -81,6 +81,12 @@ require("lazy").setup({
   'mfussenegger/nvim-dap-python',
   'pwntester/octo.nvim',
   {
+    "nvim-neorg/neorg",
+    lazy = false,
+    version = "*",
+    config = true,
+  },
+  {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
