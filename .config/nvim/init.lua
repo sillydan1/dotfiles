@@ -84,7 +84,7 @@ require("lazy").setup({
     "nvim-neorg/neorg",
     lazy = false,
     version = "*",
-    config = true,
+    config = false,
   },
   {
     'folke/snacks.nvim',
@@ -276,6 +276,20 @@ require("nvim-tree").setup({
 })
 
 require('cmake-tools').setup({})
+require('neorg').setup({
+  load = {
+    ["core.defaults"] = {},
+    ["core.concealer"] = {},
+    ["core.dirman"] = {
+      config = {
+        workspaces = {
+          agj = "~/neorg",
+        },
+        index = "index.norg",
+      }
+    }
+  }
+})
 
 require('sessions').setup()
 require("dapui").setup()
@@ -657,6 +671,28 @@ vim.api.nvim_set_keymap('n', '<leader><', '<Cmd>BufferMovePrevious<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>>', '<Cmd>BufferMoveNext<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>tp', '<Cmd>BufferPin<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+
+-- Neorg bindings
+vim.keymap.set('n', '<leader>ne', function() vim.cmd("Neorg workspace agj") end, { desc = "Open [Ne]org personal workspace" })
+vim.api.nvim_create_augroup("filetype_mappings", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "norg",
+  callback = function()
+    -- These are all detected using :checkhealth neorg
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cm', "<Plug>(neorg.looking-glass.magnify-code-block)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>id', "<Plug>(neorg.tempus.insert-date)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>li', "<Plug>(neorg.pivot.list.invert)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>lt', "<Plug>(neorg.pivot.list.toggle)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>ta', "<Plug>(neorg.qol.todo-items.todo.task-ambiguous)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tc', "<Plug>(neorg.qol.todo-items.todo.cancelled)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>td', "<Plug>(neorg.qol.todo-items.todo.task-done)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>th', "<Plug>(neorg.qol.todo-items.todo.task-on-hold)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>ti', "<Plug>(neorg.qol.todo-items.todo.task-important)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tp', "<Plug>(neorg.qol.todo-items.todo.task-pending)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tr', "<Plug>(neorg.qol.todo-items.todo.task-recurring)", opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tu', "<Plug>(neorg.qol.todo-items.todo.task-undone)", opts)
+  end
+})
 
 -- Wipeout buffer
 --                 :BufferWipeout
