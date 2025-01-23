@@ -11,3 +11,4 @@ lazy-lock.json
 .emacs.d/elpa/
 .emacs.d/url/
 .emacs.d/*~
+.config/hypr/hyprpaper.conf
