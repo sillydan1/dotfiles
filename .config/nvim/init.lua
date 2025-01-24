@@ -20,17 +20,17 @@ vim.g.loaded_netrwPlugin = 1
 
 local is_macos = vim.fn.has('macunix')
 require("lazy").setup({
-  { 'nvim-tree/nvim-tree.lua', dependencies = { 'nvim-tree/nvim-web-devicons' } },
-  { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
-  { "rcarriga/nvim-dap-ui", dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' }, lazy = true },
-  { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' } },
-  { 'neovim/nvim-lspconfig', dependencies = { 'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim', 'folke/neodev.nvim' } },
-  { 'hrsh7th/nvim-cmp', dependencies = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip','L3MON4D3/LuaSnip', 'rafamadriz/friendly-snippets' } },
+  { 'nvim-tree/nvim-tree.lua',                     dependencies = { 'nvim-tree/nvim-web-devicons' } },
+  { 'folke/todo-comments.nvim',                    dependencies = { 'nvim-lua/plenary.nvim' } },
+  { "rcarriga/nvim-dap-ui",                        dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },                                                                                               lazy = true },
+  { 'nvim-telescope/telescope.nvim',               dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' } },
+  { 'neovim/nvim-lspconfig',                       dependencies = { 'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim', 'folke/neodev.nvim' } },
+  { 'hrsh7th/nvim-cmp',                            dependencies = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip', 'L3MON4D3/LuaSnip', 'rafamadriz/friendly-snippets' } },
   { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-  { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
-  { "mfussenegger/nvim-jdtls", ft = 'java', lazy = true },
-  { 'j-hui/fidget.nvim', tag = 'legacy' },
-  { 'stevearc/dressing.nvim', event = 'VeryLazy' },
+  { 'romgrk/barbar.nvim',                          dependencies = { 'nvim-web-devicons' } },
+  { "mfussenegger/nvim-jdtls",                     ft = 'java',                                                                                                                                                       lazy = true },
+  { 'j-hui/fidget.nvim',                           tag = 'legacy' },
+  { 'stevearc/dressing.nvim',                      event = 'VeryLazy' },
   -- TODO: Write my own, because this sucks
   -- { 'jackMort/ChatGPT.nvim', event = 'VeryLazy', config = function() setup_chatgpt() end, dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } },
   {
@@ -67,7 +67,7 @@ require("lazy").setup({
   'tpope/vim-dadbod',
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
-  { 'danymat/neogen', config = true },
+  { 'danymat/neogen',  config = true },
   'andythigpen/nvim-coverage',
   'klen/nvim-test',
   'github/copilot.vim',
@@ -109,14 +109,14 @@ require("lazy").setup({
       }
     },
     keys = {
-      { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-      { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+      { "<leader>.",  function() Snacks.scratch() end,          desc = "Toggle Scratch Buffer" },
+      { "<leader>S",  function() Snacks.scratch.select() end,   desc = "Select Scratch Buffer" },
+      { "<leader>gg", function() Snacks.lazygit() end,          desc = "Lazygit" },
       { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
-      { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
-      { "<leader>dd", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+      { "<leader>gb", function() Snacks.git.blame_line() end,   desc = "Git Blame Line" },
+      { "<leader>dd", function() Snacks.notifier.hide() end,    desc = "Dismiss All Notifications" },
       {
-        "<leader>1",  -- Still debating this...
+        "<leader>1", -- Still debating this...
         desc = "Neovim News",
         function()
           Snacks.win({
@@ -153,7 +153,8 @@ require("lazy").setup({
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
           Snacks.toggle.diagnostics():map("<leader>ud")
           Snacks.toggle.line_number():map("<leader>ul")
-          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
+          "<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
           Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
           Snacks.toggle.inlay_hints():map("<leader>uh")
@@ -199,12 +200,12 @@ vim.o.expandtab = true
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.cindent = true
-vim.api.nvim_set_option("clipboard","unnamed")
+vim.api.nvim_set_option("clipboard", "unnamed")
 
 -- files named "Jenkinsfile" should be set to use the groovy syntax highlighter
 -- Not setting filetype=groovy, because groovy-language-server is not too happy with jenkinsfiles
 -- TODO: Write a better jenkinsfile language-server / linter.
-vim.cmd[[
+vim.cmd [[
   augroup groovy_filetype
     autocmd BufNewFile,BufRead Jenkinsfile set syntax=groovy
   augroup END
@@ -256,9 +257,9 @@ ranger_nvim.setup({
 })
 
 require('darklight').setup({
-  mode = 'colorscheme', -- Sets darklight to colorscheme mode
+  mode = 'colorscheme',                  -- Sets darklight to colorscheme mode
   light_mode_colorscheme = 'catppuccin', -- Sets the colorscheme to use for light mode
-  dark_mode_colorscheme = 'catppuccin', -- Sets the colorscheme to use for dark mode
+  dark_mode_colorscheme = 'catppuccin',  -- Sets the colorscheme to use for dark mode
 })
 
 require("nvim-tree").setup({
@@ -334,7 +335,7 @@ pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'nerdy')
 require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'java', 'rust', 'typescript', 'jsonc', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'java', 'rust', 'typescript', 'jsonc', 'vimdoc', 'vim', 'norg' },
   modules = {},
   ignore_install = {},
   sync_install = false,
@@ -375,7 +376,7 @@ local on_attach = function(client, bufnr)
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gh',function()
+  nmap('gh', function()
     vim.cmd(':ClangdSwitchSourceHeader')
   end, '[G]oto [H]eader')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
@@ -433,7 +434,7 @@ local servers = {
           reportMissingTypeStubs = false,
           reportUnknownVariableType = false,
           reportUnknownArgumentType = false,
-          reportImplicitOverride = false, -- python3.12 is a bit too new for some projects.
+          reportImplicitOverride = false,        -- python3.12 is a bit too new for some projects.
           reportUnusedCallResult = false,
           reportPrivateLocalImportUsage = false, -- a bit aggressive, even though I empathize
           reportImplicitRelativeImport = false,
@@ -484,8 +485,8 @@ require('mason-lspconfig').setup_handlers({
       },
       -- TODO: This is the stupidest shim ever. But for some reason it fixes everything
       handlers = {
-        ["$/progress"] = function(id,msg,info)
-          vim.lsp.handlers["$/progress"](id,msg,info)
+        ["$/progress"] = function(id, msg, info)
+          vim.lsp.handlers["$/progress"](id, msg, info)
         end,
       }
     })
@@ -552,7 +553,8 @@ cmp.setup({
 })
 
 require('luasnip/loaders/from_vscode').lazy_load()
-local python_path = table.concat({ vim.fn.stdpath('data'),  'mason', 'packages', 'debugpy', 'venv', 'bin', 'python'}, '/'):gsub('//+', '/')
+local python_path = table.concat({ vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv', 'bin', 'python' }, '/')
+:gsub('//+', '/')
 require('dap-python').setup(python_path)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -582,11 +584,13 @@ vim.keymap.set('n', '<leader>uu', ':UndotreeToggle<CR>', { desc = '[U]ndotree to
 vim.keymap.set('n', '<leader>ff', function() ranger_nvim.open(true) end, { desc = 'Open [F]ile using ranger' })
 vim.keymap.set('n', '<leader>FF', function() vim.lsp.buf.format() end, { desc = '[F]ile [F]ormat' })
 vim.keymap.set('n', '<leader>bl', ':!black .<CR>', { desc = '[Bl]ack formatting' })
-vim.keymap.set('n', '<leader>st', function() vim.cmd(':TodoTelescope keywords=TODO,FIX') end, { desc = '[S]earch [T]odos' })
-vim.keymap.set('n', '<leader>sT', function() vim.cmd(':TodoTelescope') end,                   { desc = '[S]earch all [T]odos' })
-vim.keymap.set('n', '<leader>p', require('nvim-tree.api').tree.find_file,                     { desc = 'open the current buffer file in nvim tree' })
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles,                       { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers,                  { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>st', function() vim.cmd(':TodoTelescope keywords=TODO,FIX') end,
+  { desc = '[S]earch [T]odos' })
+vim.keymap.set('n', '<leader>sT', function() vim.cmd(':TodoTelescope') end, { desc = '[S]earch all [T]odos' })
+vim.keymap.set('n', '<leader>p', require('nvim-tree.api').tree.find_file,
+  { desc = 'open the current buffer file in nvim tree' })
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
@@ -600,66 +604,76 @@ vim.keymap.set('n', '<leader>co', function()
   require("coverage").load_lcov("coverage.info", true)
 end, { desc = '[CO]verage Toggle' })
 
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files,                                                        { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sF', function() require('telescope.builtin').find_files({ no_ignore = true }) end,                   { desc = '[S]earch All Files' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep,                                                         { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sG', function() require('telescope.builtin').live_grep({ additional_args = { '--no-ignore' } }) end, { desc = '[S]earch all by [G]rep' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags,                                                         { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string,                                                       { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics,                                                       { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands,                                                          { desc = '[S]earch [C]ommands' })
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sF', function() require('telescope.builtin').find_files({ no_ignore = true }) end,
+  { desc = '[S]earch All Files' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sG',
+  function() require('telescope.builtin').live_grep({ additional_args = { '--no-ignore' } }) end,
+  { desc = '[S]earch all by [G]rep' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands' })
 vim.keymap.set('n', '<leader>cc', function() vim.cmd('CMakeGenerate') end, { desc = '[C]Make project [C]onfigure' })
-vim.keymap.set('n', '<leader>cb', function() vim.cmd('CMakeBuild') end,    { desc = '[C]Make project [B]uild' })
-vim.keymap.set('n', '<leader>cC', function() vim.cmd('CMakeClean') end,    { desc = '[C]Make project [C]lean' })
-vim.keymap.set('n', '<leader>mm', function() vim.cmd('MesonInit') end,     { desc = '[M]eson project configure' })
-vim.keymap.set('n', '<leader>mb', function() vim.cmd('make') end,          { desc = '[M]eson project [B]uild' })
-vim.keymap.set('n', '<leader>Ss', function() require('sessions').save('.nvim/session', { silent = true }) end, { desc = '[S]ession [s]ave' })
-vim.keymap.set('n', '<leader>Sl', function() require('sessions').load('.nvim/session', { silent = true }) end, { desc = '[S]ession [l]oad' })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,         { desc = 'Next diagnostic' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next,         { desc = 'Previous diagnostic' })
+vim.keymap.set('n', '<leader>cb', function() vim.cmd('CMakeBuild') end, { desc = '[C]Make project [B]uild' })
+vim.keymap.set('n', '<leader>cC', function() vim.cmd('CMakeClean') end, { desc = '[C]Make project [C]lean' })
+vim.keymap.set('n', '<leader>mm', function() vim.cmd('MesonInit') end, { desc = '[M]eson project configure' })
+vim.keymap.set('n', '<leader>mb', function() vim.cmd('make') end, { desc = '[M]eson project [B]uild' })
+vim.keymap.set('n', '<leader>Ss', function() require('sessions').save('.nvim/session', { silent = true }) end,
+  { desc = '[S]ession [s]ave' })
+vim.keymap.set('n', '<leader>Sl', function() require('sessions').load('.nvim/session', { silent = true }) end,
+  { desc = '[S]ession [l]oad' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Next diagnostic' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Previous diagnostic' })
 vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = 'Open diagnostics floating window' })
 vim.keymap.set('n', '<C-w>h', function() vim.cmd(':sp') end, { desc = 'split horizontally' })
 
-vim.api.nvim_set_hl(0, "blue",   { fg = "#3d59a1" })
-vim.api.nvim_set_hl(0, "green",  { fg = "#9ece6a" })
+vim.api.nvim_set_hl(0, "blue", { fg = "#3d59a1" })
+vim.api.nvim_set_hl(0, "green", { fg = "#9ece6a" })
 vim.api.nvim_set_hl(0, "yellow", { fg = "#FFFF00" })
 vim.api.nvim_set_hl(0, "orange", { fg = "#f09000" })
-vim.api.nvim_set_hl(0, "red",    { fg = "#ff3333" })
-vim.api.nvim_set_hl(0, "veryred",{ fg = "#ff0000" })
-vim.fn.sign_define('DapBreakpoint',          {text='',texthl='red',linehl='',numhl='red'})
-vim.fn.sign_define('DapBreakpointCondition', {text='',texthl='orange',linehl='',numhl=''})
-vim.fn.sign_define('DapLogPoint',            {text='',texthl='blue',linehl='',numhl=''})
-vim.fn.sign_define('DapStopped',             {text='',texthl='green',linehl='',numhl='green'})
-vim.fn.sign_define('DapBreakpointRejected',  {text='',texthl='red',linehl='veryred',numhl=''})
-vim.keymap.set('n', '<F2>', require('dapui').open,    { desc = 'Debugger UI Open' })
-vim.keymap.set('n', '<F3>', require('dapui').close,   { desc = 'Debugger UI close' })
-vim.keymap.set('n', '<F4>', require('dap').close,     { desc = 'Debugger Close' })
+vim.api.nvim_set_hl(0, "red", { fg = "#ff3333" })
+vim.api.nvim_set_hl(0, "veryred", { fg = "#ff0000" })
+vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'red', linehl = '', numhl = 'red' })
+vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'orange', linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'blue', linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '', texthl = 'green', linehl = '', numhl = 'green' })
+vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'red', linehl = 'veryred', numhl = '' })
+vim.keymap.set('n', '<F2>', require('dapui').open, { desc = 'Debugger UI Open' })
+vim.keymap.set('n', '<F3>', require('dapui').close, { desc = 'Debugger UI close' })
+vim.keymap.set('n', '<F4>', require('dap').close, { desc = 'Debugger Close' })
 vim.keymap.set('n', '<F5>', function()
   if vim.fn.filereadable('.vscode/launch.json') then
-    require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' }, codelldb = { 'c', 'cpp' }})
+    require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' }, codelldb = { 'c', 'cpp' } })
   end
   require('dap').continue()
 end, { desc = 'Debugger Continue, or launch' })
 vim.keymap.set('n', '<F6>', require('dap').step_over, { desc = 'Debugger Step Over' })
 vim.keymap.set('n', '<F7>', require('dap').step_into, { desc = 'Debugger Step Into' })
-vim.keymap.set('n', '<F8>', require('dap').step_out,  { desc = 'Debugger Step Out' })
-vim.keymap.set('n', '<leader>B', function() require('dap').set_breakpoint(vim.fn.input('Set breakpoint condition: '), nil, nil) end, { desc = 'Debugger New breakpoint with a condition' })
+vim.keymap.set('n', '<F8>', require('dap').step_out, { desc = 'Debugger Step Out' })
+vim.keymap.set('n', '<leader>B',
+  function() require('dap').set_breakpoint(vim.fn.input('Set breakpoint condition: '), nil, nil) end,
+  { desc = 'Debugger New breakpoint with a condition' })
 vim.keymap.set('n', '<leader>b', require('dap').toggle_breakpoint, { desc = 'Debugger New breakpoint' })
-vim.keymap.set('n', '<leader>dr', require('dap').repl.open,   { desc = 'Debugger open REPL' })
-vim.keymap.set('n', '<leader>dl', require('dap').run_last,    { desc = 'Debugger run last run executable' })
+vim.keymap.set('n', '<leader>dr', require('dap').repl.open, { desc = 'Debugger open REPL' })
+vim.keymap.set('n', '<leader>dl', require('dap').run_last, { desc = 'Debugger run last run executable' })
 vim.keymap.set('n', '<leader>df', require('dap').focus_frame, { desc = 'Debugger focus to current stack' })
-vim.keymap.set('n', '<leader>db', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = 'Debugger new logpoint' })
+vim.keymap.set('n', '<leader>db',
+  function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
+  { desc = 'Debugger new logpoint' })
 vim.keymap.set('n', '<leader>dj', function()
-  require('dap.ext.vscode').load_launchjs(vim.fn.input('Path to json: ', vim.fn.getcwd() .. '/', 'file'), { cppdbg = { 'c', 'cpp' }, codelldb = { 'c', 'cpp' } })
+  require('dap.ext.vscode').load_launchjs(vim.fn.input('Path to json: ', vim.fn.getcwd() .. '/', 'file'),
+    { cppdbg = { 'c', 'cpp' }, codelldb = { 'c', 'cpp' } })
 end, { desc = 'Debugger Load launch specification file' })
-vim.keymap.set({'n', 'v'}, '<Leader>dh', require('dap.ui.widgets').hover,   { desc = 'Debugger hover menu' })
-vim.keymap.set({'n', 'v'}, '<Leader>dp', require('dap.ui.widgets').preview, { desc = 'Debugger preview menu' })
+vim.keymap.set({ 'n', 'v' }, '<Leader>dh', require('dap.ui.widgets').hover, { desc = 'Debugger hover menu' })
+vim.keymap.set({ 'n', 'v' }, '<Leader>dp', require('dap.ui.widgets').preview, { desc = 'Debugger preview menu' })
 vim.keymap.set('n', '<Leader>ds', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.frames)
 end, { desc = 'Debugger summon centered_float' })
 
-vim.keymap.set('n', '<leader>o', require('nvim-tree.api').tree.toggle,  { desc = '[O]pen file' })
+vim.keymap.set('n', '<leader>o', require('nvim-tree.api').tree.toggle, { desc = '[O]pen file' })
 vim.keymap.set('n', '<leader>fn', require('telescope').extensions.nerdy.nerdy, { desc = 'Discover [N]erd [F]onts' })
 
 local opts = { noremap = true, silent = true }
@@ -673,7 +687,8 @@ vim.api.nvim_set_keymap('n', '<leader>tp', '<Cmd>BufferPin<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 
 -- Neorg bindings
-vim.keymap.set('n', '<leader>ne', function() vim.cmd("Neorg workspace notes") end, { desc = "Open [Ne]org personal workspace" })
+vim.keymap.set('n', '<leader>ne', function() vim.cmd("Neorg workspace notes") end,
+  { desc = "Open [Ne]org personal workspace" })
 vim.api.nvim_create_augroup("filetype_mappings", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "norg",
