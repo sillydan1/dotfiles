@@ -283,7 +283,7 @@ require('neorg').setup({
     ["core.dirman"] = {
       config = {
         workspaces = {
-          agj = "~/neorg",
+          notes = "~/git/notes",
         },
         index = "index.norg",
       }
@@ -673,7 +673,7 @@ vim.api.nvim_set_keymap('n', '<leader>tp', '<Cmd>BufferPin<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 
 -- Neorg bindings
-vim.keymap.set('n', '<leader>ne', function() vim.cmd("Neorg workspace agj") end, { desc = "Open [Ne]org personal workspace" })
+vim.keymap.set('n', '<leader>ne', function() vim.cmd("Neorg workspace notes") end, { desc = "Open [Ne]org personal workspace" })
 vim.api.nvim_create_augroup("filetype_mappings", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "norg",
