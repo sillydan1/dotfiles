@@ -107,7 +107,6 @@ You can enable it after you've `stow .`'d with the following command:
 git config --global core.excludesfile ~/.gitignore_global
 ```
 
-
 # Arch linux
 I am using arch linux. Sometimes you just want to use one of the tty's.
 This is a general guide for myself, as I tend to forget things.
@@ -124,7 +123,8 @@ Dont install `hyprland` yet, make sure you have done these prerequisites first:
 
 ```sh
 sudo pacman -S alacritty waybar hyprpaper wmenu wl-clipboard ttf-meslo-nerd
-sudo usermod seat input <user>
+sudo usermod -aG seat $USER
+sudo usermod -aG input $USER
 systemctl enable seatd
 systemctl start seatd
 ```
@@ -136,7 +136,6 @@ So I must use `sway` instead.
 sudo apt install sway waybar light
 ```
 The sway config is decent, but I cant get rounded corners. Also, I am missing the randomized wallpapers.
-
 
 ## Missing Programs
 A fresh arch linux (with no gui) is missing a lot.
@@ -153,9 +152,27 @@ A fresh arch linux (with no gui) is missing a lot.
    systemctl enable systemd-resolved
    systemctl start systemd-resolved
    ```
-- `neovim`
-- `tmux` (see above)
-- `git`
-- `openssh` (use to generate ssh key and get going)
-- `nvm` (see above)
-- `lynx`
+ - `brightnessctl` (if it's a laptop)
+ - `git`
+ - `lynx` - in case your wm install mucks up, you can browse the internet
+ - `neovim` - my fav editor (trying out `emacs` a bit)
+ - `openssh` - used to generate ssh key and get going
+ - `pfetch` - for the pretties
+ - `rustup`
+ - `stow`
+ - `tmux` - (see above for plugin config)
+ - `vim` - backup editor
+
+### Not Available in `pacman`
+ - `nvm` (see above for config)
+    ```sh
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+    ```
+ - `yay`
+    ```sh
+    sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git ~/git/yay-bin && cd ~/git/yay-bin && makepkg -si
+    ```
+
+### From the AUR
+Use `yay` to install these.
+ - `sc-im`
