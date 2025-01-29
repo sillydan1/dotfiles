@@ -79,6 +79,7 @@ require("lazy").setup({
   'tamton-aquib/duck.nvim',
   'igankevich/mesonic',
   'mfussenegger/nvim-dap-python',
+  "raafatturki/hex.nvim",
   'pwntester/octo.nvim',
   {
     "nvim-neorg/neorg",
@@ -331,6 +332,7 @@ require('telescope').setup({
     },
   },
 })
+require('hex').setup()
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'nerdy')
 require('nvim-treesitter.configs').setup({
