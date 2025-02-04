@@ -33,6 +33,9 @@ stow .
 If you have any aliases, paths, env variables or anything else that you don't want to share, you can put them in a file called `secrets` in the root of the dotfiles directory.
 This file will be ignored by git, but still loaded automatically by the shell-rc file(s) so you can put whatever you want in there.
 
+## ghostty
+If you're cool and down with the sickness, these dotfiles include a config for `ghostty`.
+
 ## alacritty
 I personally like `alacritty`, so this repo also adds a config file for that. However, you may need to clone the alacritty-theme repository in order to get proper colors.
 ```sh

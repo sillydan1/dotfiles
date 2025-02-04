@@ -22,13 +22,13 @@ local is_macos = vim.fn.has('macunix')
 require("lazy").setup({
   { 'nvim-tree/nvim-tree.lua',                     dependencies = { 'nvim-tree/nvim-web-devicons' } },
   { 'folke/todo-comments.nvim',                    dependencies = { 'nvim-lua/plenary.nvim' } },
-  { "rcarriga/nvim-dap-ui",                        dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },                                                                                               lazy = true },
+  { "rcarriga/nvim-dap-ui",                        dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },                                                                                                lazy = true },
   { 'nvim-telescope/telescope.nvim',               dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' } },
   { 'neovim/nvim-lspconfig',                       dependencies = { 'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim', 'folke/neodev.nvim' } },
   { 'hrsh7th/nvim-cmp',                            dependencies = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip', 'L3MON4D3/LuaSnip', 'rafamadriz/friendly-snippets' } },
   { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'romgrk/barbar.nvim',                          dependencies = { 'nvim-web-devicons' } },
-  { "mfussenegger/nvim-jdtls",                     ft = 'java',                                                                                                                                                       lazy = true },
+  { "mfussenegger/nvim-jdtls",                     ft = 'java',                                                                                                                                                        lazy = true },
   { 'j-hui/fidget.nvim',                           tag = 'legacy' },
   { 'stevearc/dressing.nvim',                      event = 'VeryLazy' },
   -- TODO: Write my own, because this sucks
@@ -80,6 +80,7 @@ require("lazy").setup({
   'igankevich/mesonic',
   'mfussenegger/nvim-dap-python',
   "raafatturki/hex.nvim",
+  { "3rd/image.nvim", opts = {} },
   'pwntester/octo.nvim',
   {
     "nvim-neorg/neorg",
@@ -155,7 +156,7 @@ require("lazy").setup({
           Snacks.toggle.diagnostics():map("<leader>ud")
           Snacks.toggle.line_number():map("<leader>ul")
           Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-          "<leader>uc")
+            "<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
           Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
           Snacks.toggle.inlay_hints():map("<leader>uh")
@@ -263,6 +264,9 @@ require('darklight').setup({
   dark_mode_colorscheme = 'catppuccin',  -- Sets the colorscheme to use for dark mode
 })
 
+require("image").setup({
+  backend = "kitty"
+})
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
@@ -556,7 +560,7 @@ cmp.setup({
 
 require('luasnip/loaders/from_vscode').lazy_load()
 local python_path = table.concat({ vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv', 'bin', 'python' }, '/')
-:gsub('//+', '/')
+    :gsub('//+', '/')
 require('dap-python').setup(python_path)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
