@@ -75,7 +75,7 @@ require("lazy").setup({
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   'sillydan1/luajava.nvim',
   'sillydan1/graphedit-lua.nvim',
-  'kelly-lin/ranger.nvim',
+  "mikavilpas/yazi.nvim",
   'tamton-aquib/duck.nvim',
   'igankevich/mesonic',
   'mfussenegger/nvim-dap-python',
@@ -236,25 +236,6 @@ require('todo-comments').setup({
 require('fidget').setup({
   text = {
     spinner = 'dots'
-  }
-})
-
-local ranger_nvim = require('ranger-nvim')
-ranger_nvim.setup({
-  enable_cmds = false,
-  replace_netrw = false,
-  keybinds = {
-    ["ov"] = ranger_nvim.OPEN_MODE.vsplit,
-    ["oh"] = ranger_nvim.OPEN_MODE.split,
-    ["ot"] = ranger_nvim.OPEN_MODE.tabedit,
-    ["or"] = ranger_nvim.OPEN_MODE.rifle,
-  },
-  ui = {
-    border = "rounded",
-    height = 0.8,
-    width = 0.8,
-    x = 0.5,
-    y = 0.5,
   }
 })
 
@@ -587,7 +568,7 @@ vim.keymap.set('n', '<leader>N', ':cprevious<CR>', { desc = '[N]ext quickfix ite
 vim.keymap.set('n', '<leader>DD', ':Neogen<CR>', { desc = 'Generate [D]ocstring' })
 vim.keymap.set('n', '<leader>tt', ':DarkLightSwitch<CR>', { desc = '[T]oggle [T]heme' })
 vim.keymap.set('n', '<leader>uu', ':UndotreeToggle<CR>', { desc = '[U]ndotree toggle' })
-vim.keymap.set('n', '<leader>ff', function() ranger_nvim.open(true) end, { desc = 'Open [F]ile using ranger' })
+vim.keymap.set('n', '<leader>ff', ':Yazi cwd<CR>', { desc = 'Open [F]ile using filemanager' })
 vim.keymap.set('n', '<leader>FF', function() vim.lsp.buf.format() end, { desc = '[F]ile [F]ormat' })
 vim.keymap.set('n', '<leader>bl', ':!black .<CR>', { desc = '[Bl]ack formatting' })
 vim.keymap.set('n', '<leader>st', function() vim.cmd(':TodoTelescope keywords=TODO,FIX') end,
