@@ -190,6 +190,7 @@ alias vev="uv v && source .venv/bin/activate && uv pip install -e .[dev] && uv p
 alias v="source .venv/bin/activate"
 alias scim="TERM=xterm-256color sc-im"
 alias n="nvim"
+alias t="tmux"
 
 # Load all the secrets from the secrets folder (assuming this repo is in $HOME/dotfiles)
 if [ -d $HOME/dotfiles/secrets ]; then
