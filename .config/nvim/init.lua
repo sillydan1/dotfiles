@@ -81,6 +81,7 @@ require("lazy").setup({
   'mfussenegger/nvim-dap-python',
   "raafatturki/hex.nvim",
   { "3rd/image.nvim", opts = {} },
+  { "3rd/diagram.nvim", opts = {} },
   'pwntester/octo.nvim',
   {
     "nvim-neorg/neorg",
@@ -247,6 +248,27 @@ require('darklight').setup({
 
 require("image").setup({
   backend = "kitty"
+})
+require("diagram").setup({
+  integrations = {
+    require("diagram.integrations.markdown"),
+    require("diagram.integrations.neorg"),
+  },
+  renderer_options = {
+    mermaid = {
+      theme = "forest",
+    },
+    plantuml = {
+      charset = "utf-8",
+    },
+    d2 = {
+      theme_id = 1,
+    },
+    gnuplot = {
+      theme = "dark",
+      size = "800,600",
+    },
+  },
 })
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
