@@ -5,7 +5,7 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term alacritty
+set $term ghostty
 set $menu dmenu_path | wmenu -f "Meslo 11" | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
