@@ -80,7 +80,7 @@ require("lazy").setup({
   'igankevich/mesonic',
   'mfussenegger/nvim-dap-python',
   "raafatturki/hex.nvim",
-  { "3rd/image.nvim", opts = {} },
+  { "3rd/image.nvim",   opts = {} },
   { "3rd/diagram.nvim", opts = {} },
   'pwntester/octo.nvim',
   {
@@ -289,6 +289,13 @@ require('neorg').setup({
   load = {
     ["core.defaults"] = {},
     ["core.concealer"] = {},
+    ["core.journal"] = {
+      config = {
+        journal_folder = "journal",
+        strategy = "flat",
+        workspace = "notes"
+      }
+    },
     ["core.dirman"] = {
       config = {
         workspaces = {
@@ -698,6 +705,7 @@ vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 -- Neorg bindings
 vim.keymap.set('n', '<leader>ne', function() vim.cmd("Neorg workspace notes") end,
   { desc = "Open [Ne]org personal workspace" })
+vim.keymap.set('n', '<leader>nj', function() vim.cmd("Neorg journal today") end, { desc = "Open [Ne]org [J]ournal" })
 vim.api.nvim_create_augroup("filetype_mappings", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "norg",
