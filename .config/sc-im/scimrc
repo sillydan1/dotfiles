@@ -39,3 +39,6 @@ color "type=DATEF fg=YELLOW bg=BLACK"
 # Keymaps
 nmap "<C-n>" ":nextsheet<CR>"
 nmap "<C-p>" ":prevsheet<CR>"
+
+# Use a sane "open" program to open links etc.
+set default_open_file_under_cursor_cmd="xdg-open"
