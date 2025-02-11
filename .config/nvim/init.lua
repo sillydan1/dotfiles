@@ -18,6 +18,8 @@ vim.g.maplocalleader = ' '
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+local enable_image = false
+
 local is_macos = vim.fn.has('macunix')
 require("lazy").setup({
   { 'nvim-tree/nvim-tree.lua',                     dependencies = { 'nvim-tree/nvim-web-devicons' } },
@@ -80,8 +82,8 @@ require("lazy").setup({
   'igankevich/mesonic',
   'mfussenegger/nvim-dap-python',
   "raafatturki/hex.nvim",
-  { "3rd/image.nvim",   opts = {} },
-  { "3rd/diagram.nvim", opts = {} },
+  { "3rd/image.nvim",   opts = {}, enabled = enable_image },
+  { "3rd/diagram.nvim", opts = {}, enabled = enable_image },
   'pwntester/octo.nvim',
   {
     "nvim-neorg/neorg",
@@ -246,30 +248,32 @@ require('darklight').setup({
   dark_mode_colorscheme = 'catppuccin',  -- Sets the colorscheme to use for dark mode
 })
 
-require("image").setup({
-  backend = "kitty"
-})
-require("diagram").setup({
-  integrations = {
-    require("diagram.integrations.markdown"),
-    require("diagram.integrations.neorg"),
-  },
-  renderer_options = {
-    mermaid = {
-      theme = "forest",
+if enable_image then
+  require('image').setup({
+    backend = 'kitty',
+  })
+  require("diagram").setup({
+    integrations = {
+      require("diagram.integrations.markdown"),
+      require("diagram.integrations.neorg"),
     },
-    plantuml = {
-      charset = "utf-8",
+    renderer_options = {
+      mermaid = {
+        theme = "forest",
+      },
+      plantuml = {
+        charset = "utf-8",
+      },
+      d2 = {
+        theme_id = 1,
+      },
+      gnuplot = {
+        theme = "dark",
+        size = "800,600",
+      },
     },
-    d2 = {
-      theme_id = 1,
-    },
-    gnuplot = {
-      theme = "dark",
-      size = "800,600",
-    },
-  },
-})
+  })
+end
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
