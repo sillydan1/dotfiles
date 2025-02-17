@@ -5,3 +5,4 @@ font-size = 9.25
 theme = catppuccin-mocha
 background-opacity = 0.9
 resize-overlay = never
+app-notifications = "no-clipboard-copy"
