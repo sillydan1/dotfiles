@@ -293,6 +293,7 @@ require('neorg').setup({
   load = {
     ["core.defaults"] = {},
     ["core.concealer"] = {},
+    ["core.latex.renderer"] = {},
     ["core.journal"] = {
       config = {
         journal_folder = "journal",
@@ -596,8 +597,8 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', '½', '$')
-vim.keymap.set('n', '<leader>n', ':cnext<CR>', { desc = '[N]ext quickfix item' })
-vim.keymap.set('n', '<leader>N', ':cprevious<CR>', { desc = '[N]ext quickfix item (backwards)' })
+vim.keymap.set('n', '<leader>nq', ':cnext<CR>', { desc = '[N]ext quickfix item' })
+vim.keymap.set('n', '<leader>Nq', ':cprevious<CR>', { desc = '[N]ext quickfix item (backwards)' })
 vim.keymap.set('n', '<leader>DD', ':Neogen<CR>', { desc = 'Generate [D]ocstring' })
 vim.keymap.set('n', '<leader>tt', ':DarkLightSwitch<CR>', { desc = '[T]oggle [T]heme' })
 vim.keymap.set('n', '<leader>uu', ':UndotreeToggle<CR>', { desc = '[U]ndotree toggle' })
@@ -707,6 +708,7 @@ vim.api.nvim_set_keymap('n', '<leader>tp', '<Cmd>BufferPin<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 
 -- Neorg bindings
+vim.keymap.set('n', '<leader>nl', function() vim.cmd("Neorg render-latex") end, { desc = "[N]eorg render [L]atex" })
 vim.keymap.set('n', '<leader>ne', function() vim.cmd("Neorg workspace notes") end,
   { desc = "Open [Ne]org personal workspace" })
 vim.keymap.set('n', '<leader>nj', function() vim.cmd("Neorg journal today") end, { desc = "Open [Ne]org [J]ournal" })
