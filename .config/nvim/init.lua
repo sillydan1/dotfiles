@@ -18,7 +18,7 @@ vim.g.maplocalleader = ' '
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-local enable_image = false
+local enable_image = true
 
 local is_macos = vim.fn.has('macunix')
 require("lazy").setup({

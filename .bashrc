@@ -224,6 +224,18 @@ if [ -x "$(command -v emacs)" ]; then
   alias emacs="emacs -nw"
 fi
 
+# Make yazi exit into the directory on exit.
+if [ -x "$(command -v yazi)" ]; then
+  function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+      builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
+fi
+
 # enable syntax highlighting in the manpages
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
