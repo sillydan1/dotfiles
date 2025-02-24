@@ -83,7 +83,7 @@ require("lazy").setup({
   'mfussenegger/nvim-dap-python',
   "raafatturki/hex.nvim",
   { "3rd/image.nvim",   opts = {}, enabled = enable_image },
-  { "3rd/diagram.nvim", opts = {}, enabled = enable_image },
+  { "3rd/diagram.nvim", opts = {}, branch = "feature/toggle", enabled = enable_image },
   'pwntester/octo.nvim',
   {
     "nvim-neorg/neorg",
@@ -273,6 +273,7 @@ if enable_image then
       },
     },
   })
+  vim.cmd(":Diagram disable")
 end
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
