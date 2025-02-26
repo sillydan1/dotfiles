@@ -299,6 +299,8 @@ require('neorg').setup({
   load = {
     ["core.defaults"] = {},
     ["core.concealer"] = {},
+    ["core.export"] = {},
+    ["core.export.markdown"] = {},
     ["core.latex.renderer"] = {},
     ["core.journal"] = {
       config = {
