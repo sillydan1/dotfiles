@@ -761,6 +761,33 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 
+
+vim.keymap.set('n', '<leader>he', function()
+  local params = vim.lsp.util.make_range_params()
+  params.context = { diagnostics = {} }
+  for i=1,vim.diagnostic.count() do
+    (function()  -- lua has no 'continue' keyword, so we must hack.
+      local d = vim.diagnostic.get_next()
+      if not d then return end
+      vim.lsp.buf_request_all(d.bufnr, "textDocument/codeAction", params, function(result)
+        if not result then return end
+        for _, res in pairs(result) do
+          if res.result then
+            for _, action in ipairs(res.result) do
+              if action.edit then
+                vim.lsp.util.apply_workspace_edit(action.edit, "utf-8")
+              end
+              if action.command then
+                vim.lsp.buf.execute_command(action.command)
+              end
+            end
+          end
+        end
+      end)
+    end)()
+  end
+end, { desc = "[He]st mapping" })
+
 -- Wipeout buffer
 --                 :BufferWipeout
 -- Close commands
