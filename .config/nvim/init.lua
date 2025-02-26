@@ -245,7 +245,20 @@ require('fidget').setup({
 })
 
 require("workspace-diagnostics").setup()
-require("trouble").setup()
+require("trouble").setup({
+  opts = {
+    modes = {
+      all_diagnostics = {
+        mode = 'diagnostics',
+        filter = function(items)
+          return vim.tbl_filter(function(item)
+            return item.severity <= vim.diagnostic.severity.HINT
+          end, items)
+        end,
+      },
+    }
+  }
+})
 
 require('darklight').setup({
   mode = 'colorscheme',                  -- Sets darklight to colorscheme mode
