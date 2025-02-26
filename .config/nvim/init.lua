@@ -49,6 +49,8 @@ require("lazy").setup({
   'nvim-tree/nvim-web-devicons',
   'aca/marp.nvim',
   'natecraddock/workspaces.nvim',
+  'artemave/workspace-diagnostics.nvim',
+  "folke/trouble.nvim",
   'natecraddock/sessions.nvim',
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -241,6 +243,9 @@ require('fidget').setup({
     spinner = 'dots'
   }
 })
+
+require("workspace-diagnostics").setup()
+require("trouble").setup()
 
 require('darklight').setup({
   mode = 'colorscheme',                  -- Sets darklight to colorscheme mode
@@ -483,6 +488,14 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 require('mason-lspconfig').setup {
   ensure_installed = vim.tbl_keys(servers),
 }
+vim.api.nvim_set_keymap('n', '<leader>x', '', {
+  noremap = true,
+  callback = function()
+    for _, client in ipairs(vim.lsp.buf_get_clients()) do
+      require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+    end
+  end
+})
 require('mason-lspconfig').setup_handlers({
   -- CLI arguments (e.g. -log=verbose) is done like so:
   -- clangd = { cmd = { "clangd", "-log=verbose" } }
