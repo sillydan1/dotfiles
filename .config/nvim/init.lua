@@ -377,10 +377,66 @@ require('nvim-treesitter.configs').setup({
 require('neodev').setup()
 require('mason').setup()
 require('mason-nvim-dap').setup({
-  ensure_installed = {},
+  ensure_installed = { 'codelldb' },
   automatic_installation = false,
-  handlers = {}
+  handlers = {
+    function(config)
+      require('mason-nvim-dap').default_setup(config)
+    end,
+    codelldb = function(config)
+      config.adapters = {
+        type = "executable",
+        command = "codelldb",
+      }
+      require('mason-nvim-dap').default_setup(config)
+    end
+  }
 })
+require('dap').configurations.cpp = {
+  {
+    name = "Launch",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = "${workspaceFolder}",
+    stopOnEntry = false,
+    postRunCommands = {
+      "breakpoint name configure --disable cpp_exception" -- Don't stop on every exception please
+    }
+  },
+  {
+    name = "Select and attach to process",
+    type = "codelldb",
+    request = "attach",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    pid = function()
+      local name = vim.fn.input('Executable name (filter): ')
+      return require("dap.utils").pick_process({ filter = name })
+    end,
+    cwd = '${workspaceFolder}',
+    postRunCommands = {
+      "breakpoint name configure --disable cpp_exception" -- Don't stop on every exception please
+    }
+  },
+  {
+    name = 'Attach to gdbserver localhost:1234',
+    type = 'codelldb',
+    request = 'attach',
+    target = 'localhost:1234',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    postRunCommands = {
+      "breakpoint name configure --disable cpp_exception" -- Don't stop on every exception please
+    }
+  },
+}
+
 local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
@@ -463,12 +519,12 @@ local servers = {
           reportMissingTypeStubs = false,
           reportUnknownVariableType = false,
           reportUnknownArgumentType = false,
-          reportImplicitOverride = false,        -- python3.12 is a bit too new for some projects.
+          reportImplicitOverride = false,              -- python3.12 is a bit too new for some projects.
           reportUnusedCallResult = false,
-          reportPrivateLocalImportUsage = false, -- a bit aggressive, even though I empathize
+          reportPrivateLocalImportUsage = false,       -- a bit aggressive, even though I empathize
           reportImplicitRelativeImport = false,
           reportUnusedFunction = "warning",
-          reportUnannotatedClassAttribute = false, -- https://peps.python.org/pep-0591/ is quite aggressive
+          reportUnannotatedClassAttribute = false,       -- https://peps.python.org/pep-0591/ is quite aggressive
         }
       }
     }
@@ -530,7 +586,7 @@ require('mason-lspconfig').setup_handlers({
   end,
   ["clangd"] = function()
     require('lspconfig').clangd.setup({
-      filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', --[[ 'proto' --]] }, -- TODO: clangd's proto stuff is seriously borked, re-enable when it works again
+      filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', --[[ 'proto' --]] },       -- TODO: clangd's proto stuff is seriously borked, re-enable when it works again
       capabilities = {
         unpack(capabilities),
         offsetEncoding = "utf-16",
@@ -593,6 +649,48 @@ require('luasnip/loaders/from_vscode').lazy_load()
 local python_path = table.concat({ vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv', 'bin', 'python' }, '/')
     :gsub('//+', '/')
 require('dap-python').setup(python_path)
+
+-- local dap = require('dap')
+-- dap.adapters.gdb = {
+--   type = "executable",
+--   command = "gdb",
+--   args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+-- }
+-- dap.configurations.cpp = {
+--   {
+--     name = "Launch",
+--     type = "gdb",
+--     request = "launch",
+--     program = function()
+--       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--     end,
+--     cwd = "${workspaceFolder}",
+--     stopAtBeginningOfMainSubprogram = false,
+--   },
+--   {
+--     name = "Select and attach to process",
+--     type = "gdb",
+--     request = "attach",
+--     program = function()
+--        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--     end,
+--     pid = function()
+--        local name = vim.fn.input('Executable name (filter): ')
+--        return require("dap.utils").pick_process({ filter = name })
+--     end,
+--     cwd = '${workspaceFolder}'
+--   },
+--   {
+--     name = 'Attach to gdbserver localhost:1234',
+--     type = 'gdb',
+--     request = 'attach',
+--     target = 'localhost:1234',
+--     program = function()
+--        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--     end,
+--     cwd = '${workspaceFolder}'
+--   },
+-- }
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 vim.api.nvim_create_user_command('DuckHatch', 'lua require("duck").hatch()', {})
