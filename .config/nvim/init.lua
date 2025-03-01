@@ -74,7 +74,7 @@ require("lazy").setup({
   { 'danymat/neogen',  config = true },
   'andythigpen/nvim-coverage',
   'klen/nvim-test',
-  'github/copilot.vim',
+  { 'github/copilot.vim', lazy = true },
   'mbbill/undotree',
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   'sillydan1/luajava.nvim',
@@ -696,7 +696,7 @@ require('dap-python').setup(python_path)
 vim.api.nvim_create_user_command('DuckHatch', 'lua require("duck").hatch()', {})
 vim.api.nvim_create_user_command('DuckCook', 'lua require("duck").cook()', {})
 -- press <C-D> to accept the completion
-vim.cmd(':Copilot disable')
+-- vim.cmd(':Copilot disable')
 vim.keymap.set('i', '<C-D>', 'copilot#Accept("\\<CR>")', {
   expr = true,
   replace_keycodes = false
