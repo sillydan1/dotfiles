@@ -71,12 +71,12 @@ require("lazy").setup({
   'tpope/vim-dadbod',
   'kristijanhusak/vim-dadbod-ui',
   'kristijanhusak/vim-dadbod-completion',
-  { 'danymat/neogen',  config = true },
+  { 'danymat/neogen',     config = true },
   'andythigpen/nvim-coverage',
   'klen/nvim-test',
   { 'github/copilot.vim', lazy = true },
   'mbbill/undotree',
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim",  name = "catppuccin", priority = 1000 },
   'sillydan1/luajava.nvim',
   'sillydan1/graphedit-lua.nvim',
   "mikavilpas/yazi.nvim",
@@ -84,8 +84,8 @@ require("lazy").setup({
   'igankevich/mesonic',
   'mfussenegger/nvim-dap-python',
   "raafatturki/hex.nvim",
-  { "3rd/image.nvim",   opts = {}, enabled = enable_image },
-  { "3rd/diagram.nvim", opts = {}, branch = "feature/toggle", enabled = enable_image },
+  { "3rd/image.nvim",   opts = {},           enabled = enable_image },
+  { "3rd/diagram.nvim", opts = {},           branch = "feature/toggle", enabled = enable_image },
   'pwntester/octo.nvim',
   {
     "nvim-neorg/neorg",
@@ -392,6 +392,12 @@ require('mason-nvim-dap').setup({
     end
   }
 })
+-- NOTE: native 'gdb' is not available through mason yet.
+require('dap').adapters.gdb = {
+    type = "executable",
+    command = "gdb",
+    args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+}
 require('dap').configurations.cpp = {
   {
     name = "Launch",
@@ -424,16 +430,13 @@ require('dap').configurations.cpp = {
   },
   {
     name = 'Attach to gdbserver localhost:1234',
-    type = 'codelldb',
+    type = 'gdb', -- NOTE: This is using native GDB, because codelldb is not fantastic regarding gdbserver
     request = 'attach',
     target = 'localhost:1234',
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = '${workspaceFolder}',
-    postRunCommands = {
-      "breakpoint name configure --disable cpp_exception" -- Don't stop on every exception please
-    }
   },
 }
 
@@ -519,12 +522,12 @@ local servers = {
           reportMissingTypeStubs = false,
           reportUnknownVariableType = false,
           reportUnknownArgumentType = false,
-          reportImplicitOverride = false,              -- python3.12 is a bit too new for some projects.
+          reportImplicitOverride = false,        -- python3.12 is a bit too new for some projects.
           reportUnusedCallResult = false,
-          reportPrivateLocalImportUsage = false,       -- a bit aggressive, even though I empathize
+          reportPrivateLocalImportUsage = false, -- a bit aggressive, even though I empathize
           reportImplicitRelativeImport = false,
           reportUnusedFunction = "warning",
-          reportUnannotatedClassAttribute = false,       -- https://peps.python.org/pep-0591/ is quite aggressive
+          reportUnannotatedClassAttribute = false, -- https://peps.python.org/pep-0591/ is quite aggressive
         }
       }
     }
@@ -586,7 +589,7 @@ require('mason-lspconfig').setup_handlers({
   end,
   ["clangd"] = function()
     require('lspconfig').clangd.setup({
-      filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', --[[ 'proto' --]] },       -- TODO: clangd's proto stuff is seriously borked, re-enable when it works again
+      filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', --[[ 'proto' --]] }, -- TODO: clangd's proto stuff is seriously borked, re-enable when it works again
       capabilities = {
         unpack(capabilities),
         offsetEncoding = "utf-16",
