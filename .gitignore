@@ -8,7 +8,9 @@ lazy-lock.json
 .config/lazygit/
 .config/dconf/
 .config/btop/
-.emacs.d/elpa/
-.emacs.d/url/
-.emacs.d/*~
 .config/hypr/hyprpaper.conf
+.config/emacs/custom.el
+.config/emacs/elpa/
+.config/emacs/url/
+.config/emacs/*~
+.config/emacs/eln-cache/

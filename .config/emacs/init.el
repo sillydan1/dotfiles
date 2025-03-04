@@ -1,10 +1,16 @@
 ;; Performance hacks (taken from lionyxml/emacs-kick)
 (setq gc-cons-threshold #x40000000)
 (setq read-process-output-max (* 1024 1024 4))
+(setq custom-file "~/.config/emacs/custom.el") ; Don't touch my shit
 
 ;; ======================== package manager
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+;; The toolbar and menubar are ugly, remove them.
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(scroll-bar-mode 0)
 
 ;; ======================== packages
 (unless (package-installed-p 'evil) (package-install 'evil))
@@ -36,18 +42,3 @@
 	    (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
 	    (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
 (evil-leader/set-key "o" 'neotree-toggle)
-
-
-;; ======================= custom
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(evil catppuccin-theme)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

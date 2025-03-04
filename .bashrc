@@ -220,9 +220,9 @@ if [ -x "$(command -v manbook)" ]; then
 fi
 
 # Emacs shit (experimental)
-if [ -x "$(command -v emacs)" ]; then
-  alias emacs="emacs -nw"
-fi
+# if [ -x "$(command -v emacs)" ]; then
+#   alias emacs="emacs -nw"
+# fi
 
 # Make yazi exit into the directory on exit.
 if [ -x "$(command -v yazi)" ]; then
