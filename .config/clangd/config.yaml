@@ -38,7 +38,6 @@ Diagnostics:
       - fuchsia-*
       - google-readability-avoid-underscore-in-googletest-name
       - google-readability-namespace-comments
-      - google-runtime-references
       - hicpp-deprecated-headers
       - hicpp-named-parameter
       - hicpp-no-array-decay
@@ -56,6 +55,7 @@ Diagnostics:
       - modernize-use-default-member-init
       - modernize-use-nodiscard
       - modernize-use-trailing-return-type
+      - modernize-use-std-print
       - performance-trivially-destructible
       - readability-container-data-pointer
       - readability-convert-member-functions-to-static
