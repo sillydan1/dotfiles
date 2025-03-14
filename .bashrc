@@ -236,8 +236,13 @@ if [ -x "$(command -v yazi)" ]; then
   }
 fi
 
-# enable syntax highlighting in the manpages
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
+# enable syntax highlighting in the manpages (if you've installed batman)
+if [ -x "$(command -v batman)" ]; then
+  alias man="batman"
+else
+  export MANPAGER="less -R --use-color -Dd+r -Du+b"
+fi
+
 
 # Set firefox as default browser
 export BROWSER="firefox"
