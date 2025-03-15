@@ -244,8 +244,12 @@ else
 fi
 
 
-# Set firefox as default browser
-export BROWSER="firefox"
+# Set the default browser - prefer libre stuff.
+if [ -x "$(command -v librewolf)" ]; then
+  export BROWSER="librewolf"
+elif [ -x "$(command -v firefox)" ]; then
+  export BROWSER="firefox"
+fi
 
 # Pretty print some information
 clear
