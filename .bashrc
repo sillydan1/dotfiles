@@ -243,7 +243,6 @@ else
   export MANPAGER="less -R --use-color -Dd+r -Du+b"
 fi
 
-
 # Set the default browser - prefer libre stuff.
 if [ -x "$(command -v librewolf)" ]; then
   export BROWSER="librewolf"
