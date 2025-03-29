@@ -17,6 +17,14 @@ vim.g.maplocalleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Set Vim plugin globals before lazy loads them
+vim.g.vimwiki_list = {{
+  syntax = "markdown",
+  ext = ".md",
+  path = vim.fn.expand("~/git/vimwiki")
+}}
+vim.g.vimwiki_global_ext = 0
+
 require("lazy").setup({
   {
     "rcarriga/nvim-dap-ui",
@@ -52,6 +60,7 @@ require("lazy").setup({
   "christoomey/vim-tmux-navigator",
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   "nvim-lualine/lualine.nvim",
+  "hrsh7th/nvim-cmp",
   "lukas-reineke/indent-blankline.nvim",
   "numToStr/Comment.nvim",
   "civitasv/cmake-tools.nvim",
@@ -64,6 +73,7 @@ require("lazy").setup({
   "klen/nvim-test",
   "mbbill/undotree",
   "mikavilpas/yazi.nvim",
+  "vimwiki/vimwiki",
   "raafatturki/hex.nvim",
   {
     "folke/lazydev.nvim",
@@ -78,7 +88,7 @@ require("lazy").setup({
     config = false,
   },
   {
-    "folke/snacks.nvim",
+    "sillydan1/snacks.nvim",
     dependencies = { "3rd/image.nvim" },
     priority = 1000,
     lazy = false,
@@ -269,13 +279,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
     end
 
-    -- Enable
-    -- if client:supports_method("textDocument/highlight") then
-    --   vim.api.nvim_create_autocmd("CursorHold", { callback = vim.lsp.buf.document_highlight })
-    --   vim.api.nvim_create_autocmd("CursorHoldI", { callback = vim.lsp.buf.document_highlight })
-    --   vim.api.nvim_create_autocmd("CursorMoved", { callback = vim.lsp.buf.clear_references })
-    -- end
-
     -- Set keybinds
     local telescope = require("telescope.builtin")
     vim.keymap.set("n", "gd", vim.lsp.buf.definition)
@@ -304,7 +307,15 @@ require("hex").setup()
 require("mason").setup()
 
 pcall(require("telescope").load_extension, "fzf")
-local python_path = table.concat({ vim.fn.stdpath("data"), "mason", "packages", "debugpy", "venv", "bin", "python" }, "/")
+local python_path = table.concat({
+      vim.fn.stdpath("data"),
+      "mason",
+      "packages",
+      "debugpy",
+      "venv",
+      "bin",
+      "python"
+    }, "/")
     :gsub("//+", "/")
 require("dap-python").setup(python_path)
 
