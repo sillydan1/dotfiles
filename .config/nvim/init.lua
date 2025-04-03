@@ -17,14 +17,6 @@ vim.g.maplocalleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Set Vim plugin globals before lazy loads them
-vim.g.vimwiki_list = {{
-  syntax = "markdown",
-  ext = ".md",
-  path = vim.fn.expand("~/git/vimwiki")
-}}
-vim.g.vimwiki_global_ext = 0
-
 require("lazy").setup({
   {
     "rcarriga/nvim-dap-ui",
@@ -75,7 +67,6 @@ require("lazy").setup({
   "klen/nvim-test",
   "mbbill/undotree",
   "mikavilpas/yazi.nvim",
-  "vimwiki/vimwiki",
   "raafatturki/hex.nvim",
   {
     "folke/lazydev.nvim",
