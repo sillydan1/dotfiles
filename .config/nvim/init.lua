@@ -85,7 +85,6 @@ require("lazy").setup({
     dependencies = { "3rd/image.nvim" },
     priority = 1000,
     lazy = false,
-    ---@type snacks.Config
     opts = {
       image = {},
       input = {},
@@ -315,9 +314,10 @@ require("coverage").setup()
 require("Comment").setup()
 require("hex").setup()
 require("mason").setup()
-
+require("todo-comments").setup()
 pcall(require("telescope").load_extension, "fzf")
 require("telescope").load_extension("ui-select")
+
 local python_path = table.concat({
       vim.fn.stdpath("data"),
       "mason",
@@ -330,16 +330,6 @@ local python_path = table.concat({
     :gsub("//+", "/")
 require("dap-python").setup(python_path)
 
-require("todo-comments").setup({
-  keywords = {
-    TODO = {
-      alt = { "todo:", " todo ", " TODO " }
-    },
-    NOTE = {
-      alt = { "note:" }
-    }
-  }
-})
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
