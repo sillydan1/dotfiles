@@ -169,7 +169,7 @@ vim.cmd("let g:cmake_link_compile_commands = 1")
 vim.cmd("set colorcolumn=120")
 vim.o.breakindent = true
 vim.o.cindent = true
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = "menu,noselect,noinsert,noselect,fuzzy,preview"
 vim.o.expandtab = true
 vim.o.hlsearch = false
 vim.o.ignorecase = true
@@ -285,7 +285,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Enable autocompletion
     if client:supports_method("textDocument/completion") then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+      -- Overwrite the trigger characters to be ANY character
+      local chars = {}
+      for i = 32, 126 do
+        table.insert(chars, string.char(i))
+      end
+      client.server_capabilities.completionProvider.triggerCharacters = chars
+
+      -- Enable LSP Completion
+      vim.lsp.completion.enable(true, client.id, ev.buf, {
+        autotrigger = true
+      })
     end
 
     -- Set keybinds
@@ -500,6 +510,9 @@ vim.g.copilot_no_tab_map = true
 
 -----------------------------------------------------------------------------------------------------------------------
 
+vim.keymap.set('i', '<c-space>', function()
+  vim.lsp.completion.get()
+end)
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
