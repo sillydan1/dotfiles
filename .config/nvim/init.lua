@@ -169,7 +169,7 @@ vim.cmd("let g:cmake_link_compile_commands = 1")
 vim.cmd("set colorcolumn=120")
 vim.o.breakindent = true
 vim.o.cindent = true
-vim.o.completeopt = "menu,noselect,noinsert,noselect,fuzzy,preview"
+vim.o.completeopt = "menu,noselect,noinsert,noselect,fuzzy,popup"
 vim.o.expandtab = true
 vim.o.hlsearch = false
 vim.o.ignorecase = true
@@ -276,6 +276,28 @@ vim.diagnostic.config({
 
 vim.lsp.enable({ "clangd", "luals", "basedpyright", "ruff", "jdtls", "rust_analyzer" })
 
+-- NOTE: Stolen from nvim-lspconfig
+-- TODO: Move this somewhere prettier
+local function switch_source_header(bufnr)
+  local method_name = 'textDocument/switchSourceHeader'
+  vim.validate("bufnr", bufnr, "number")
+  local client = vim.lsp.get_clients({ bufnr = bufnr, name = 'clangd' })[1]
+  if not client then
+    return vim.notify(('method %s is not supported by any servers active on the current buffer'):format(method_name))
+  end
+  local params = vim.lsp.util.make_text_document_params(bufnr)
+  client.request(method_name, params, function(err, result)
+    if err then
+      error(tostring(err))
+    end
+    if not result then
+      vim.notify('corresponding file cannot be determined')
+      return
+    end
+    vim.cmd.edit(vim.uri_to_fname(result))
+  end, bufnr)
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -298,13 +320,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end
 
+    -- Feature-gated keybinds
+    if client:supports_method("textDocument/switchSourceHeader") then
+      vim.keymap.set("n", "gh", function() switch_source_header(0) end)
+    end
+
     -- Set keybinds
     local telescope = require("telescope.builtin")
     vim.keymap.set("n", "gd", vim.lsp.buf.definition)
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
     vim.keymap.set("n", "gr", telescope.lsp_references)
-    vim.keymap.set("n", "gh", function() vim.cmd(":ClangdSwitchSourceHeader") end)
     vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
