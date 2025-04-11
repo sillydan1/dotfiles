@@ -68,6 +68,7 @@ require("lazy").setup({
   "mbbill/undotree",
   "mikavilpas/yazi.nvim",
   "raafatturki/hex.nvim",
+  { "danymat/neogen", config = true },
   {
     "folke/lazydev.nvim",
     ft = "lua"
