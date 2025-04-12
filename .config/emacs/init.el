@@ -17,16 +17,23 @@
 (unless (package-installed-p 'catpuccin-theme) (package-install 'catppuccin-theme))
 (unless (package-installed-p 'neotree) (package-install 'neotree))
 (unless (package-installed-p 'evil-leader) (package-install 'evil-leader))
+(unless (package-installed-p 'all-the-icons) (package-install 'all-the-icons))
 
 ;; ======================== configuration
 (setq-default display-line-numbers 'relative)
+
 (require 'evil-leader)
 (global-evil-leader-mode)
 (require 'evil)
 (evil-mode 1)
 (evil-leader/set-leader "<SPC>")
+
 (load-theme 'catppuccin :no-confirm)
+
 (require 'neotree)
+(when (display-graphic-p)
+  (require 'all-the-icons))
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; ======================== keybinds
 ; NOTE: non-<leader> keymaps: (global-set-key [f8] 'neotree-toggle)

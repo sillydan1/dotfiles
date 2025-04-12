@@ -14,3 +14,6 @@ lazy-lock.json
 .config/emacs/url/
 .config/emacs/*~
 .config/emacs/eln-cache/
+.config/emacs/auto-save-list/
+.config/emacs/games
+.config/emacs/tutorial
