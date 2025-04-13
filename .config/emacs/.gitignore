@@ -1,0 +1,8 @@
+custom.el
+elpa/
+url/
+*~
+eln-cache/
+auto-save-list/
+games
+tutorial

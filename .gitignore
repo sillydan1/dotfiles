@@ -9,11 +9,3 @@ lazy-lock.json
 .config/dconf/
 .config/btop/
 .config/hypr/hyprpaper.conf
-.config/emacs/custom.el
-.config/emacs/elpa/
-.config/emacs/url/
-.config/emacs/*~
-.config/emacs/eln-cache/
-.config/emacs/auto-save-list/
-.config/emacs/games
-.config/emacs/tutorial
