@@ -1,7 +1,7 @@
 // -*- mode: jsonc -*-
 {
     // "layer": "top", // Waybar at top layer
-    "height": 10,
+    "height": 24,
     "spacing": 4,
     "modules-left": [
         "hyprland/workspaces",
@@ -15,7 +15,7 @@
     "modules-right": [
         "mpd",
         "idle_inhibitor",
-        // "wireplummer",  // TODO: write a thing for pipewire
+        "wireplumber",
         "network",
         "power-profiles-daemon",
         "cpu",
@@ -89,6 +89,16 @@
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
+    },
+    "wireplumber": {
+        "format": "{icon} {volume}%",
+        "format-muted": " ",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol -t 3",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
+        "format-icons": ["", "", "󰕾", ""],
+        "max-volume": 140,
     },
     "cpu": {
         "format": "{usage}% ",
