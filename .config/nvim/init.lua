@@ -76,32 +76,6 @@ require("lazy").setup({
   "sillydan1/luajava.nvim",
   "sillydan1/graphedit-lua.nvim",
   {
-    "nvim-orgmode/orgmode",
-    dependencies = {
-      "danilshvalov/org-modern.nvim",
-      { "lukas-reineke/headlines.nvim", config = true },
-      "akinsho/org-bullets.nvim",
-      { "hamidi-dev/org-list.nvim", dependencies = { "tpope/vim-repeat" }, }
-    },
-    event = "VeryLazy",
-    ft = { "org" },
-    config = function()
-      local Menu = require("org-modern.menu")
-      require("orgmode").setup({
-        org_agenda_files = '~/git/notes/**/*',
-        org_default_notes_file = '~/git/notes/inbox.org',
-        ui = {
-          menu = {
-            handler = function(data)
-              Menu:new():open(data)
-            end,
-          },
-        },
-      })
-      require("org-list").setup()
-    end,
-  },
-  {
     "nvim-neorg/neorg",
     lazy = false,
     version = "*",
@@ -417,6 +391,7 @@ require("neorg").setup({
     ["core.export"] = {},
     ["core.export.markdown"] = {},
     ["core.latex.renderer"] = {},
+    ["core.ui.calendar"] = {},
     ["core.journal"] = {
       config = {
         journal_folder = "journal",
@@ -687,7 +662,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     -- These are all detected using :checkhealth neorg
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>cm", "<Plug>(neorg.looking-glass.magnify-code-block)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>id", "<Plug>(neorg.tempus.insert-date)", opts)
+    vim.api.nvim_buf_set_keymap(0, "n", "<leader>id", "<Plug>(neorg.tempus.insert-date)", opts) -- this uses core.ui.calendar.
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>li", "<Plug>(neorg.pivot.list.invert)", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>lt", "<Plug>(neorg.pivot.list.toggle)", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>ta", "<Plug>(neorg.qol.todo-items.todo.task-ambiguous)", opts)
@@ -698,16 +673,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tp", "<Plug>(neorg.qol.todo-items.todo.task-pending)", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tr", "<Plug>(neorg.qol.todo-items.todo.task-recurring)", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tu", "<Plug>(neorg.qol.todo-items.todo.task-undone)", opts)
-  end
-})
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "org",
-  callback = function(ev)
-    vim.o.conceallevel = 3 -- conceal extraneous stuff
-    vim.o.foldlevel = 99   -- unfold things on open
   end
 })
 
