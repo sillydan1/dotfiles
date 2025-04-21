@@ -1,0 +1,79 @@
+#+Title: Emacs configuration
+#+Author: sillydan1
+#+Description: My emacs configuration in org-mode format.
+#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
+#+Startup: showeverything
+#+Options: toc:2
+
+* Initial
+
+** Startup Performance
+
+Emacs can tend to be slow at startup, this will fix most of that.
+
+#+begin_src emacs-lisp
+  (setq gc-cons-threshold #x40000000)
+  (setq read-process-output-max (* 1024 1024 4))
+  (setq custom-file "~/.config/emacs/custom.el")
+#+end_src
+
+
+
+#+begin_src emacs-lisp
+  (defun start/org-babel-tangle-config ()
+  "Automatically tangle our Emacs.org config file when we save it. Credit to Emacs From Scratch for this one!"
+  (when (string-equal (file-name-directory (buffer-file-name))
+                      (expand-file-name user-emacs-directory))
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'start/org-babel-tangle-config)))
+#+end_src
+
+** Set up package management
+
+We use ~melpa~ as our package management repository.
+
+#+begin_src emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+#+end_src
+
+** User Interface
+
+We remove some of the ugly parts of emacs that we don't use anyway.
+
+#+begin_src emacs-lisp
+  (tool-bar-mode 0)
+  (menu-bar-mode 0)
+  (scroll-bar-mode 0)
+  (setq-default display-line-numbers 'relative)
+#+end_src
+
+* Install Packages
+
+Here we install all the packages that we want to use.
+
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'catpuccin-theme) (package-install 'catppuccin-theme))
+  (unless (package-installed-p 'all-the-icons) (package-install 'all-the-icons))
+#+end_src
+
+** Aesthetics
+
+Configure the aesthetics here - e.g. themes, icons, font sizes and so forth
+
+#+begin_src emacs-lisp
+  (load-theme 'catppuccin :no-confirm)
+  (when (display-graphic-p)
+    (require 'all-the-icons))
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+#+end_src
+
+* Keybinds
+
+Set custom keybindings here.
+
+#+begin_src emacs-lisp
+#+end_src
