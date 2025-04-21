@@ -68,13 +68,39 @@ require("lazy").setup({
   "mbbill/undotree",
   "mikavilpas/yazi.nvim",
   "raafatturki/hex.nvim",
-  { "danymat/neogen", config = true },
+  { "danymat/neogen",  config = true },
   {
     "folke/lazydev.nvim",
     ft = "lua"
   },
   "sillydan1/luajava.nvim",
   "sillydan1/graphedit-lua.nvim",
+  {
+    "nvim-orgmode/orgmode",
+    dependencies = {
+      "danilshvalov/org-modern.nvim",
+      { "lukas-reineke/headlines.nvim", config = true },
+      "akinsho/org-bullets.nvim",
+      { "hamidi-dev/org-list.nvim", dependencies = { "tpope/vim-repeat" }, }
+    },
+    event = "VeryLazy",
+    ft = { "org" },
+    config = function()
+      local Menu = require("org-modern.menu")
+      require("orgmode").setup({
+        org_agenda_files = '~/git/notes/**/*',
+        org_default_notes_file = '~/git/notes/inbox.org',
+        ui = {
+          menu = {
+            handler = function(data)
+              Menu:new():open(data)
+            end,
+          },
+        },
+      })
+      require("org-list").setup()
+    end,
+  },
   {
     "nvim-neorg/neorg",
     lazy = false,
@@ -148,7 +174,6 @@ require("lazy").setup({
           Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
           Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-          Snacks.toggle.diagnostics():map("<leader>ud")
           Snacks.toggle.line_number():map("<leader>ul")
           Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
             "<leader>uc")
@@ -271,11 +296,16 @@ vim.lsp.config.rust_analyzer = {
   filetypes = { "rust" }
 }
 
+vim.lsp.config.textlsp = {
+  cmd = { "textlsp" },
+  filetypes = { "org" }
+}
+
 vim.diagnostic.config({
   virtual_text = true
 })
 
-vim.lsp.enable({ "clangd", "luals", "basedpyright", "ruff", "jdtls", "rust_analyzer" })
+vim.lsp.enable({ "clangd", "luals", "basedpyright", "ruff", "jdtls", "rust_analyzer", "textlsp" })
 
 -- NOTE: Stolen from nvim-lspconfig
 -- TODO: Move this somewhere prettier
@@ -668,6 +698,16 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tp", "<Plug>(neorg.qol.todo-items.todo.task-pending)", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tr", "<Plug>(neorg.qol.todo-items.todo.task-recurring)", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tu", "<Plug>(neorg.qol.todo-items.todo.task-undone)", opts)
+  end
+})
+
+-----------------------------------------------------------------------------------------------------------------------
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "org",
+  callback = function(ev)
+    vim.o.conceallevel = 3 -- conceal extraneous stuff
+    vim.o.foldlevel = 99   -- unfold things on open
   end
 })
 
