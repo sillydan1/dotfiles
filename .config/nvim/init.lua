@@ -53,7 +53,20 @@ require("lazy").setup({
   "lewis6991/gitsigns.nvim",
   "christoomey/vim-tmux-navigator",
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  "rose-pine/neovim",
   "nvim-lualine/lualine.nvim",
+  {
+    "zaldih/themery.nvim",
+    config = function()
+      require("themery").setup({
+        themes = {
+          "catppuccin-macchiato",
+          "catppuccin-latte",
+          "rose-pine-dawn"
+        }
+      })
+    end
+  },
   "hrsh7th/nvim-cmp",
   "lukas-reineke/indent-blankline.nvim",
   "numToStr/Comment.nvim",
@@ -158,6 +171,24 @@ require("lazy").setup({
       })
     end,
   },
+  -- Markdown workflow things
+  "jghauser/follow-md-links.nvim",
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      code = {
+        style = "full",
+        border = "thick",
+        sign = false,
+      },
+      heading = {
+        sign = false,
+        width = 'block',
+        position = 'inline',
+        icons = { "◉ ", "◎ ", "○ ", "✺ ", "▶ ", "◉ " },
+      },
+    }
+  }
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -180,13 +211,11 @@ vim.o.smartindent = true
 vim.o.softtabstop = 4
 vim.o.tabstop = 4
 vim.o.termguicolors = true
-vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.updatetime = 250
 vim.wo.nu = true
 vim.wo.relativenumber = true
 vim.wo.signcolumn = "yes"
-vim.cmd.colorscheme "catppuccin"
 
 vim.cmd [[
   augroup groovy_filetype
@@ -263,7 +292,7 @@ vim.lsp.config.ruff = {
 vim.lsp.config.jdtls = {
   cmd = { "jdtls" },
   filetypes = { "java" },
-  root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+  root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
 }
 
 vim.lsp.config.rust_analyzer = {
@@ -413,7 +442,6 @@ require("neorg").setup({
 require("lualine").setup({
   options = {
     icons_enabled = false,
-    theme = "catppuccin",
     component_separators = "|",
     section_separators = "|",
   },
@@ -650,6 +678,10 @@ vim.keymap.set("n", "<Leader>ds", function()
   widgets.centered_float(widgets.frames)
 end, { desc = "Debugger summon centered_float" })
 
+vim.keymap.set({ "n" }, "<Leader>TT", function()
+  vim.cmd("Themery")
+end, { desc = "Open Themery" })
+
 -----------------------------------------------------------------------------------------------------------------------
 
 local opts = { noremap = true, silent = true }
@@ -675,6 +707,31 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tr", "<Plug>(neorg.qol.todo-items.todo.task-recurring)", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tu", "<Plug>(neorg.qol.todo-items.todo.task-undone)", opts)
   end
+})
+
+-----------------------------------------------------------------------------------------------------------------------
+
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = "*.md",
+  callback = function()
+    -- Get the full path of the current file
+    local file_path = vim.fn.expand("%:p")
+    -- Ignore files in my daily note directory
+    if file_path:match(os.getenv("HOME") .. "/github/obsidian_main/250%-daily/") then
+      return
+    end -- Avoid running zk multiple times for the same buffer
+    if vim.b.zk_executed then
+      return
+    end
+    vim.b.zk_executed = true -- Mark as executed
+    -- Use `vim.defer_fn` to add a slight delay before executing `zk`
+    vim.defer_fn(function()
+      vim.cmd("normal zk")
+      -- This write was disabling my inlay hints
+      -- vim.cmd("silent write")
+      vim.notify("Folded keymaps", vim.log.levels.INFO)
+    end, 100) -- Delay in milliseconds (100ms should be enough)
+  end,
 })
 
 -----------------------------------------------------------------------------------------------------------------------
