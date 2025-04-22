@@ -262,7 +262,8 @@ vim.lsp.config.ruff = {
 
 vim.lsp.config.jdtls = {
   cmd = { "jdtls" },
-  filetypes = { "java" }
+  filetypes = { "java" },
+  root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
 }
 
 vim.lsp.config.rust_analyzer = {
