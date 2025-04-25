@@ -58,6 +58,7 @@ Diagnostics:
       - llvm-header-guard
       - llvm-namespace-comment
       - llvm-qualified-auto
+      - llvm-include-order
       - misc-header-include-cycle
       - misc-non-private-member-variables-in-classes
       - misc-no-recursion
