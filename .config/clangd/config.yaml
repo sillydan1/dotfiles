@@ -3,6 +3,8 @@ CompileFlags:
   # Remove: [-m*, -f*]  # NOTE: uncomment these for avr32 and freertos development.
 
 Diagnostics:
+  UnusedIncludes: Strict
+  MissingIncludes: Strict
   ClangTidy:
     FastCheckFilter: None
     Add:
