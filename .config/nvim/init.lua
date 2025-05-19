@@ -28,7 +28,7 @@ require("lazy").setup({
   },
   {
     "github/copilot.vim",
-    lazy = true
+    lazy = false
   },
   "nvim-tree/nvim-tree.lua",
   "nvim-tree/nvim-web-devicons",
@@ -382,6 +382,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -----------------------------------------------------------------------------------------------------------------------
 
+vim.cmd(":Copilot disable")  -- Disable copilot to get it to be on-demand rather than always on.
 require("lazydev").setup()
 require("fidget").setup()
 require("cmake-tools").setup({})
