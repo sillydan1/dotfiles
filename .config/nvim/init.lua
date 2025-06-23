@@ -382,7 +382,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -----------------------------------------------------------------------------------------------------------------------
 
-vim.cmd(":Copilot disable")  -- Disable copilot to get it to be on-demand rather than always on.
+vim.cmd(":Copilot disable") -- Disable copilot to get it to be on-demand rather than always on.
 require("lazydev").setup()
 require("fidget").setup()
 require("cmake-tools").setup({})
@@ -631,6 +631,8 @@ vim.keymap.set("n", "<leader>sc", require("telescope.builtin").commands, { desc 
 
 vim.keymap.set("n", "<leader>cc", function() vim.cmd("CMakeGenerate") end, { desc = "[C]Make project [C]onfigure" })
 vim.keymap.set("n", "<leader>cb", function() vim.cmd("CMakeBuild") end, { desc = "[C]Make project [B]uild" })
+vim.keymap.set("n", "<leader>ci", function() vim.cmd("CMakeInstall --prefix out/install") end,
+  { desc = "[C]Make project [I]nstall" })
 vim.keymap.set("n", "<leader>cC", function() vim.cmd("CMakeClean") end, { desc = "[C]Make project [C]lean" })
 
 -----------------------------------------------------------------------------------------------------------------------
