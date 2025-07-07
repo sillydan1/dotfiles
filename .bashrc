@@ -249,6 +249,11 @@ elif [ -x "$(command -v firefox)" ]; then
   export BROWSER="firefox"
 fi
 
+# Set the 'fuck' alias if available.
+if [ -x "$(command -v thefuck)" ]; then
+    eval $(thefuck --alias)
+fi
+
 # Pretty print some information
 clear
 if [ -x "$(command -v fastfetch)" ]; then
