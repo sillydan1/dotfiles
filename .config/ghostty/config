@@ -6,3 +6,4 @@ theme = catppuccin-mocha
 background-opacity = 0.9
 resize-overlay = never
 app-notifications = "no-clipboard-copy"
+mouse-hide-while-typing = true
