@@ -213,6 +213,7 @@ vim.o.tabstop = 4
 vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.updatetime = 250
+vim.o.winborder = "rounded"
 vim.wo.nu = true
 vim.wo.relativenumber = true
 vim.wo.signcolumn = "yes"
