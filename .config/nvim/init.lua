@@ -301,11 +301,6 @@ vim.lsp.config.rust_analyzer = {
   filetypes = { "rust" }
 }
 
-vim.lsp.config.textlsp = {
-  cmd = { "textlsp" },
-  filetypes = { "org" }
-}
-
 -- TODO: Investigate neocmakelsp and how to configure it, because it's miles better
 vim.lsp.config.cmake_language_server = {
   cmd = { "cmake-language-server" },
