@@ -279,6 +279,7 @@ vim.lsp.config.basedpyright = {
           reportImplicitRelativeImport = false,
           reportUnusedFunction = "warning",
           reportUnannotatedClassAttribute = false, -- https://peps.python.org/pep-0591/ is quite aggressive
+          reportCallInDefaultInitializer = false,  -- sometimes used when dependency injecting in a flask app
         }
       }
     }
