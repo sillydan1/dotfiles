@@ -7,23 +7,3 @@ AllowShortBlocksOnASingleLine: false
 AllowShortIfStatementsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: false
 QualifierAlignment: Left
-IncludeBlocks: Regroup
-IncludeCategories:
-  - Regex:           '^<gtest/.*'
-    Priority:        1
-    CaseSensitive:   false
-  - Regex:           '^<gs/.*'
-    Priority:        4
-    CaseSensitive:   false
-  - Regex:           '^"gs/.*'
-    Priority:        5
-    CaseSensitive:   false
-  - Regex:           '^<.*\.h>'
-    Priority:        2
-    CaseSensitive:   false
-  - Regex:           '^<.*'
-    Priority:        3
-    CaseSensitive:   false
-  - Regex:           '.*'
-    Priority:        6
-    CaseSensitive:   false
