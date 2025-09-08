@@ -186,6 +186,7 @@ fi
 
 alias flip_coin="echo \$((1 + \$RANDOM % 2))"
 alias vev="uv v && source .venv/bin/activate && uv pip install -e .[dev] && uv pip install neovim"
+alias gs-git-fuck="gs-git clone -f && ./tools/buildtools/gsbuildtools_bootstrap.py && ./waf configure clangdb"
 alias v="source .venv/bin/activate"
 alias scim="TERM=xterm-256color sc-im"
 alias n="nvim"
