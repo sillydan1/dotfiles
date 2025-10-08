@@ -255,6 +255,11 @@ if [ -x "$(command -v thefuck)" ]; then
     eval $(thefuck --alias)
 fi
 
+if [ -d $HOME/.guix-profile ]; then
+    GUIX_PROFILE="${HOME}/.guix-profile"
+    . "$GUIX_PROFILE/etc/profile"
+fi
+
 # Pretty print some information
 clear
 if [ -x "$(command -v fastfetch)" ]; then
