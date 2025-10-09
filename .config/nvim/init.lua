@@ -551,16 +551,16 @@ require("dap").configurations.cpp = {
     }
   },
   {
-    name = "Attach to gdbserver localhost:1234",
+    name = "Attach to gdbserver",
     type = "gdb", -- NOTE: This is using native GDB, because codelldb is not fantastic regarding gdbserver
     request = "attach",
-    target = "localhost:1234",
-    program = function()
-      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    target = function()
+      return vim.fn.input("Host: ", "localhost") .. ":" .. vim.fn.input("Port: ", "1234")
     end,
     cwd = "${workspaceFolder}",
   },
 }
+require("dap").configurations.c = require("dap").configurations.cpp
 
 -----------------------------------------------------------------------------------------------------------------------
 
