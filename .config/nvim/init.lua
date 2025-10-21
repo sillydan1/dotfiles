@@ -158,7 +158,7 @@ require("lazy").setup({
           vim.print = _G.dd -- Override print to use snacks for `:=` command
 
           -- Create some toggle mappings
-          Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+          Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")  -- Note: `z=` is to get suggestions
           Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
           Snacks.toggle.line_number():map("<leader>ul")
