@@ -148,6 +148,7 @@ export PATH="$PATH:$HOME/Applications/gradle-8.5/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export EDITOR=vim
 export CMAKE_GENERATOR=Ninja
@@ -256,9 +257,17 @@ if [ -x "$(command -v thefuck)" ]; then
     eval $(thefuck --alias)
 fi
 
+# Set guix profile if it exists.
 if [ -d $HOME/.guix-profile ]; then
     GUIX_PROFILE="${HOME}/.guix-profile"
     . "$GUIX_PROFILE/etc/profile"
+fi
+
+# Configure zeit https://github.com/mrusme/zeit
+if [ -x "$(command -v zeit)" ]; then
+    export ZEIT_DB=$HOME/.config/zeit.db
+    source <(zeit completion bash)
+    alias z=zeit
 fi
 
 # Pretty print some information
@@ -273,4 +282,8 @@ elif [ -x "$(command -v cowsay)" ]; then
   cowsay "Greetings $USER!"
 else
   echo "Hello $USER!"
+fi
+
+if [ -x "$(command -v zeit)" ]; then
+    zeit stats
 fi
