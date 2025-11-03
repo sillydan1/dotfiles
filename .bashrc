@@ -286,4 +286,5 @@ fi
 
 if [ -x "$(command -v zeit)" ]; then
     zeit stats
+    zeit tracking
 fi
