@@ -302,11 +302,6 @@ vim.lsp.config.rust_analyzer = {
   filetypes = { "rust" }
 }
 
-vim.lsp.config.asm_lsp = {
-  cmd = { "asm-lsp" },
-  filetypes = { "asm" }
-}
-
 -- TODO: Investigate neocmakelsp and how to configure it, because it's miles better
 vim.lsp.config.cmake_language_server = {
   cmd = { "cmake-language-server" },
@@ -317,7 +312,7 @@ vim.diagnostic.config({
   virtual_text = true
 })
 
-vim.lsp.enable({ "clangd", "luals", "basedpyright", "ruff", "jdtls", "rust_analyzer", "textlsp", "cmake_language_server", "asm_lsp" })
+vim.lsp.enable({ "clangd", "luals", "basedpyright", "ruff", "jdtls", "rust_analyzer", "textlsp", "cmake_language_server" })
 
 -- NOTE: Stolen from nvim-lspconfig
 -- TODO: Move this somewhere prettier
