@@ -217,12 +217,12 @@ vim.o.winborder = "rounded"
 vim.wo.nu = true
 vim.wo.relativenumber = true
 vim.wo.signcolumn = "yes"
-
-vim.cmd [[
-  augroup groovy_filetype
-    autocmd BufNewFile,BufRead Jenkinsfile set syntax=groovy
-  augroup END
-]]
+vim.filetype.add({
+  pattern = {
+    [".*.service"] = "systemd",
+    ["Jenkinsfile"] = "groovy",
+  },
+})
 
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
