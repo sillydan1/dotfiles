@@ -80,7 +80,6 @@ require("lazy").setup({
   "klen/nvim-test",
   "mbbill/undotree",
   "mikavilpas/yazi.nvim",
-  "raafatturki/hex.nvim",
   { "danymat/neogen",  config = true },
   {
     "folke/lazydev.nvim",
@@ -387,7 +386,6 @@ require("dapui").setup()
 require("nvim-test").setup()
 require("coverage").setup()
 require("Comment").setup()
-require("hex").setup()
 require("mason").setup()
 require("todo-comments").setup()
 pcall(require("telescope").load_extension, "fzf")
