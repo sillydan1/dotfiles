@@ -1,0 +1,23 @@
+toggle_actions          a
+toggle_filenames        d
+toggle_fullscreen       f
+toggle_fixed_geometry   g
+toggle_info             i
+toggle_menu             m
+reload_image            r
+quit                    q
+toggle_aliasing         A
+toggle_auto_zoom        z Z
+flip                    underscore
+mirror                  bar
+zoom_in                 plus Up
+zoom_out                minus Down
+zoom_fill               a
+orient_3                less
+orient_1                greater
+prev_dir                bracketleft
+next_dir                bracketright
+scroll_left             h
+scroll_up               k
+scroll_down             j
+scroll_right            l
