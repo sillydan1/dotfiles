@@ -256,6 +256,7 @@ vim.lsp.config.luals = {
   }
 }
 
+-- TODO: Remove basedpyright configuration when ty is battletested
 vim.lsp.config.basedpyright = {
   cmd = { "basedpyright-langserver", "--stdio" },
   filetypes = { "python" },
@@ -281,6 +282,15 @@ vim.lsp.config.basedpyright = {
           reportCallInDefaultInitializer = false,  -- sometimes used when dependency injecting in a flask app
         }
       }
+    }
+  }
+}
+
+vim.lsp.config.ty = {
+  cmd = { "ty", "server" },
+  filetypes = { "python" },
+  settings = {
+    ty = {
     }
   }
 }
@@ -311,7 +321,7 @@ vim.diagnostic.config({
   virtual_text = true
 })
 
-vim.lsp.enable({ "clangd", "luals", "basedpyright", "ruff", "jdtls", "rust_analyzer", "textlsp", "cmake_language_server" })
+vim.lsp.enable({ "clangd", "luals", "ruff", "jdtls", "rust_analyzer", "textlsp", "cmake_language_server", "ty" })
 
 -- NOTE: Stolen from nvim-lspconfig
 -- TODO: Move this somewhere prettier
