@@ -1,3 +1,7 @@
-$wp = <wp>
-preload = $wp
-wallpaper = , $wp
+wallpaper {
+    monitor =
+    path = <wp>
+    fit_mode = cover
+}
+
+splash = false
