@@ -3,3 +3,4 @@ venv/
 .venv/
 .ruff_cache/
 .cache/
+compile_commands.json
