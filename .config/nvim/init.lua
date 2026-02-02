@@ -77,7 +77,6 @@ require("lazy").setup({
   "kristijanhusak/vim-dadbod-completion",
   "danymat/neogen",
   "andythigpen/nvim-coverage",
-  "klen/nvim-test",
   "mbbill/undotree",
   "mikavilpas/yazi.nvim",
   { "danymat/neogen",  config = true },
@@ -393,7 +392,6 @@ require("lazydev").setup()
 require("fidget").setup()
 require("cmake-tools").setup({})
 require("dapui").setup()
-require("nvim-test").setup()
 require("coverage").setup()
 require("Comment").setup()
 require("mason").setup()
