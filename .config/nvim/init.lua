@@ -77,6 +77,7 @@ require("lazy").setup({
   "kristijanhusak/vim-dadbod-completion",
   "danymat/neogen",
   "andythigpen/nvim-coverage",
+  "klen/nvim-test",
   "mbbill/undotree",
   "mikavilpas/yazi.nvim",
   { "danymat/neogen",  config = true },
@@ -91,7 +92,6 @@ require("lazy").setup({
     lazy = false,
     version = "*",
     config = false,
-    dependencies = { "nvim-neorg/tree-sitter-norg" },
   },
   {
     "folke/snacks.nvim",
@@ -389,25 +389,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -----------------------------------------------------------------------------------------------------------------------
 
 vim.cmd(":Copilot disable") -- Disable copilot to get it to be on-demand rather than always on.
-require("nvim-treesitter").setup()
-require("nvim-treesitter").install({
-    "c",
-    "cpp",
-    "go",
-    "lua",
-    "python",
-    "java",
-    "rust",
-    "typescript",
-    "jsonc",
-    "vimdoc",
-    "vim",
-    "norg"
-})
 require("lazydev").setup()
 require("fidget").setup()
 require("cmake-tools").setup({})
 require("dapui").setup()
+require("nvim-test").setup()
 require("coverage").setup()
 require("Comment").setup()
 require("mason").setup()
@@ -495,6 +481,30 @@ require("telescope").setup({
       },
     },
   },
+})
+require("nvim-treesitter.configs").setup({
+  -- Add languages to be installed here that you want installed for treesitter
+  ensure_installed = {
+    "c",
+    "cpp",
+    "go",
+    "lua",
+    "python",
+    "java",
+    "rust",
+    "typescript",
+    "jsonc",
+    "vimdoc",
+    "vim",
+    "norg"
+  },
+  modules = {},
+  ignore_install = {},
+  sync_install = false,
+  auto_install = true,
+  highlight = {
+    enable = true
+  }
 })
 require("mason-nvim-dap").setup({
   ensure_installed = { "codelldb" },
