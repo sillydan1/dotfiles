@@ -39,8 +39,11 @@ require("lazy").setup({
   "nvim-telescope/telescope-ui-select.nvim",
   "nvim-telescope/telescope-fzf-native.nvim",
   "nvim-lua/plenary.nvim",
-  "nvim-treesitter/nvim-treesitter-textobjects",
-  "nvim-treesitter/nvim-treesitter",
+  {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate"
+  },
   "romgrk/barbar.nvim",
   "nvim-web-devicons",
   "williamboman/mason.nvim",
@@ -480,7 +483,7 @@ require("telescope").setup({
     },
   },
 })
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.config").setup({
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = {
     "c",
