@@ -42,7 +42,8 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    build = ":TSUpdate"
+    build = ":TSUpdate",
+    version = "v0.9.3"
   },
   "romgrk/barbar.nvim",
   "nvim-web-devicons",
@@ -488,7 +489,7 @@ require("telescope").setup({
     },
   },
 })
-require("nvim-treesitter.config").setup({
+require("nvim-treesitter.configs").setup({
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = {
     "c",
