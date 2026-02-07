@@ -319,6 +319,11 @@ vim.lsp.config.cmake_language_server = {
   filetypes = { "cmake" }
 }
 
+vim.lsp.config.textlsp = {
+  cmd = { "textlsp" },
+  filetypes = { "txt", "latex", "org" }
+}
+
 vim.diagnostic.config({
   virtual_text = true
 })
