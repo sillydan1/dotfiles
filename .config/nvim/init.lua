@@ -519,6 +519,13 @@ require("nvim-treesitter.configs").setup({
     enable = true
   }
 })
+-- vim.treesitter.language.add('guitar_chords', { path = "/home/agj/git/tree-sitter-guitar-chords/guitar-chords.so" })
+-- vim.treesitter.language.register("guitar_chords", { "guitar" })
+-- vim.cmd([[highlight link ts_chord Identifier]])
+-- vim.cmd([[highlight link ts_section_name Function]])
+-- vim.opt.runtimepath:append("/home/agj/git/tree-sitter-guitar-chords")
+
+
 require("mason-nvim-dap").setup({
   ensure_installed = { "codelldb" },
   automatic_installation = false,
