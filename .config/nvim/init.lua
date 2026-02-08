@@ -43,7 +43,7 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
     build = ":TSUpdate",
-    version = "v0.9.3"
+    version = "v0.10.0"
   },
   "romgrk/barbar.nvim",
   "nvim-web-devicons",
