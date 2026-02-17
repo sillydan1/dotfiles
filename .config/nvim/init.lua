@@ -613,6 +613,13 @@ vim.keymap.set("n", "<C-w>h", function() vim.cmd(":sp") end, { desc = "split hor
 
 -----------------------------------------------------------------------------------------------------------------------
 
+vim.keymap.set('n', 'gK', function()
+  local new_config = not vim.diagnostic.config().virtual_text
+  vim.diagnostic.config({ virtual_text = new_config })
+end, { desc = 'Toggle diagnostic virtual_text' })
+
+-----------------------------------------------------------------------------------------------------------------------
+
 vim.keymap.set("n", "<leader>nq", ":cnext<CR>", { desc = "[N]ext quickfix item" })
 vim.keymap.set("n", "<leader>Nq", ":cprevious<CR>", { desc = "[N]ext quickfix item (backwards)" })
 vim.keymap.set("n", "<leader>DD", ":Neogen<CR>", { desc = "Generate [D]ocstring" })
