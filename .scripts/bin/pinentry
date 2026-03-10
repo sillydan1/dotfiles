@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# choose pinentry depending on PINENTRY_USER_DATA
+
+case $PINENTRY_USER_DATA in
+    gnome)
+        exec /usr/bin/pinentry-gnome3 "$@"
+        ;;
+    tty)
+        exec /usr/bin/pinentry-tty "$@"
+        ;;
+    *)
+        exec /usr/bin/pinentry-tty "$@"
+esac

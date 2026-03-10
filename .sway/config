@@ -51,6 +51,7 @@ default_floating_border pixel 3
 bindsym $mod+Shift+Return exec $term
 bindsym $mod+Shift+q kill
 bindsym $mod+p exec $menu
+bindsym $mod+Shift+p exec /home/agj/.scripts/bin/passmenu
 floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+m exec swaymsg exit
