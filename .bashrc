@@ -138,6 +138,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
+export PATH="$PATH:$HOME/.scripts/bin"
 export EDITOR=vim
 export CMAKE_GENERATOR=Ninja
 
