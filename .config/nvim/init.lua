@@ -752,6 +752,12 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -----------------------------------------------------------------------------------------------------------------------
 
+-- GomSpace things
+vim.keymap.set("n", "<leader>dd", function() vim.cmd("!gs-deps -nc fetch -f") end,
+  { desc = "[D]ownload gomspace [D]ependencies" })
+
+-----------------------------------------------------------------------------------------------------------------------
+
 vim.api.nvim_create_autocmd("BufRead", {
   pattern = "*.md",
   callback = function()
