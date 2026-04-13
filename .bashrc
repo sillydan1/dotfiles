@@ -273,7 +273,7 @@ else
   echo "Hello $USER!"
 fi
 
-if [ -x "$(command -v zeit)" ]; then
-    zeit stats
-    zeit tracking
-fi
+# Rebind Ctrl+k to copy the line into wl-clipboard.
+# Note that this kills the original binding.
+# I've tried to do "; bind "\C-k":kill-line'" to restore the original functionality but no luck so far.
+bind -x '"\C-k":echo -n $READLINE_LINE | wl-copy'
