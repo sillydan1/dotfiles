@@ -1,201 +1,28 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
+vim.pack.add({
+  -- Neorg and dependencies
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/nvim-neorg/tree-sitter-norg",
+  "https://github.com/vhyrro/luarocks.nvim",
+  "https://github.com/nvim-neorg/lua-utils.nvim",
+  "https://github.com/pysan3/pathlib.nvim",
+  "https://github.com/nvim-neotest/nvim-nio",
+  { src = "https://github.com/nvim-neorg/neorg", version = "v9.6.4" },
 
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
-require("lazy").setup({
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      "nvim-neotest/nvim-nio"
-    },
-    lazy = true
-  },
-  {
-    "github/copilot.vim",
-    lazy = false
-  },
-  "nvim-tree/nvim-tree.lua",
-  "nvim-tree/nvim-web-devicons",
-  "folke/todo-comments.nvim",
-  "nvim-lua/plenary.nvim",
-  "nvim-telescope/telescope.nvim",
-  -- NOTE: I would like to use snacks.nvim instead of this - I only use ui-select for code actions.
-  "nvim-telescope/telescope-ui-select.nvim",
-  "nvim-telescope/telescope-fzf-native.nvim",
-  "nvim-lua/plenary.nvim",
-  {
-    "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    build = ":TSUpdate",
-    version = "v0.10.0"
-  },
-  "romgrk/barbar.nvim",
-  "nvim-web-devicons",
-  "williamboman/mason.nvim",
-  "j-hui/fidget.nvim",
-  "f-person/git-blame.nvim",
-  "jay-babu/mason-nvim-dap.nvim",
-  "mfussenegger/nvim-dap-python",
-  "nvim-tree/nvim-web-devicons",
-  "aca/marp.nvim",
-  "lewis6991/gitsigns.nvim",
-  "christoomey/vim-tmux-navigator",
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  "rose-pine/neovim",
-  "nvim-lualine/lualine.nvim",
-  {
-    "zaldih/themery.nvim",
-    config = function()
-      require("themery").setup({
-        themes = {
-          "catppuccin-macchiato",
-          "catppuccin-latte",
-          "rose-pine-dawn"
-        }
-      })
-    end
-  },
-  "hrsh7th/nvim-cmp",
-  "lukas-reineke/indent-blankline.nvim",
-  "numToStr/Comment.nvim",
-  "civitasv/cmake-tools.nvim",
-  "BurntSushi/ripgrep",
-  "tpope/vim-dadbod",
-  "kristijanhusak/vim-dadbod-ui",
-  "kristijanhusak/vim-dadbod-completion",
-  "danymat/neogen",
-  "andythigpen/nvim-coverage",
-  "mbbill/undotree",
-  "mikavilpas/yazi.nvim",
-  { "danymat/neogen",  config = true },
-  {
-    "folke/lazydev.nvim",
-    ft = "lua"
-  },
-  "sillydan1/luajava.nvim",
-  "sillydan1/graphedit-lua.nvim",
-  {
-    "nvim-neorg/neorg",
-    lazy = false,
-    version = "*",
-    config = false,
-  },
-  {
-    "folke/snacks.nvim",
-    dependencies = { "3rd/image.nvim" },
-    priority = 1000,
-    lazy = false,
-    opts = {
-      image = {},
-      input = {},
-      bigfile = { enabled = true },
-      dashboard = { enabled = false },
-      notifier = {
-        enabled = true,
-        timeout = 3000,
-        top_down = false,
-      },
-      quickfile = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-      styles = {
-        notification = {
-          wo = { wrap = true } -- Wrap notifications
-        }
-      }
-    },
-    keys = {
-      { "<leader>.",  function() Snacks.scratch() end,          desc = "Toggle Scratch Buffer" },
-      { "<leader>S",  function() Snacks.scratch.select() end,   desc = "Select Scratch Buffer" },
-      { "<leader>gg", function() Snacks.lazygit() end,          desc = "Lazygit" },
-      { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
-      { "<leader>gb", function() Snacks.git.blame_line() end,   desc = "Git Blame Line" },
-      { "<leader>dd", function() Snacks.notifier.hide() end,    desc = "Dismiss All Notifications" },
-      {
-        "<leader>1", -- Still debating this...
-        desc = "Neovim News",
-        function()
-          Snacks.win({
-            file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-            width = 0.6,
-            height = 0.6,
-            wo = {
-              spell = false,
-              wrap = false,
-              signcolumn = "yes",
-              statuscolumn = " ",
-              conceallevel = 3,
-            },
-          })
-        end,
-      }
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "VeryLazy",
-        callback = function()
-          -- Setup some globals for debugging (lazy-loaded)
-          _G.dd = function(...)
-            Snacks.debug.inspect(...)
-          end
-          _G.bt = function()
-            Snacks.debug.backtrace()
-          end
-          vim.print = _G.dd -- Override print to use snacks for `:=` command
-
-          -- Create some toggle mappings
-          Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>ze") -- Note: `z=` is to get suggestions
-          Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-          Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-          Snacks.toggle.line_number():map("<leader>ul")
-          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-            "<leader>uc")
-          Snacks.toggle.treesitter():map("<leader>uT")
-          Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-          Snacks.toggle.inlay_hints():map("<leader>uh")
-        end,
-      })
-    end,
-  },
-  -- Markdown workflow things
-  "jghauser/follow-md-links.nvim",
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    opts = {
-      code = {
-        style = "full",
-        border = "thick",
-        sign = false,
-      },
-      heading = {
-        sign = false,
-        width = 'block',
-        position = 'inline',
-        icons = { "◉ ", "◎ ", "○ ", "✺ ", "▶ ", "◉ " },
-      },
-    }
-  }
+  -- Other
+  -- "https://github.com/christoomey/vim-tmux-navigator",
+  -- "https://github.com/f-person/git-blame.nvim",
+  -- "https://github.com/mfussenegger/nvim-dap",
+  -- "https://github.com/numtostr/comment.nvim",
+  -- "https://github.com/nvim-tree/nvim-web-devicons",
 })
 
 -----------------------------------------------------------------------------------------------------------------------
 
 -- NOTE: see `:help vim.o`
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.cmd("set clipboard+=unnamedplus")
 vim.cmd("imap <C-c> <Esc>")
 vim.cmd("let g:cmake_link_compile_commands = 1")
@@ -234,6 +61,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = highlight_group,
   pattern = "*",
 })
+
+-----------------------------------------------------------------------------------------------------------------------
 
 vim.lsp.config.clangd = {
   cmd = { "clangd", "--background-index" },
@@ -387,11 +216,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- Set keybinds
-    local telescope = require("telescope.builtin")
+    -- local telescope = require("telescope.builtin")
     vim.keymap.set("n", "gd", vim.lsp.buf.definition)
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-    vim.keymap.set("n", "gr", telescope.lsp_references)
+    -- vim.keymap.set("n", "gr", telescope.lsp_references)
     vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
@@ -402,326 +231,49 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -----------------------------------------------------------------------------------------------------------------------
 
-vim.cmd(":Copilot disable") -- Disable copilot to get it to be on-demand rather than always on.
-require("lazydev").setup()
-require("fidget").setup()
-require("cmake-tools").setup({})
-require("dapui").setup()
-require("coverage").setup()
-require("Comment").setup()
-require("mason").setup()
-require("todo-comments").setup()
-pcall(require("telescope").load_extension, "fzf")
-require("telescope").load_extension("ui-select")
+require("luarocks-nvim").setup()
 
-local python_path = table.concat({
-      vim.fn.stdpath("data"),
-      "mason",
-      "packages",
-      "debugpy",
-      "venv",
-      "bin",
-      "python"
-    }, "/")
-    :gsub("//+", "/")
-require("dap-python").setup(python_path)
-
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = {
-    adaptive_size = true,
-    side = "right",
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = false,
-  },
-})
 require("neorg").setup({
-  load = {
-    ["core.defaults"] = {},
-    ["core.concealer"] = {},
-    ["core.export"] = {},
-    ["core.export.markdown"] = {},
-    ["core.latex.renderer"] = {},
-    ["core.ui.calendar"] = {},
-    ["core.journal"] = {
-      config = {
-        journal_folder = "journal",
-        strategy = "flat",
-        workspace = "notes"
-      }
-    },
-    ["core.dirman"] = {
-      config = {
-        workspaces = {
-          notes = "~/git/notes",
-        },
-        index = "index.norg",
-      }
-    }
-  }
-})
-require("lualine").setup({
-  options = {
-    icons_enabled = false,
-    component_separators = "|",
-    section_separators = "|",
-  },
-})
-require("gitsigns").setup {
-  signs = {
-    add = { text = "+" },
-    change = { text = "~" },
-    delete = { text = "_" },
-    topdelete = { text = "‾" },
-    changedelete = { text = "~" },
-  },
-}
-require("telescope").setup({
-  extensions = {
-    workspaces = {
-      keep_insert = true,
-    }
-  },
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-u>"] = false,
-        ["<C-d>"] = false,
+  config = {
+    load = {
+      ["core.defaults"] = {},
+      ["core.concealer"] = {},
+      ["core.export"] = {},
+      ["core.export.markdown"] = {},
+      ["core.latex.renderer"] = {},
+      ["core.ui.calendar"] = {},
+      ["core.journal"] = {
+        config = {
+          journal_folder = "journal",
+          strategy = "flat",
+          workspace = "notes"
+        }
       },
-    },
-  },
-})
-require("nvim-treesitter.configs").setup({
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = {
-    "c",
-    "cpp",
-    "go",
-    "lua",
-    "python",
-    "java",
-    "rust",
-    "typescript",
-    "jsonc",
-    "vimdoc",
-    "vim",
-    "norg"
-  },
-  modules = {},
-  ignore_install = {},
-  sync_install = false,
-  auto_install = true,
-  highlight = {
-    enable = true
-  }
-})
--- vim.treesitter.language.add('guitar_chords', { path = "/home/agj/git/tree-sitter-guitar-chords/guitar-chords.so" })
--- vim.treesitter.language.register("guitar_chords", { "guitar" })
--- vim.cmd([[highlight link ts_chord Identifier]])
--- vim.cmd([[highlight link ts_section_name Function]])
--- vim.opt.runtimepath:append("/home/agj/git/tree-sitter-guitar-chords")
-
-
-require("mason-nvim-dap").setup({
-  ensure_installed = { "codelldb" },
-  automatic_installation = false,
-  handlers = {
-    function(config)
-      require("mason-nvim-dap").default_setup(config)
-    end,
-    codelldb = function(config)
-      config.adapters = {
-        type = "executable",
-        command = "codelldb",
+      ["core.dirman"] = {
+        config = {
+          workspaces = {
+            notes = "~/git/notes",
+          },
+          index = "index.norg",
+        }
       }
-      require("mason-nvim-dap").default_setup(config)
-    end
+    }
   }
 })
--- NOTE: native "gdb" is not available through mason yet.
-require("dap").adapters.gdb = {
-  type = "executable",
-  command = "gdb",
-  args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
-}
-require("dap").configurations.cpp = {
-  {
-    name = "Launch",
-    type = "codelldb",
-    request = "launch",
-    program = function()
-      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-    end,
-    cwd = "${workspaceFolder}",
-    stopOnEntry = false,
-    postRunCommands = {
-      "breakpoint name configure --disable cpp_exception" -- Don't stop on every exception please
-    }
-  },
-  {
-    name = "Select and attach to process",
-    type = "codelldb",
-    request = "attach",
-    program = function()
-      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-    end,
-    pid = function()
-      local name = vim.fn.input("Executable name (filter): ")
-      return require("dap.utils").pick_process({ filter = name })
-    end,
-    cwd = "${workspaceFolder}",
-    postRunCommands = {
-      "breakpoint name configure --disable cpp_exception" -- Don't stop on every exception please
-    }
-  },
-  {
-    name = "Attach to gdbserver",
-    type = "gdb", -- NOTE: This is using native GDB, because codelldb is not fantastic regarding gdbserver
-    request = "attach",
-    target = function()
-      return vim.fn.input("Host: ", "localhost") .. ":" .. vim.fn.input("Port: ", "1234")
-    end,
-    cwd = "${workspaceFolder}",
-  },
-}
-require("dap").configurations.c = require("dap").configurations.cpp
 
 -----------------------------------------------------------------------------------------------------------------------
 
-vim.keymap.set("i", "<C-D>", 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false
-})
-vim.keymap.set("i", "<C-W>", "<Plug>(copilot-suggest)")
-vim.keymap.set("n", "<leader>cp", function() vim.cmd(":Copilot panel") end)
-vim.keymap.set("i", "<C-Q>", "<Plug>(copilot-dismiss)")
-vim.g.copilot_no_tab_map = true
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.keymap.set('i', '<c-space>', function()
-  vim.lsp.completion.get()
-end)
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set("n", "<C-w>h", function() vim.cmd(":sp") end, { desc = "split horizontally" })
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.keymap.set('n', 'gK', function()
-  local new_config = not vim.diagnostic.config().virtual_text
-  vim.diagnostic.config({ virtual_text = new_config })
-end, { desc = 'Toggle diagnostic virtual_text' })
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.keymap.set("n", "<leader>nq", ":cnext<CR>", { desc = "[N]ext quickfix item" })
-vim.keymap.set("n", "<leader>Nq", ":cprevious<CR>", { desc = "[N]ext quickfix item (backwards)" })
-vim.keymap.set("n", "<leader>DD", ":Neogen<CR>", { desc = "Generate [D]ocstring" })
-vim.keymap.set("n", "<leader>uu", ":UndotreeToggle<CR>", { desc = "[U]ndotree toggle" })
-vim.keymap.set("n", "<leader>ff", ":Yazi cwd<CR>", { desc = "Open [F]ile using filemanager" })
-vim.keymap.set("n", "<leader>FF", function() vim.lsp.buf.format() end, { desc = "[F]ormat [F]ile (using LSP)" })
-vim.keymap.set("n", "<leader>st", function() vim.cmd(":TodoTelescope") end, { desc = "[S]earch [T]odos" })
-vim.keymap.set("n", "<leader>p", require("nvim-tree.api").tree.find_file, { desc = "show current file in nvim tree" })
-vim.keymap.set("n", "<leader>o", require("nvim-tree.api").tree.toggle, { desc = "[O]pen file" })
-vim.keymap.set("n", "H", "<Cmd>BufferPrevious<CR>")
-vim.keymap.set("n", "L", "<Cmd>BufferNext<CR>")
-vim.keymap.set("n", "<leader>q", "<Cmd>BufferClose<CR>")
-vim.keymap.set("n", "<leader>Q", "<Cmd>BufferClose!<CR>")
-vim.keymap.set("n", "<leader><", "<Cmd>BufferMovePrevious<CR>")
-vim.keymap.set("n", "<leader>>", "<Cmd>BufferMoveNext<CR>")
-vim.keymap.set("n", "<leader>tp", "<Cmd>BufferPin<CR>")
-vim.keymap.set("n", "<C-p>", "<Cmd>BufferPick<CR>")
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.keymap.set("n", "<leader>co", function()
-  require("coverage").load_lcov("coverage.info", true)
-end, { desc = "[CO]verage Toggle" })
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
-vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
-vim.keymap.set("n", "<leader>sF", function() require("telescope.builtin").find_files({ no_ignore = true }) end,
-  { desc = "[S]earch All Files" })
-vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
-vim.keymap.set("n", "<leader>sG",
-  function() require("telescope.builtin").live_grep({ additional_args = { "--no-ignore" } }) end,
-  { desc = "[S]earch all by [G]rep" })
-vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
-vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
-vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
-vim.keymap.set("n", "<leader>sc", require("telescope.builtin").commands, { desc = "[S]earch [C]ommands" })
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.keymap.set("n", "<leader>cc", function() vim.cmd("CMakeGenerate") end, { desc = "[C]Make project [C]onfigure" })
-vim.keymap.set("n", "<leader>cb", function() vim.cmd("CMakeBuild") end, { desc = "[C]Make project [B]uild" })
-vim.keymap.set("n", "<leader>ci", function() vim.cmd("CMakeInstall --prefix out/install") end,
-  { desc = "[C]Make project [I]nstall" })
-vim.keymap.set("n", "<leader>cC", function() vim.cmd("CMakeClean") end, { desc = "[C]Make project [C]lean" })
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Next diagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float, { desc = "Open diagnostics floating window" })
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.api.nvim_set_hl(0, "blue", { fg = "#3d59a1" })
-vim.api.nvim_set_hl(0, "green", { fg = "#9ece6a" })
-vim.api.nvim_set_hl(0, "yellow", { fg = "#FFFF00" })
-vim.api.nvim_set_hl(0, "orange", { fg = "#f09000" })
-vim.api.nvim_set_hl(0, "red", { fg = "#ff3333" })
-vim.api.nvim_set_hl(0, "veryred", { fg = "#ff0000" })
-vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "red", linehl = "", numhl = "red" })
-vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "orange", linehl = "", numhl = "" })
-vim.fn.sign_define("DapLogPoint", { text = "", texthl = "blue", linehl = "", numhl = "" })
-vim.fn.sign_define("DapStopped", { text = "", texthl = "green", linehl = "", numhl = "green" })
-vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "red", linehl = "veryred", numhl = "" })
-vim.keymap.set("n", "<F2>", require("dapui").open, { desc = "Debugger UI Open" })
-vim.keymap.set("n", "<F3>", require("dapui").close, { desc = "Debugger UI close" })
-vim.keymap.set("n", "<F4>", require("dap").close, { desc = "Debugger Close" })
-vim.keymap.set("n", "<F5>", function()
-  if vim.fn.filereadable(".vscode/launch.json") then
-    require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp" }, codelldb = { "c", "cpp" } })
-  end
-  require("dap").continue()
-end, { desc = "Debugger Continue, or launch" })
-vim.keymap.set("n", "<F6>", require("dap").step_over, { desc = "Debugger Step Over" })
-vim.keymap.set("n", "<F7>", require("dap").step_into, { desc = "Debugger Step Into" })
-vim.keymap.set("n", "<F8>", require("dap").step_out, { desc = "Debugger Step Out" })
-vim.keymap.set("n", "<leader>B",
-  function() require("dap").set_breakpoint(vim.fn.input("Set breakpoint condition: "), nil, nil) end,
-  { desc = "Debugger New breakpoint with a condition" })
-vim.keymap.set("n", "<leader>b", require("dap").toggle_breakpoint, { desc = "Debugger New breakpoint" })
-vim.keymap.set("n", "<leader>dr", require("dap").repl.open, { desc = "Debugger open REPL" })
-vim.keymap.set("n", "<leader>dl", require("dap").run_last, { desc = "Debugger run last run executable" })
-vim.keymap.set("n", "<leader>df", require("dap").focus_frame, { desc = "Debugger focus to current stack" })
-vim.keymap.set("n", "<leader>db",
-  function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end,
-  { desc = "Debugger new logpoint" })
-vim.keymap.set("n", "<leader>dj", function()
-  require("dap.ext.vscode").load_launchjs(vim.fn.input("Path to json: ", vim.fn.getcwd() .. "/", "file"),
-    { cppdbg = { "c", "cpp" }, codelldb = { "c", "cpp" } })
-end, { desc = "Debugger Load launch specification file" })
-vim.keymap.set({ "n", "v" }, "<Leader>dh", require("dap.ui.widgets").hover, { desc = "Debugger hover menu" })
-vim.keymap.set({ "n", "v" }, "<Leader>dp", require("dap.ui.widgets").preview, { desc = "Debugger preview menu" })
-vim.keymap.set("n", "<Leader>ds", function()
-  local widgets = require("dap.ui.widgets")
-  widgets.centered_float(widgets.frames)
-end, { desc = "Debugger summon centered_float" })
-
-vim.keymap.set({ "n" }, "<Leader>TT", function()
-  vim.cmd("Themery")
-end, { desc = "Open Themery" })
+-- All of these are installed through `pacman -S tree-sitter-grammar`
+vim.treesitter.language.add('bash')
+vim.treesitter.language.add('c')
+vim.treesitter.language.add('javascript')
+vim.treesitter.language.add('lua')
+vim.treesitter.language.add('markdown')
+vim.treesitter.language.add('python')
+vim.treesitter.language.add('query')
+vim.treesitter.language.add('rust')
+vim.treesitter.language.add('vim ')
+vim.treesitter.language.add('vimdoc')
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -748,37 +300,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tr", "<Plug>(neorg.qol.todo-items.todo.task-recurring)", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>tu", "<Plug>(neorg.qol.todo-items.todo.task-undone)", opts)
   end
-})
-
------------------------------------------------------------------------------------------------------------------------
-
--- GomSpace things
-vim.keymap.set("n", "<leader>dd", function() vim.cmd("!gs-deps -nc fetch -f") end,
-  { desc = "[D]ownload gomspace [D]ependencies" })
-
------------------------------------------------------------------------------------------------------------------------
-
-vim.api.nvim_create_autocmd("BufRead", {
-  pattern = "*.md",
-  callback = function()
-    -- Get the full path of the current file
-    local file_path = vim.fn.expand("%:p")
-    -- Ignore files in my daily note directory
-    if file_path:match(os.getenv("HOME") .. "/github/obsidian_main/250%-daily/") then
-      return
-    end -- Avoid running zk multiple times for the same buffer
-    if vim.b.zk_executed then
-      return
-    end
-    vim.b.zk_executed = true -- Mark as executed
-    -- Use `vim.defer_fn` to add a slight delay before executing `zk`
-    vim.defer_fn(function()
-      vim.cmd("normal zk")
-      -- This write was disabling my inlay hints
-      -- vim.cmd("silent write")
-      vim.notify("Folded keymaps", vim.log.levels.INFO)
-    end, 100) -- Delay in milliseconds (100ms should be enough)
-  end,
 })
 
 -----------------------------------------------------------------------------------------------------------------------
