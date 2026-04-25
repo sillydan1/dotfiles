@@ -1,0 +1,57 @@
+{
+  "plugins": {
+    "comment.nvim": {
+      "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
+      "src": "https://github.com/numtostr/comment.nvim"
+    },
+    "git-blame.nvim": {
+      "rev": "5c536e2d4134d064aa3f41575280bc8a2a0e03d7",
+      "src": "https://github.com/f-person/git-blame.nvim"
+    },
+    "lua-utils.nvim": {
+      "rev": "e565749421f4bbb5d2e85e37c3cef9d56553d8bd",
+      "src": "https://github.com/nvim-neorg/lua-utils.nvim"
+    },
+    "luarocks.nvim": {
+      "rev": "1db9093915eb16ba2473cfb8d343ace5ee04130a",
+      "src": "https://github.com/vhyrro/luarocks.nvim"
+    },
+    "neorg": {
+      "rev": "a09e0bb9b32e2d0406d4503ae8c1a7ad2ca83eae",
+      "src": "https://github.com/nvim-neorg/neorg",
+      "version": "'v9.6.4'"
+    },
+    "nvim-dap": {
+      "rev": "45a69eba683a2c448dd9ecfc4de89511f0646b5f",
+      "src": "https://github.com/mfussenegger/nvim-dap"
+    },
+    "nvim-nio": {
+      "rev": "21f5324bfac14e22ba26553caf69ec76ae8a7662",
+      "src": "https://github.com/nvim-neotest/nvim-nio"
+    },
+    "nvim-treesitter": {
+      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "nvim-web-devicons": {
+      "rev": "c72328a5494b4502947a022fe69c0c47e53b6aa6",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "pathlib.nvim": {
+      "rev": "57e5598af6fe253761c1b48e0b59b7cd6699e2c1",
+      "src": "https://github.com/pysan3/pathlib.nvim"
+    },
+    "tree-sitter-manager.nvim": {
+      "rev": "fa63bc63ae08b661843d9976a43becfbd3daf76c",
+      "src": "https://github.com/romus204/tree-sitter-manager.nvim"
+    },
+    "tree-sitter-norg": {
+      "rev": "d89d95af13d409f30a6c7676387bde311ec4a2c8",
+      "src": "https://github.com/nvim-neorg/tree-sitter-norg"
+    },
+    "vim-tmux-navigator": {
+      "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
+      "src": "https://github.com/christoomey/vim-tmux-navigator"
+    }
+  }
+}

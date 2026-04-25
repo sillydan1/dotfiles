@@ -1,7 +1,8 @@
 vim.pack.add({
   -- Neorg and dependencies
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/nvim-neorg/tree-sitter-norg",
+  -- "https://github.com/romus204/tree-sitter-manager.nvim",
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", branch = "main"},
+
   "https://github.com/vhyrro/luarocks.nvim",
   "https://github.com/nvim-neorg/lua-utils.nvim",
   "https://github.com/pysan3/pathlib.nvim",
@@ -9,11 +10,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-neorg/neorg", version = "v9.6.4" },
 
   -- Other
-  -- "https://github.com/christoomey/vim-tmux-navigator",
-  -- "https://github.com/f-person/git-blame.nvim",
-  -- "https://github.com/mfussenegger/nvim-dap",
-  -- "https://github.com/numtostr/comment.nvim",
-  -- "https://github.com/nvim-tree/nvim-web-devicons",
+  "https://github.com/christoomey/vim-tmux-navigator",
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -231,7 +228,48 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -----------------------------------------------------------------------------------------------------------------------
 
+-- All of these are installed through `pacman -S tree-sitter-grammar`
+-- vim.treesitter.language.register("bash", { "sh" })
+-- vim.treesitter.language.register("c", { "c" })
+-- vim.treesitter.language.register("cpp", { "cpp", "cc", "c++", "cxx" })
+-- vim.treesitter.language.register("javascript", { "js" })
+-- vim.treesitter.language.register("lua", { "lua" })
+-- vim.treesitter.language.register("markdown", { "md", "markdown" })
+-- vim.treesitter.language.register("python", { "py" })
+-- vim.treesitter.language.register("query", { "q" })
+-- vim.treesitter.language.register("rust", { "rs" })
+-- vim.treesitter.language.register("vim", { "vimrc", "vim" })
+-- vim.treesitter.language.register("vimdoc", { "vimdoc" })
+--
+-- Installed using luarocks install nvim-treesitter-norg nvim-treesitter-norg-meta
+vim.treesitter.language.register('norg', { "norg" })
+--
+vim.api.nvim_create_autocmd( 'FileType', { pattern = 'norg',
+callback = function(ev)
+  vim.treesitter.start(ev.buf, 'norg_meta')
+  vim.treesitter.start(ev.buf, 'norg')
+  vim.bo[ev.buf].syntax = 'ON'  -- only if additional legacy syntax is needed
+end
+})
+
+-----------------------------------------------------------------------------------------------------------------------
+
 require("luarocks-nvim").setup()
+
+-- require("nvim-treesitter").setup({
+--   highlight = {
+--     enable = true
+--   },
+--   install_dir = vim.fn.stdpath('data') .. '/site'
+-- })
+--
+-- require('nvim-treesitter').install({ 'rust', 'javascript', 'zig' })
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = { '<filetype>' },
+--   callback = function() vim.treesitter.start() end,
+-- })
+
+-- require("tree-sitter-manager").setup({})
 
 require("neorg").setup({
   config = {
@@ -260,20 +298,6 @@ require("neorg").setup({
     }
   }
 })
-
------------------------------------------------------------------------------------------------------------------------
-
--- All of these are installed through `pacman -S tree-sitter-grammar`
-vim.treesitter.language.add('bash')
-vim.treesitter.language.add('c')
-vim.treesitter.language.add('javascript')
-vim.treesitter.language.add('lua')
-vim.treesitter.language.add('markdown')
-vim.treesitter.language.add('python')
-vim.treesitter.language.add('query')
-vim.treesitter.language.add('rust')
-vim.treesitter.language.add('vim ')
-vim.treesitter.language.add('vimdoc')
 
 -----------------------------------------------------------------------------------------------------------------------
 

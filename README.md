@@ -11,6 +11,12 @@ This means that my real "window manager" is `tmux` - so most of this config is v
 
 ## Installation
 
+### Rewrite 2026 notes
+
+```sh
+CC=gcc CXX=g++ luarocks install tree-sitter-norg
+```
+
 ### stow
 You must have `stow` installed for this to work.
 ```sh
