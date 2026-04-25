@@ -57,6 +57,7 @@ require("lazy").setup({
   "lewis6991/gitsigns.nvim",
   "christoomey/vim-tmux-navigator",
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
   "rose-pine/neovim",
   "nvim-lualine/lualine.nvim",
   {
@@ -66,7 +67,8 @@ require("lazy").setup({
         themes = {
           "catppuccin-macchiato",
           "catppuccin-latte",
-          "rose-pine-dawn"
+          "rose-pine-dawn",
+          "gruvbox"
         }
       })
     end
