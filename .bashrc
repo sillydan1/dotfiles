@@ -273,6 +273,8 @@ else
   echo "Hello $USER!"
 fi
 
+export WLR_NO_HARDWARE_CURSORS=1
+
 # Rebind Ctrl+k to copy the line into wl-clipboard.
 # Note that this kills the original binding.
 # I've tried to do "; bind "\C-k":kill-line'" to restore the original functionality but no luck so far.
