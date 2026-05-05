@@ -9,3 +9,4 @@ lazy-lock.json
 .config/dconf/
 .config/btop/
 .config/hypr/hyprpaper.conf
+.config/git/config

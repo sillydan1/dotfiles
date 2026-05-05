@@ -63,31 +63,19 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 Then start tmux, press `Ctrl+a, I` to install the plugins (these dotfile rebind `Ctrl+b` to `Ctrl+a`).
 
 ## neovim
-Install the latest neovim from https://github.com/neovim/neovim
-Note that these files expect neovim v0.9+, so the package manager distribution may not be good enough (looking at you debian & ubuntu)
 ```sh
-# Ubuntu
-wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
-tar xzvf nvim-linux64.tar.gz
-./nvim-linux64/bin/nvim
-# MacOS
-brew install neovim
-# Arch
-sudo pacman -S neovim
+sudo apt install neovim
 ```
 
 ## lazygit
 ```sh
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit /usr/local/bin
+sudo apt install lazygit
 ```
 
 ## ripgrep
 Prefer to use the cargo package, but this can work in a pinch (not necessarily up to date):
 ```sh
-curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/14.0.0/ripgrep_13.0.0_amd64.deb
 sudo dpkg -i ripgrep_13.0.0_amd64.deb
 ```
 

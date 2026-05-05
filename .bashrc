@@ -259,6 +259,10 @@ if [ -x "$(command -v zeit)" ]; then
     alias z=zeit
 fi
 
+if [ -d "/usr/local/LinkServer" ]; then
+    export PATH="$PATH:/usr/local/LinkServer"
+fi
+
 # Pretty print some information
 clear
 if [ -x "$(command -v fastfetch)" ]; then
