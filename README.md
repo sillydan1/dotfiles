@@ -167,3 +167,15 @@ A fresh arch linux (with no gui) is missing a lot.
 ### From the AUR
 Use `yay` to install these.
  - `sc-im`
+
+## Password Management
+Install `pass` using your package manager and initialize your `gpg` key:
+
+```sh
+cd $HOME
+gpg --full-gen-key
+pass init <gpg-key>
+```
+
+You can then insert new passwords using `pass insert work/email` (it will prompt you). Then you can use `passmenu` to
+retreive the passwords directly from your desktop environment.
