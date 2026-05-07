@@ -70,7 +70,7 @@ Then start tmux, press `Ctrl+a, I` to install the plugins (these dotfile rebind 
 
 ## neovim
 Install the latest neovim from https://github.com/neovim/neovim
-Note that these files expect neovim v0.9+, so the package manager distribution may not be good enough (looking at you debian & ubuntu)
+Note that these files expect neovim v0.12+, so the package manager distribution may not be good enough (looking at you debian & ubuntu)
 ```sh
 # Ubuntu
 wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz

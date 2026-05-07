@@ -1,13 +1,25 @@
 vim.pack.add({
-  "https://github.com/vhyrro/luarocks.nvim",
-  "https://github.com/nvim-neorg/lua-utils.nvim",
-  "https://github.com/pysan3/pathlib.nvim",
-  "https://github.com/nvim-neotest/nvim-nio",
-  -- { src = "https://github.com/nvim-neorg/neorg", version = "v9.6.4" },
-  "https://github.com/christoomey/vim-tmux-navigator",
+  -- Treesitter parser & query downloader
   "https://github.com/arborist-ts/arborist.nvim",
-  "https://github.com/zaldih/themery.nvim",
+
+  -- Integrate with tmux
+  "https://github.com/christoomey/vim-tmux-navigator",
+
+  -- Theming
   "https://github.com/ellisonleao/gruvbox.nvim",
+  "https://github.com/zaldih/themery.nvim",
+
+  -- File-tree view
+  "https://github.com/nvim-tree/nvim-web-devicons",
+  "https://github.com/nvim-tree/nvim-tree.lua",
+
+  -- Telescope
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-telescope/telescope.nvim",
+
+  -- lazygit integration
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/kdheepak/lazygit.nvim",
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -45,15 +57,6 @@ vim.filetype.add({
     [".*.service"] = "systemd",
     ["Jenkinsfile"] = "groovy",
   },
-})
-
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = "*",
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -157,8 +160,19 @@ vim.diagnostic.config({
   virtual_text = true
 })
 
-vim.lsp.enable({ "clangd", "luals", "ruff", "jdtls", "rust_analyzer", "textlsp", "cmake_language_server", "ty",
-  "json_lsp" })
+vim.lsp.enable({
+  "clangd",
+  "luals",
+  "ruff",
+  "jdtls",
+  "rust_analyzer",
+  "textlsp",
+  "cmake_language_server",
+  "ty",
+  "json_lsp",
+})
+
+-----------------------------------------------------------------------------------------------------------------------
 
 -- NOTE: Stolen from nvim-lspconfig
 -- TODO: Move this somewhere prettier
@@ -181,6 +195,16 @@ local function switch_source_header(bufnr)
     vim.cmd.edit(vim.uri_to_fname(result))
   end, bufnr)
 end
+
+-----------------------------------------------------------------------------------------------------------------------
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
+  pattern = "*",
+})
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
@@ -208,70 +232,94 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client:supports_method("textDocument/switchSourceHeader") then
       vim.keymap.set("n", "gh", function() switch_source_header(0) end)
     end
-
-    -- Set keybinds
-    -- local telescope = require("telescope.builtin")
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-    -- vim.keymap.set("n", "gr", telescope.lsp_references)
-    vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover)
-    vim.keymap.set("n", "<leader>K", vim.lsp.buf.signature_help)
   end,
 })
 
------------------------------------------------------------------------------------------------------------------------
-
--- Installed using luarocks install nvim-treesitter-norg nvim-treesitter-norg-meta
-vim.treesitter.language.register('norg', { "norg" })
---
-vim.api.nvim_create_autocmd( 'FileType', { pattern = 'norg',
-callback = function(ev)
-  vim.treesitter.start(ev.buf, 'norg_meta')
-  vim.treesitter.start(ev.buf, 'norg')
-  vim.bo[ev.buf].syntax = 'ON'  -- only if additional legacy syntax is needed
-end
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'norg',
+  callback = function(ev)
+    vim.treesitter.start(ev.buf, 'norg_meta')
+    vim.treesitter.start(ev.buf, 'norg')
+    vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
+  end
 })
 
 -----------------------------------------------------------------------------------------------------------------------
+-- Plugin setup calls
 
-require("luarocks-nvim").setup()
 require("arborist").setup()
+
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    side = "right",
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = false,
+  },
+})
+
 require("themery").setup({
   themes = {
     "gruvbox"
-  }  
+  }
+})
+
+require("telescope").setup({
+  extensions = {
+    workspaces = {
+      keep_insert = true,
+    }
+  },
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-u>"] = false,
+        ["<C-d>"] = false,
+      },
+    },
+  },
 })
 
 -----------------------------------------------------------------------------------------------------------------------
+-- General navigation
 
-local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<leader>nl", function() vim.cmd("Neorg render-latex") end, { desc = "[N]eorg render [L]atex" })
-vim.keymap.set("n", "<leader>ne", function() vim.cmd("Neorg workspace notes") end,
-  { desc = "Open [Ne]org personal workspace" })
-vim.keymap.set("n", "<leader>nj", function() vim.cmd("Neorg journal today") end, { desc = "Open [Ne]org [J]ournal" })
-vim.api.nvim_create_augroup("filetype_mappings", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "norg",
-  callback = function()
-    -- These are all detected using :checkhealth neorg
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>cm", "<Plug>(neorg.looking-glass.magnify-code-block)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>id", "<Plug>(neorg.tempus.insert-date)", opts) -- this uses core.ui.calendar.
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>li", "<Plug>(neorg.pivot.list.invert)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>lt", "<Plug>(neorg.pivot.list.toggle)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>ta", "<Plug>(neorg.qol.todo-items.todo.task-ambiguous)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>tc", "<Plug>(neorg.qol.todo-items.todo.cancelled)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>td", "<Plug>(neorg.qol.todo-items.todo.task-done)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>th", "<Plug>(neorg.qol.todo-items.todo.task-on-hold)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>ti", "<Plug>(neorg.qol.todo-items.todo.task-important)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>tp", "<Plug>(neorg.qol.todo-items.todo.task-pending)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>tr", "<Plug>(neorg.qol.todo-items.todo.task-recurring)", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>tu", "<Plug>(neorg.qol.todo-items.todo.task-undone)", opts)
-  end
-})
+vim.keymap.set("n", "<leader>o", "<Cmd>NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>p", "<Cmd>NvimTreeFindFile<CR>")
+vim.keymap.set("n", "<leader>gg", "<Cmd>LazyGit<CR>")
+vim.keymap.set('n', '<leader>gk', function()
+  local new_config = not vim.diagnostic.config().virtual_text
+  vim.diagnostic.config({ virtual_text = new_config })
+end)
+
+-----------------------------------------------------------------------------------------------------------------------
+-- LSP interaction
+
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+vim.keymap.set("n", "<leader>FF", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float)
+
+-----------------------------------------------------------------------------------------------------------------------
+-- Telescope interaction
+
+local telescope = require("telescope.builtin")
+vim.keymap.set("n", "<leader>sf", telescope.find_files)
+vim.keymap.set("n", "<leader>sf", telescope.find_files)
+vim.keymap.set("n", "<leader>sF", function() telescope.find_files({ no_ignore = true }) end)
+vim.keymap.set("n", "<leader><space>", telescope.buffers)
+vim.keymap.set("n", "<leader>sg", telescope.live_grep)
+vim.keymap.set("n", "<leader>sG", function() telescope.live_grep({ additional_args = { "--no-ignore" } }) end)
+vim.keymap.set("n", "gr", telescope.lsp_references)
 
 -----------------------------------------------------------------------------------------------------------------------
 
