@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "arborist.nvim": {
+      "rev": "6cffbf419a495c84c56b918771a3d004e892e235",
+      "src": "https://github.com/arborist-ts/arborist.nvim"
+    },
     "comment.nvim": {
       "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
       "src": "https://github.com/numtostr/comment.nvim"
@@ -7,6 +11,10 @@
     "git-blame.nvim": {
       "rev": "5c536e2d4134d064aa3f41575280bc8a2a0e03d7",
       "src": "https://github.com/f-person/git-blame.nvim"
+    },
+    "gruvbox.nvim": {
+      "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
+      "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
     "lua-utils.nvim": {
       "rev": "e565749421f4bbb5d2e85e37c3cef9d56553d8bd",
@@ -40,6 +48,10 @@
     "pathlib.nvim": {
       "rev": "57e5598af6fe253761c1b48e0b59b7cd6699e2c1",
       "src": "https://github.com/pysan3/pathlib.nvim"
+    },
+    "themery.nvim": {
+      "rev": "bfa58f4b279d21cb515b28023e1b68ec908584b2",
+      "src": "https://github.com/zaldih/themery.nvim"
     },
     "tree-sitter-manager.nvim": {
       "rev": "fa63bc63ae08b661843d9976a43becfbd3daf76c",

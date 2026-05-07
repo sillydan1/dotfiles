@@ -1,16 +1,13 @@
 vim.pack.add({
-  -- Neorg and dependencies
-  -- "https://github.com/romus204/tree-sitter-manager.nvim",
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter", branch = "main"},
-
   "https://github.com/vhyrro/luarocks.nvim",
   "https://github.com/nvim-neorg/lua-utils.nvim",
   "https://github.com/pysan3/pathlib.nvim",
   "https://github.com/nvim-neotest/nvim-nio",
-  { src = "https://github.com/nvim-neorg/neorg", version = "v9.6.4" },
-
-  -- Other
+  -- { src = "https://github.com/nvim-neorg/neorg", version = "v9.6.4" },
   "https://github.com/christoomey/vim-tmux-navigator",
+  "https://github.com/arborist-ts/arborist.nvim",
+  "https://github.com/zaldih/themery.nvim",
+  "https://github.com/ellisonleao/gruvbox.nvim",
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -228,19 +225,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -----------------------------------------------------------------------------------------------------------------------
 
--- All of these are installed through `pacman -S tree-sitter-grammar`
--- vim.treesitter.language.register("bash", { "sh" })
--- vim.treesitter.language.register("c", { "c" })
--- vim.treesitter.language.register("cpp", { "cpp", "cc", "c++", "cxx" })
--- vim.treesitter.language.register("javascript", { "js" })
--- vim.treesitter.language.register("lua", { "lua" })
--- vim.treesitter.language.register("markdown", { "md", "markdown" })
--- vim.treesitter.language.register("python", { "py" })
--- vim.treesitter.language.register("query", { "q" })
--- vim.treesitter.language.register("rust", { "rs" })
--- vim.treesitter.language.register("vim", { "vimrc", "vim" })
--- vim.treesitter.language.register("vimdoc", { "vimdoc" })
---
 -- Installed using luarocks install nvim-treesitter-norg nvim-treesitter-norg-meta
 vim.treesitter.language.register('norg', { "norg" })
 --
@@ -255,48 +239,11 @@ end
 -----------------------------------------------------------------------------------------------------------------------
 
 require("luarocks-nvim").setup()
-
--- require("nvim-treesitter").setup({
---   highlight = {
---     enable = true
---   },
---   install_dir = vim.fn.stdpath('data') .. '/site'
--- })
---
--- require('nvim-treesitter').install({ 'rust', 'javascript', 'zig' })
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = { '<filetype>' },
---   callback = function() vim.treesitter.start() end,
--- })
-
--- require("tree-sitter-manager").setup({})
-
-require("neorg").setup({
-  config = {
-    load = {
-      ["core.defaults"] = {},
-      ["core.concealer"] = {},
-      ["core.export"] = {},
-      ["core.export.markdown"] = {},
-      ["core.latex.renderer"] = {},
-      ["core.ui.calendar"] = {},
-      ["core.journal"] = {
-        config = {
-          journal_folder = "journal",
-          strategy = "flat",
-          workspace = "notes"
-        }
-      },
-      ["core.dirman"] = {
-        config = {
-          workspaces = {
-            notes = "~/git/notes",
-          },
-          index = "index.norg",
-        }
-      }
-    }
-  }
+require("arborist").setup()
+require("themery").setup({
+  themes = {
+    "gruvbox"
+  }  
 })
 
 -----------------------------------------------------------------------------------------------------------------------
