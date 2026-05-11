@@ -33,6 +33,7 @@ require("lazy").setup({
   "nvim-tree/nvim-tree.lua",
   "nvim-tree/nvim-web-devicons",
   "folke/todo-comments.nvim",
+  "fei6409/log-highlight.nvim",
   "nvim-lua/plenary.nvim",
   "nvim-telescope/telescope.nvim",
   -- NOTE: I would like to use snacks.nvim instead of this - I only use ui-select for code actions.
