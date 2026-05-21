@@ -292,6 +292,8 @@ watch_cwd()
 -----------------------------------------------------------------------------------------------------------------------
 -- Plugin setup calls
 
+require("vim._core.ui2").enable({})
+
 require("arborist").setup({
   overrides = {
     norg = { url = "https://github.com/nvim-neorg/tree-sitter-norg" },
@@ -434,7 +436,7 @@ vim.keymap.set("n", "gr", telescope.lsp_references)
 -----------------------------------------------------------------------------------------------------------------------
 -- Claude Code interaction
 
-vim.keymap.set({ "n", "t" }, "<leader>a", "<Cmd>ClaudeCode<CR>")
+vim.keymap.set("n", "<leader>a", "<Cmd>ClaudeCode<CR>")
 
 -----------------------------------------------------------------------------------------------------------------------
 
