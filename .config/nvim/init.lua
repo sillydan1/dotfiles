@@ -35,6 +35,9 @@ vim.pack.add({
   "https://github.com/pysan3/pathlib.nvim",
   "https://github.com/nvim-neorg/lua-utils.nvim",
   "https://github.com/nvim-neorg/neorg",
+
+  -- Agentic coding
+  "https://github.com/coder/claudecode.nvim",
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -48,6 +51,7 @@ vim.cmd("set clipboard+=unnamedplus")
 vim.cmd("imap <C-c> <Esc>")
 vim.cmd("let g:cmake_link_compile_commands = 1")
 vim.cmd("set colorcolumn=120")
+vim.o.autoread = true
 vim.o.breakindent = true
 vim.o.cindent = true
 vim.o.completeopt = "menu,noselect,noinsert,noselect,fuzzy,popup"
@@ -249,6 +253,42 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+-- Auto-reload files changed outside Neovim
+vim.api.nvim_create_autocmd({
+  "FocusGained", "BufEnter", "WinEnter",
+  "TermLeave", "CursorHold", "CursorHoldI"
+}, {
+  callback = function()
+    if vim.fn.getcmdwintype() == "" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
+-- Use libuv to watch filesystem for changes in cwd
+local function watch_cwd()
+  local handle = vim.uv.new_fs_event()
+  handle:start(vim.fn.getcwd(), { recursive = true }, function(err, fname)
+    if err then return end
+    vim.schedule(function()
+      -- Only reload unmodified, non-special buffers
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.bo[buf].modified then goto continue end
+        if vim.bo[buf].buftype ~= "" then goto continue end
+        local bname = vim.api.nvim_buf_get_name(buf)
+        if bname ~= "" and vim.fn.filereadable(bname) == 1 then
+          vim.api.nvim_buf_call(buf, function()
+            vim.cmd("checktime")
+          end)
+        end
+        ::continue::
+      end
+    end)
+  end)
+end
+
+watch_cwd()
+
 -----------------------------------------------------------------------------------------------------------------------
 -- Plugin setup calls
 
@@ -334,6 +374,15 @@ require("snacks").setup({
 
 require("fidget").setup()
 
+require("claudecode").setup({
+  terminal = {
+    split_side = "right",
+    split_width_percentage = 0.35,
+    provider = "native",
+    auto_close = true,
+  },
+})
+
 -----------------------------------------------------------------------------------------------------------------------
 -- General navigation
 
@@ -381,6 +430,11 @@ vim.keymap.set("n", "<leader><space>", telescope.buffers)
 vim.keymap.set("n", "<leader>sg", telescope.live_grep)
 vim.keymap.set("n", "<leader>sG", function() telescope.live_grep({ additional_args = { "--no-ignore" } }) end)
 vim.keymap.set("n", "gr", telescope.lsp_references)
+
+-----------------------------------------------------------------------------------------------------------------------
+-- Claude Code interaction
+
+vim.keymap.set({ "n", "t" }, "<leader>a", "<Cmd>ClaudeCode<CR>")
 
 -----------------------------------------------------------------------------------------------------------------------
 
