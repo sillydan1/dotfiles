@@ -30,6 +30,11 @@ require("lazy").setup({
     "github/copilot.vim",
     lazy = false
   },
+  {
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
+  },
   "nvim-tree/nvim-tree.lua",
   "nvim-tree/nvim-web-devicons",
   "folke/todo-comments.nvim",
@@ -758,6 +763,8 @@ vim.api.nvim_create_autocmd("FileType", {
 -- GomSpace things
 vim.keymap.set("n", "<leader>dd", function() vim.cmd("!gs-deps -nc fetch -f") end,
   { desc = "[D]ownload gomspace [D]ependencies" })
+
+vim.keymap.set("n", "<leader>a", "<Cmd>ClaudeCode<CR>")
 
 -----------------------------------------------------------------------------------------------------------------------
 
