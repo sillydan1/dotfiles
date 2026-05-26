@@ -175,9 +175,10 @@ require("lazy").setup({
   -- AI assistants
   { "github/copilot.vim",    lazy = false },
   {
-    "coder/claudecode.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    config = true,
+    "carlos-algms/agentic.nvim",
+    opts = {
+      provider = "copilot-acp",
+    },
   },
 
   -- Navigation / workflow
@@ -695,7 +696,7 @@ vim.keymap.set("i", "<C-D>", 'copilot#Accept("\\<CR>")', { expr = true, replace_
 vim.keymap.set("i", "<C-W>", "<Plug>(copilot-suggest)")
 vim.keymap.set("i", "<C-Q>", "<Plug>(copilot-dismiss)")
 vim.keymap.set("n", "<leader>cp", "<Cmd>Copilot panel<CR>")
-vim.keymap.set("n", "<leader>a", "<Cmd>ClaudeCode<CR>")
+vim.keymap.set("n", "<leader>a", function() require("agentic").toggle() end)
 
 -----------------------------------------------------------------------------------------------------------------------
 -- Keymaps: files & buffers
