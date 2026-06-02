@@ -36,6 +36,9 @@ vim.pack.add({
   "https://github.com/nvim-neorg/lua-utils.nvim",
   "https://github.com/nvim-neorg/neorg",
 
+  -- cmake based repositories
+  "https://github.com/civitasv/cmake-tools.nvim",
+
   -- Agentic coding
   "https://github.com/coder/claudecode.nvim",
 })
@@ -294,6 +297,8 @@ watch_cwd()
 
 require("vim._core.ui2").enable({})
 
+require("cmake-tools").setup({})
+
 require("arborist").setup({
   overrides = {
     norg = { url = "https://github.com/nvim-neorg/tree-sitter-norg" },
@@ -407,6 +412,14 @@ vim.keymap.set({ "n" }, "<Leader>TT", "<Cmd>Themery<CR>")
 vim.keymap.set("n", "<leader>ne", "<Cmd>Neorg workspace notes<CR>")
 vim.keymap.set("n", "<leader>nj", "<Cmd>Neorg journal today<CR>")
 vim.api.nvim_create_augroup("filetype_mappings", { clear = true })
+
+-----------------------------------------------------------------------------------------------------------------------
+-- CMake
+
+vim.keymap.set("n", "<leader>cc", "<Cmd>CMakeGenerate<CR>", { desc = "[C]Make project [C]onfigure" })
+vim.keymap.set("n", "<leader>cb", "<Cmd>CMakeBuild<CR>", { desc = "[C]Make project [B]uild" })
+vim.keymap.set("n", "<leader>ci", "<Cmd>CMakeInstall --prefix out/install<CR>", { desc = "[C]Make project [I]nstall" })
+vim.keymap.set("n", "<leader>cC", "<Cmd>CMakeClean<CR>", { desc = "[C]Make project [C]lean" })
 
 -----------------------------------------------------------------------------------------------------------------------
 -- LSP interaction
