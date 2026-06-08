@@ -278,6 +278,8 @@ else
 fi
 
 export WLR_NO_HARDWARE_CURSORS=1
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
 
 # Rebind Ctrl+k to copy the line into wl-clipboard.
 # Note that this kills the original binding.
