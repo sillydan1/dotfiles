@@ -35,6 +35,7 @@ vim.pack.add({
   "https://github.com/pysan3/pathlib.nvim",
   "https://github.com/nvim-neorg/lua-utils.nvim",
   "https://github.com/nvim-neorg/neorg",
+  "https://github.com/IogaMaster/tuxedo.nvim",
 
   -- cmake based repositories
   "https://github.com/civitasv/cmake-tools.nvim",
@@ -390,12 +391,19 @@ require("claudecode").setup({
   },
 })
 
+require("tuxedo").setup({
+  create_todo_file = false,
+  width_ratio = 0.95,
+  height_ratio = 0.80,
+})
+
 -----------------------------------------------------------------------------------------------------------------------
 -- General navigation
 
 vim.keymap.set("n", "<leader>o", "<Cmd>NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>p", "<Cmd>NvimTreeFindFile<CR>")
 vim.keymap.set("n", "<leader>gg", "<Cmd>LazyGit<CR>")
+vim.keymap.set("n", "<leader>tt", "<Cmd>Tuxedo<CR>")
 vim.keymap.set("n", "<C-w>h", "<Cmd>sp<CR>")
 vim.keymap.set('n', '<leader>gk', function()
   local new_config = not vim.diagnostic.config().virtual_text

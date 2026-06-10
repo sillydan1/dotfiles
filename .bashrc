@@ -259,6 +259,14 @@ if [ -x "$(command -v zeit)" ]; then
     alias z=zeit
 fi
 
+# Configure todo.txt
+# I use https://github.com/webstonehq/tuxedo
+if [ -x "$(command -v tuxedo)" ]; then
+    export TODO_DIR="$HOME/git/notes/"
+    export TODO_FILE="$TODO_DIR/todo.txt"
+    export DONE_FILE="$TODO_DIR/done.txt"
+fi
+
 # Pretty print some information
 clear
 if [ -x "$(command -v fastfetch)" ]; then
