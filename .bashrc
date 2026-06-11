@@ -140,6 +140,8 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/.scripts/bin"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+export PATH="$PATH:$HOME/.opencode/bin"
+
 export EDITOR=vim
 export CMAKE_GENERATOR=Ninja
 

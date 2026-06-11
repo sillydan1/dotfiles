@@ -5,6 +5,9 @@ vim.pack.add({
   -- Treesitter parser & query downloader
   "https://github.com/arborist-ts/arborist.nvim",
 
+  -- Agentic coding
+  "ssh://git@git.gtz.dk:222/agj/opencode.nvim.git",
+
   -- Integrate with tmux
   "https://github.com/christoomey/vim-tmux-navigator",
 
@@ -38,9 +41,6 @@ vim.pack.add({
 
   -- cmake based repositories
   "https://github.com/civitasv/cmake-tools.nvim",
-
-  -- Agentic coding
-  "https://github.com/coder/claudecode.nvim",
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -441,6 +441,10 @@ require("claudecode").setup({
   },
 })
 
+require("opencode").setup({
+  width = 0.3,
+})
+
 require("tuxedo").setup({
   create_todo_file = false,
   width_ratio = 0.70,
@@ -503,9 +507,9 @@ vim.keymap.set("n", "<leader>sG", function() telescope.live_grep({ additional_ar
 vim.keymap.set("n", "gr", telescope.lsp_references)
 
 -----------------------------------------------------------------------------------------------------------------------
--- Claude Code interaction
+-- Coding Agent interaction
 
-vim.keymap.set("n", "<leader>a", "<Cmd>ClaudeCode<CR>")
+vim.keymap.set("n", "<leader>a", "<Cmd>OpenCodeToggle<CR>")
 
 -----------------------------------------------------------------------------------------------------------------------
 
