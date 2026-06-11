@@ -102,7 +102,7 @@
     },
     "tuxedo.nvim": {
       "rev": "847aa130ad1ccd22722c1e8ee3084ec70764270e",
-      "src": "https://github.com/IogaMaster/tuxedo.nvim"
+      "src": "https://github.com/sillydan1/tuxedo.nvim"
     },
     "vague.nvim": {
       "rev": "fd58046b9d64259d9785e4aeb6d6f494c6943cad",
