@@ -24,7 +24,6 @@ vim.pack.add({
   "https://github.com/nvim-telescope/telescope.nvim",
 
   -- lazygit integration
-  "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/kdheepak/lazygit.nvim",
 
   -- Neorg note taking
@@ -270,9 +269,15 @@ vim.api.nvim_create_autocmd({
 })
 
 -- Use libuv to watch filesystem for changes in cwd
+local cwd_watcher ---@type uv_fs_event_t|nil
+
 local function watch_cwd()
-  local handle = vim.uv.new_fs_event()
-  handle:start(vim.fn.getcwd(), { recursive = true }, function(err, fname)
+  if cwd_watcher then
+    return
+  end
+
+  cwd_watcher = vim.uv.new_fs_event()
+  cwd_watcher:start(vim.fn.getcwd(), { recursive = true }, function(err, _fname)
     if err then return end
     vim.schedule(function()
       -- Only reload unmodified, non-special buffers
@@ -291,8 +296,17 @@ local function watch_cwd()
   end)
 end
 
-watch_cwd()
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    if cwd_watcher then
+      cwd_watcher:stop()
+      cwd_watcher:close()
+      cwd_watcher = nil
+    end
+  end,
+})
 
+watch_cwd()
 -----------------------------------------------------------------------------------------------------------------------
 -- Plugin setup calls
 
@@ -393,8 +407,8 @@ require("claudecode").setup({
 
 require("tuxedo").setup({
   create_todo_file = false,
-  width_ratio = 0.50,
-  height_ratio = 0.30,
+  width_ratio = 0.70,
+  height_ratio = 0.50,
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -419,7 +433,6 @@ vim.keymap.set({ "n" }, "<Leader>TT", "<Cmd>Themery<CR>")
 
 vim.keymap.set("n", "<leader>ne", "<Cmd>Neorg workspace notes<CR>")
 vim.keymap.set("n", "<leader>nj", "<Cmd>Neorg journal today<CR>")
-vim.api.nvim_create_augroup("filetype_mappings", { clear = true })
 
 -----------------------------------------------------------------------------------------------------------------------
 -- CMake
@@ -446,7 +459,6 @@ vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float)
 -- Telescope interaction
 
 local telescope = require("telescope.builtin")
-vim.keymap.set("n", "<leader>sf", telescope.find_files)
 vim.keymap.set("n", "<leader>sf", telescope.find_files)
 vim.keymap.set("n", "<leader>sF", function() telescope.find_files({ no_ignore = true }) end)
 vim.keymap.set("n", "<leader><space>", telescope.buffers)

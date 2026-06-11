@@ -263,7 +263,7 @@ fi
 # Configure todo.txt
 # I use https://github.com/webstonehq/tuxedo
 if [ -x "$(command -v tuxedo)" ]; then
-    export TODO_DIR="$HOME/git/notes/"
+    export TODO_DIR="$HOME/git/notes"
     export TODO_FILE="$TODO_DIR/todo.txt"
     export DONE_FILE="$TODO_DIR/done.txt"
 fi
