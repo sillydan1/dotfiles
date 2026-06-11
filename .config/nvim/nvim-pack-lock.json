@@ -101,7 +101,7 @@
       "src": "https://github.com/nvim-neorg/tree-sitter-norg"
     },
     "tuxedo.nvim": {
-      "rev": "847aa130ad1ccd22722c1e8ee3084ec70764270e",
+      "rev": "c72f4420f60f61bd1dc2fdeb580434416aaad5d2",
       "src": "https://github.com/sillydan1/tuxedo.nvim"
     },
     "vague.nvim": {
