@@ -139,6 +139,7 @@ export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/.scripts/bin"
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export EDITOR=vim
 export CMAKE_GENERATOR=Ninja
 
@@ -259,8 +260,17 @@ if [ -x "$(command -v zeit)" ]; then
     alias z=zeit
 fi
 
+# Configure LinkServer
 if [ -d "/usr/local/LinkServer" ]; then
     export PATH="$PATH:/usr/local/LinkServer"
+fi
+
+# Configure todo.txt
+# I use https://github.com/webstonehq/tuxedo
+if [ -x "$(command -v tuxedo)" ]; then
+    export TODO_DIR="$HOME/git/notes"
+    export TODO_FILE="$TODO_DIR/todo.txt"
+    export DONE_FILE="$TODO_DIR/done.txt"
 fi
 
 # Pretty print some information

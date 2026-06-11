@@ -11,6 +11,12 @@ This means that my real "window manager" is `tmux` - so most of this config is v
 
 ## Installation
 
+### Rewrite 2026 notes
+
+```sh
+CC=gcc CXX=g++ luarocks install tree-sitter-norg
+```
+
 ### stow
 You must have `stow` installed for this to work.
 ```sh
@@ -63,6 +69,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 Then start tmux, press `Ctrl+a, I` to install the plugins (these dotfile rebind `Ctrl+b` to `Ctrl+a`).
 
 ## neovim
+Install the latest neovim from https://github.com/neovim/neovim
+Note that these files expect neovim v0.12+, so the package manager distribution may not be good enough (looking at you debian & ubuntu)
 ```sh
 sudo apt install neovim
 ```
