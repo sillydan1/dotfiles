@@ -6,7 +6,7 @@ vim.pack.add({
   "https://github.com/arborist-ts/arborist.nvim",
 
   -- Agentic coding
-  "ssh://git@git.gtz.dk:222/agj/opencode.nvim.git",
+  "https://git.gtz.dk/agj/opencode.nvim.git",
 
   -- Integrate with tmux
   "https://github.com/christoomey/vim-tmux-navigator",
@@ -431,15 +431,6 @@ require("snacks").setup({
 })
 
 require("fidget").setup()
-
-require("claudecode").setup({
-  terminal = {
-    split_side = "right",
-    split_width_percentage = 0.35,
-    provider = "native",
-    auto_close = true,
-  },
-})
 
 require("opencode").setup({
   width = 0.3,

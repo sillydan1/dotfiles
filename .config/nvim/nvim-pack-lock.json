@@ -74,7 +74,7 @@
     },
     "opencode.nvim": {
       "rev": "21d75ab601ac90cab8f635247014e56df13a7aa8",
-      "src": "ssh://git@git.gtz.dk:222/agj/opencode.nvim.git"
+      "src": "https://git.gtz.dk/agj/opencode.nvim.git"
     },
     "pathlib.nvim": {
       "rev": "57e5598af6fe253761c1b48e0b59b7cd6699e2c1",
