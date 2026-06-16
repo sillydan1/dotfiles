@@ -5,11 +5,11 @@
       "src": "https://github.com/arborist-ts/arborist.nvim"
     },
     "claudecode.nvim": {
-      "rev": "7b8b7090c16f4151401a281741a4bf37050ebd26",
+      "rev": "e6c9dd4d4f144910b0066489100ad94b7133821f",
       "src": "https://github.com/coder/claudecode.nvim"
     },
     "cmake-tools.nvim": {
-      "rev": "38f320fb9f0c4c9f1019f412f561c4d370a94d23",
+      "rev": "98cdc162572a7b77733030425d8d045d68f2a1fd",
       "src": "https://github.com/civitasv/cmake-tools.nvim"
     },
     "comment.nvim": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
     "image.nvim": {
-      "rev": "44e07129cd0ea0c60afa7a1991d35b5765b51a6b",
+      "rev": "88351f1f7d9dbae286e671ce3690a49660dd8a5c",
       "src": "https://github.com/3rd/image.nvim"
     },
     "lazygit.nvim": {
@@ -57,7 +57,7 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-tree.lua": {
-      "rev": "82f58063d67defc620e1ef8be606fc62a7b5dc1e",
+      "rev": "fb343438d49fba8c35ecc4829d66fca7a1f0ed3d",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-treesitter": {
@@ -89,7 +89,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "telescope.nvim": {
-      "rev": "7d324792b7943e4aa16ad007212e6acc6f9fe335",
+      "rev": "9377230aa5305d9e9aca4ed8dadf1070fb4aa9fc",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "themery.nvim": {
@@ -97,7 +97,7 @@
       "src": "https://github.com/zaldih/themery.nvim"
     },
     "tree-sitter-manager.nvim": {
-      "rev": "c8a7b7b91aa23da24e7d02874f78d4c668a08530",
+      "rev": "ff0c04f418c610540148cb5a29a5960251f9a223",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "tree-sitter-norg": {
@@ -109,7 +109,7 @@
       "src": "https://github.com/sillydan1/tuxedo.nvim"
     },
     "vague.nvim": {
-      "rev": "788697064264bed8390b52ca2ac9906a96712120",
+      "rev": "49fe06ad33d8847b931ba4279197bda222374cd1",
       "src": "https://github.com/vague-theme/vague.nvim"
     },
     "vim-tmux-navigator": {
