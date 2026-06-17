@@ -73,7 +73,7 @@
       "src": "https://github.com/vimcolorschemes/olive-crt.nvim"
     },
     "opencode.nvim": {
-      "rev": "21d75ab601ac90cab8f635247014e56df13a7aa8",
+      "rev": "95dd54336a2b0bc46713bd761906db24cf19461d",
       "src": "https://git.gtz.dk/agj/opencode.nvim.git"
     },
     "pathlib.nvim": {
