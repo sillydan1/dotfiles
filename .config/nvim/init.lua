@@ -460,6 +460,11 @@ end)
 
 -----------------------------------------------------------------------------------------------------------------------
 -- Themery interaction
+
+function ToggleDarkmode()
+  vim.o.background = vim.o.background == "dark" and "light" or "dark"
+end
+vim.api.nvim_create_user_command("ToggleDarkmode", ToggleDarkmode, {})
 vim.keymap.set({ "n" }, "<Leader>TT", "<Cmd>Themery<CR>")
 
 -----------------------------------------------------------------------------------------------------------------------
