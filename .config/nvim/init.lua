@@ -15,6 +15,7 @@ vim.pack.add({
   "https://github.com/ellisonleao/gruvbox.nvim",
   "https://github.com/vague-theme/vague.nvim",
   "https://github.com/vimcolorschemes/olive-crt.nvim",
+  "https://github.com/catppuccin/nvim",
   "https://github.com/zaldih/themery.nvim",
   "https://github.com/j-hui/fidget.nvim",
 
@@ -380,6 +381,8 @@ require("themery").setup({
     "gruvbox",
     "vague",
     "olive-crt",
+    "catppuccin",
+    "catppuccin-latte",
   }
 })
 
