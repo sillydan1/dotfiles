@@ -5,11 +5,11 @@
       "src": "https://github.com/arborist-ts/arborist.nvim"
     },
     "claudecode.nvim": {
-      "rev": "e6c9dd4d4f144910b0066489100ad94b7133821f",
+      "rev": "298a3e6cbe784ed9c0cc5ff85aab6be6d704d2cd",
       "src": "https://github.com/coder/claudecode.nvim"
     },
     "cmake-tools.nvim": {
-      "rev": "98cdc162572a7b77733030425d8d045d68f2a1fd",
+      "rev": "22859d754b5de738cfe9945e0910729f63deefd0",
       "src": "https://github.com/civitasv/cmake-tools.nvim"
     },
     "comment.nvim": {
@@ -17,7 +17,7 @@
       "src": "https://github.com/numtostr/comment.nvim"
     },
     "fidget.nvim": {
-      "rev": "82404b196e73a00b1727a91903beef5ddc319d22",
+      "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "git-blame.nvim": {
@@ -48,8 +48,12 @@
       "rev": "1f14d72aad7165eac307a2a2f6be0fb97a04b3c2",
       "src": "https://github.com/nvim-neorg/neorg"
     },
+    "nvim": {
+      "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
+      "src": "https://github.com/catppuccin/nvim"
+    },
     "nvim-dap": {
-      "rev": "531771530d4f82ad2d21e436e3cc052d68d7aebb",
+      "rev": "9e848e09a697ee95302a3ef2dd43fd6eb709e570",
       "src": "https://github.com/mfussenegger/nvim-dap"
     },
     "nvim-nio": {
@@ -57,7 +61,7 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-tree.lua": {
-      "rev": "fb343438d49fba8c35ecc4829d66fca7a1f0ed3d",
+      "rev": "8e8be709c9a93e1ebefde7964884a8b564bfd3e0",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-treesitter": {
@@ -97,7 +101,7 @@
       "src": "https://github.com/zaldih/themery.nvim"
     },
     "tree-sitter-manager.nvim": {
-      "rev": "ff0c04f418c610540148cb5a29a5960251f9a223",
+      "rev": "ae305699da5e97b6cffdd5cc6f6045b1b0bd26ea",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "tree-sitter-norg": {
