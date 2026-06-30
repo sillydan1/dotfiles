@@ -5,7 +5,7 @@
       "src": "https://github.com/arborist-ts/arborist.nvim"
     },
     "claudecode.nvim": {
-      "rev": "298a3e6cbe784ed9c0cc5ff85aab6be6d704d2cd",
+      "rev": "2390c6e45c4789072c293ac69de051d169668b29",
       "src": "https://github.com/coder/claudecode.nvim"
     },
     "cmake-tools.nvim": {
@@ -93,7 +93,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "telescope.nvim": {
-      "rev": "9377230aa5305d9e9aca4ed8dadf1070fb4aa9fc",
+      "rev": "427b576c16792edad01a92b89721d923c19ad60f",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "themery.nvim": {
