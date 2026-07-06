@@ -61,7 +61,7 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-tree.lua": {
-      "rev": "8e8be709c9a93e1ebefde7964884a8b564bfd3e0",
+      "rev": "7ff7040bf6c246671eb55cb1727de4fd9f92a106",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-treesitter": {
@@ -69,7 +69,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
-      "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
+      "rev": "dad71387de386a946b123079d0e53f23028f3abd",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "olive-crt.nvim": {
@@ -101,7 +101,7 @@
       "src": "https://github.com/zaldih/themery.nvim"
     },
     "tree-sitter-manager.nvim": {
-      "rev": "ae305699da5e97b6cffdd5cc6f6045b1b0bd26ea",
+      "rev": "966c28dbc68fc99c82c51a64b6ec37f420aab880",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "tree-sitter-norg": {
