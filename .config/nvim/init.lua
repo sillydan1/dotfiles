@@ -220,18 +220,6 @@ vim.lsp.enable({
   "json_lsp",
 })
 
-vim.lsp.enable({
-  "clangd",
-  "luals",
-  "ruff",
-  "jdtls",
-  "rust_analyzer",
-  "textlsp",
-  "cmake_language_server",
-  "ty",
-  "json_lsp",
-})
-
 -----------------------------------------------------------------------------------------------------------------------
 -- Autocommands
 
