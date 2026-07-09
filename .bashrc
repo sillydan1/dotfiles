@@ -289,6 +289,14 @@ else
   echo "Hello $USER!"
 fi
 
+# Set the tmux window name to be the basename of the directory when `cd`-ing.
+if [ -n "$TMUX" ]; then
+    function cd() {
+        builtin cd "$@"
+        tmux rename-window "$(basename "$PWD")"
+    }
+fi
+
 export WLR_NO_HARDWARE_CURSORS=1
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
