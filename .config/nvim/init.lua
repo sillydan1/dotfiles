@@ -219,6 +219,7 @@ vim.lsp.enable({
   "ty",
   "json_lsp",
 })
+vim.diagnostic.config({ virtual_text = true })
 
 -----------------------------------------------------------------------------------------------------------------------
 -- Autocommands
@@ -419,6 +420,10 @@ require("neorg").setup({
 -- TODO: It would be nice to not have to rely on snacks.nvim here.
 require("snacks").setup({
   image = {},
+  words = {},
+  picker = {},
+  input = {},
+  gh = {},
 })
 
 require("fidget").setup()
@@ -472,7 +477,12 @@ vim.keymap.set("n", "<leader>cC", "<Cmd>CMakeClean<CR>", { desc = "[C]Make proje
 -----------------------------------------------------------------------------------------------------------------------
 -- LSP interaction
 
+function ToggleVirtualText()
+  local c = not vim.diagnostic.config().virtual_text
+  vim.diagnostic.config({ virtual_text = c })
+end
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("n", "gK", ToggleVirtualText)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
@@ -481,6 +491,12 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>FF", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float)
+
+-----------------------------------------------------------------------------------------------------------------------
+-- GitHub interaction
+
+vim.keymap.set("n", "<leader>gp", function() Snacks.picker.gh_pr() end)
+vim.keymap.set("n", "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end)
 
 -----------------------------------------------------------------------------------------------------------------------
 -- Telescope interaction
