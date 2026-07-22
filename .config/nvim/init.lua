@@ -114,7 +114,14 @@ vim.api.nvim_create_autocmd("BufRead", {
 -----------------------------------------------------------------------------------------------------------------------
 
 vim.lsp.config.clangd = {
-  cmd = { "clangd", "--background-index" },
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--pch-storage=memory",
+    "--header-insertion=never",
+    "--completion-style=detailed",
+    "--log=error",
+  },
   root_markers = { "compile_commands.json", "compile_flags.txt" },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 }
@@ -457,6 +464,7 @@ end)
 function ToggleDarkmode()
   vim.o.background = vim.o.background == "dark" and "light" or "dark"
 end
+
 vim.api.nvim_create_user_command("ToggleDarkmode", ToggleDarkmode, {})
 vim.keymap.set({ "n" }, "<Leader>TT", "<Cmd>Themery<CR>")
 
@@ -481,6 +489,7 @@ function ToggleVirtualText()
   local c = not vim.diagnostic.config().virtual_text
   vim.diagnostic.config({ virtual_text = c })
 end
+
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set("n", "gK", ToggleVirtualText)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
