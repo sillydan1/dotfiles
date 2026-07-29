@@ -114,16 +114,25 @@ vim.api.nvim_create_autocmd("BufRead", {
 -----------------------------------------------------------------------------------------------------------------------
 
 vim.lsp.config.clangd = {
-  cmd = {
-    "clangd",
-    "--background-index",
-    "--pch-storage=memory",
-    "--header-insertion=never",
-    "--completion-style=detailed",
-    "--log=error",
-  },
   root_markers = { "compile_commands.json", "compile_flags.txt" },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+  -- All of this bullshit is just because .clangd can't add `--query-driver`.
+  cmd = function(dispatchers, config)
+    local root_dir = config.root_dir or vim.uv.cwd()
+    local query_driver = vim.fs.joinpath(root_dir, "sdk-toolchain", "gcc-arm-none-eabi-*", "bin", "arm-none-eabi-*")
+
+    return vim.lsp.rpc.start({
+      "clangd",
+      "--background-index",
+      "--pch-storage=memory",
+      "--header-insertion=never",
+      "--completion-style=detailed",
+      "--log=error",
+      "--query-driver=" .. query_driver,
+    }, dispatchers, {
+      cwd = root_dir,
+    })
+  end,
 }
 
 vim.lsp.config.luals = {
