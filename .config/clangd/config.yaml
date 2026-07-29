@@ -1,4 +1,5 @@
 CompileFlags:
+  BuiltinHeaders: QueryDriver
   Add: -Wno-unknown-warning-option
   # Remove: [-m*, -f*]  # NOTE: uncomment these for avr32 and freertos development.
 
