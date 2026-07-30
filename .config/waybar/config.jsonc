@@ -16,6 +16,7 @@
         "mpd",
         "idle_inhibitor",
         "wireplumber",
+        "custom/timer",
         "network",
         "power-profiles-daemon",
         "cpu",
@@ -139,15 +140,15 @@
         "bat": "BAT2"
     },
     "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-      }
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -191,14 +192,26 @@
     },
     "custom/power": {
         "format" : "⏻ ",
-		"tooltip": false,
-		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		}
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+        "menu-actions": {
+            "shutdown": "shutdown",
+            "reboot": "reboot",
+            "suspend": "systemctl suspend",
+            "hibernate": "systemctl hibernate"
+        }
+    },
+    "custom/timer": {
+        "exec": "~/.config/waybar/scripts/timer.sh",
+        "return-type": "json",
+        "format": "{}",
+        "on-click": "~/.config/waybar/scripts/timer.sh click",
+        "on-click-right": "~/.config/waybar/scripts/timer.sh right",
+        "on-click-middle": "~/.config/waybar/scripts/timer.sh middle",
+        "on-scroll-up": "~/.config/waybar/scripts/timer.sh down",
+        "on-scroll-down": "~/.config/waybar/scripts/timer.sh up",
+        "tooltip": true,
+        "escape": true
     }
 }
