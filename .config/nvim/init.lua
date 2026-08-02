@@ -42,6 +42,9 @@ vim.pack.add({
 
   -- cmake based repositories
   "https://github.com/civitasv/cmake-tools.nvim",
+
+  -- Coding
+  "https://github.com/danymat/neogen",
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -454,6 +457,8 @@ require("tuxedo").setup({
   height_ratio = 0.50,
 })
 
+require("neogen").setup()
+
 -----------------------------------------------------------------------------------------------------------------------
 -- General navigation
 
@@ -509,6 +514,7 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>FF", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>DD", function() require('neogen').generate() end)
 
 -----------------------------------------------------------------------------------------------------------------------
 -- GitHub interaction

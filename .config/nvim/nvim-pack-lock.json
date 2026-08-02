@@ -44,6 +44,10 @@
       "rev": "1db9093915eb16ba2473cfb8d343ace5ee04130a",
       "src": "https://github.com/vhyrro/luarocks.nvim"
     },
+    "neogen": {
+      "rev": "23e7e9f883d01289ebd90e98025acc860ea26366",
+      "src": "https://github.com/danymat/neogen"
+    },
     "neorg": {
       "rev": "d4dd8979c1129b5251d5565164f54d1cc258e92a",
       "src": "https://github.com/nvim-neorg/neorg"
