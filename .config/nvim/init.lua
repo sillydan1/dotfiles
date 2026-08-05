@@ -45,6 +45,7 @@ vim.pack.add({
 
   -- Coding
   "https://github.com/danymat/neogen",
+  "https://github.com/f-person/git-blame.nvim"
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -359,6 +360,10 @@ require("vim._core.ui2").enable({})
 
 require("cmake-tools").setup({})
 
+require("gitblame").setup({
+  enabled = false
+})
+
 require("arborist").setup({
   overrides = {
     norg = { url = "https://github.com/nvim-neorg/tree-sitter-norg" },
@@ -491,10 +496,10 @@ vim.keymap.set("n", "<leader>nj", "<Cmd>Neorg journal today<CR>")
 -----------------------------------------------------------------------------------------------------------------------
 -- CMake
 
-vim.keymap.set("n", "<leader>cc", "<Cmd>CMakeGenerate<CR>", { desc = "[C]Make project [C]onfigure" })
-vim.keymap.set("n", "<leader>cb", "<Cmd>CMakeBuild<CR>", { desc = "[C]Make project [B]uild" })
-vim.keymap.set("n", "<leader>ci", "<Cmd>CMakeInstall --prefix out/install<CR>", { desc = "[C]Make project [I]nstall" })
-vim.keymap.set("n", "<leader>cC", "<Cmd>CMakeClean<CR>", { desc = "[C]Make project [C]lean" })
+vim.keymap.set("n", "<leader>cc", "<Cmd>CMakeGenerate<CR>")
+vim.keymap.set("n", "<leader>cb", "<Cmd>CMakeBuild<CR>")
+vim.keymap.set("n", "<leader>ci", "<Cmd>CMakeInstall --prefix out/install<CR>")
+vim.keymap.set("n", "<leader>cC", "<Cmd>CMakeClean<CR>")
 
 -----------------------------------------------------------------------------------------------------------------------
 -- LSP interaction
@@ -514,7 +519,11 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>FF", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float)
+
+-----------------------------------------------------------------------------------------------------------------------
+-- General coding
 vim.keymap.set("n", "<leader>DD", function() require('neogen').generate() end)
+vim.keymap.set("n", "<leader>gb", "<Cmd>GitBlameToggle<CR>")
 
 -----------------------------------------------------------------------------------------------------------------------
 -- GitHub interaction
