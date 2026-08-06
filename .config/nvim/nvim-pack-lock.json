@@ -16,6 +16,10 @@
       "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
       "src": "https://github.com/numtostr/comment.nvim"
     },
+    "copilot.vim": {
+      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
+      "src": "https://github.com/github/copilot.vim"
+    },
     "fidget.nvim": {
       "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
       "src": "https://github.com/j-hui/fidget.nvim"
@@ -65,7 +69,7 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-tree.lua": {
-      "rev": "4213bd6eabac38b16dd6615002b6243b23cf3bf6",
+      "rev": "b2aadda94b107480c48e548d6db51c6840b7b33c",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-treesitter": {
@@ -123,6 +127,10 @@
     "vim-tmux-navigator": {
       "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
       "src": "https://github.com/christoomey/vim-tmux-navigator"
+    },
+    "windsurf.vim": {
+      "rev": "3c0a4f8a7be75113a6e19be13b7cc37210d6e26a",
+      "src": "https://github.com/Exafunction/windsurf.vim"
     }
   }
 }
