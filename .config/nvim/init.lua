@@ -45,7 +45,10 @@ vim.pack.add({
 
   -- Coding
   "https://github.com/danymat/neogen",
-  "https://github.com/f-person/git-blame.nvim"
+  "https://github.com/f-person/git-blame.nvim",
+
+  -- Fun
+  "https://github.com/gonstoll/duck.nvim",
 })
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -524,6 +527,8 @@ vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float)
 -- General coding
 vim.keymap.set("n", "<leader>DD", function() require('neogen').generate() end)
 vim.keymap.set("n", "<leader>gb", "<Cmd>GitBlameToggle<CR>")
+vim.keymap.set("n", "<leader>dd", function() require("duck").hatch() end)
+vim.keymap.set("n", "<leader>dk", function() require("duck").cook_all() end)
 
 -----------------------------------------------------------------------------------------------------------------------
 -- GitHub interaction

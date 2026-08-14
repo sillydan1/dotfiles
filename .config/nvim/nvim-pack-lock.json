@@ -20,6 +20,10 @@
       "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
       "src": "https://github.com/github/copilot.vim"
     },
+    "duck.nvim": {
+      "rev": "3e779e12662a99751f861ce93cc2b36489f57567",
+      "src": "https://github.com/gonstoll/duck.nvim"
+    },
     "fidget.nvim": {
       "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
       "src": "https://github.com/j-hui/fidget.nvim"

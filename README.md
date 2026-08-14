@@ -176,6 +176,15 @@ A fresh arch linux (with no gui) is missing a lot.
 Use `yay` to install these.
  - `sc-im`
 
+### From `flatpak`
+I have some flatpak-distributed applications that I use on a daily basis.
+- `drawy`
+
+To have them executable through `wmenu`/`dmenu` you can create a symlink into `/usr/local/bin` like so:
+```sh
+sudo ln -s /var/lib/flatpak/exports/bin/org.kde.drawy /usr/local/bin/drawy
+```
+
 ## Password Management
 Install `pass` using your package manager and initialize your `gpg` key:
 
