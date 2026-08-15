@@ -4,21 +4,9 @@
       "rev": "fdeef56c2840c6772b9f68c5774ed87e9340ec7d",
       "src": "https://github.com/arborist-ts/arborist.nvim"
     },
-    "claudecode.nvim": {
-      "rev": "2390c6e45c4789072c293ac69de051d169668b29",
-      "src": "https://github.com/coder/claudecode.nvim"
-    },
     "cmake-tools.nvim": {
       "rev": "22859d754b5de738cfe9945e0910729f63deefd0",
       "src": "https://github.com/civitasv/cmake-tools.nvim"
-    },
-    "comment.nvim": {
-      "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
-      "src": "https://github.com/numtostr/comment.nvim"
-    },
-    "copilot.vim": {
-      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
-      "src": "https://github.com/github/copilot.vim"
     },
     "duck.nvim": {
       "rev": "3e779e12662a99751f861ce93cc2b36489f57567",
@@ -48,25 +36,17 @@
       "rev": "e565749421f4bbb5d2e85e37c3cef9d56553d8bd",
       "src": "https://github.com/nvim-neorg/lua-utils.nvim"
     },
-    "luarocks.nvim": {
-      "rev": "1db9093915eb16ba2473cfb8d343ace5ee04130a",
-      "src": "https://github.com/vhyrro/luarocks.nvim"
-    },
     "neogen": {
       "rev": "23e7e9f883d01289ebd90e98025acc860ea26366",
       "src": "https://github.com/danymat/neogen"
     },
     "neorg": {
-      "rev": "d4dd8979c1129b5251d5565164f54d1cc258e92a",
+      "rev": "6fda795b0108c92840fd32db6d5dd54e7f997fa8",
       "src": "https://github.com/nvim-neorg/neorg"
     },
     "nvim": {
       "rev": "edefef779ab08ce1a4a404713e3012b0d202bd35",
       "src": "https://github.com/catppuccin/nvim"
-    },
-    "nvim-dap": {
-      "rev": "9e848e09a697ee95302a3ef2dd43fd6eb709e570",
-      "src": "https://github.com/mfussenegger/nvim-dap"
     },
     "nvim-nio": {
       "rev": "edcc181a875301dd21840189aa2f2f9ad69fc172",
@@ -77,7 +57,7 @@
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-treesitter": {
-      "rev": "c9f9ed6c1892f629ea399f4ee7905f2686fa13f2",
+      "rev": "a1bcffc8095c142ad1f7a9671a4ae180333f9209",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
@@ -93,7 +73,7 @@
       "src": "https://git.gtz.dk/agj/opencode.nvim.git"
     },
     "pathlib.nvim": {
-      "rev": "57e5598af6fe253761c1b48e0b59b7cd6699e2c1",
+      "rev": "a0d3dbbe00ce6a546426b1aed3838a82fe6bfc42",
       "src": "https://github.com/pysan3/pathlib.nvim"
     },
     "plenary.nvim": {
@@ -112,10 +92,6 @@
       "rev": "bfa58f4b279d21cb515b28023e1b68ec908584b2",
       "src": "https://github.com/zaldih/themery.nvim"
     },
-    "tree-sitter-manager.nvim": {
-      "rev": "9dc4ffc4fb010e7abb976a92360c2c5a7d324c15",
-      "src": "https://github.com/romus204/tree-sitter-manager.nvim"
-    },
     "tree-sitter-norg": {
       "rev": "d7edfaf89198aab652c7a1f0f818196efedaccfb",
       "src": "https://github.com/nvim-neorg/tree-sitter-norg"
@@ -131,10 +107,6 @@
     "vim-tmux-navigator": {
       "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
       "src": "https://github.com/christoomey/vim-tmux-navigator"
-    },
-    "windsurf.vim": {
-      "rev": "3c0a4f8a7be75113a6e19be13b7cc37210d6e26a",
-      "src": "https://github.com/Exafunction/windsurf.vim"
     }
   }
 }
