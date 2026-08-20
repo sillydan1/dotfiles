@@ -46,6 +46,7 @@ vim.pack.add({
   -- Coding
   "https://github.com/danymat/neogen",
   "https://github.com/f-person/git-blame.nvim",
+  "https://github.com/andythigpen/nvim-coverage",
 
   -- Fun
   "https://github.com/gonstoll/duck.nvim",
@@ -363,6 +364,22 @@ require("vim._core.ui2").enable({})
 
 require("cmake-tools").setup({})
 
+-- get the borders to nothing, because otherwise the summary window looks stupid.
+require("coverage").setup({
+  summary = {
+    borders = {
+      topleft = "",
+      topright = "",
+      top = "",
+      left = "",
+      right = "",
+      botleft = "",
+      botright = "",
+      bot = "",
+    }
+  }
+})
+
 require("gitblame").setup({
   enabled = false
 })
@@ -529,6 +546,8 @@ vim.keymap.set("n", "<leader>DD", function() require('neogen').generate() end)
 vim.keymap.set("n", "<leader>gb", "<Cmd>GitBlameToggle<CR>")
 vim.keymap.set("n", "<leader>dd", function() require("duck").hatch() end)
 vim.keymap.set("n", "<leader>dk", function() require("duck").cook_all() end)
+vim.keymap.set("n", "<leader>co", function() require("coverage").load_lcov(".coverage", true) end)
+vim.keymap.set("n", "<leader>cs", function() require("coverage").summary() end)
 
 -----------------------------------------------------------------------------------------------------------------------
 -- GitHub interaction
