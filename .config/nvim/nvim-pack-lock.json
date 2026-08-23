@@ -37,7 +37,7 @@
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
     "image.nvim": {
-      "rev": "88351f1f7d9dbae286e671ce3690a49660dd8a5c",
+      "rev": "5c6f29a5069e1f7bd5773ce5907454063b0f125d",
       "src": "https://github.com/3rd/image.nvim"
     },
     "lazygit.nvim": {
@@ -81,7 +81,7 @@
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-treesitter": {
-      "rev": "074aa4422bf029908338e855d0c0f71470a971bb",
+      "rev": "8b98b4470eb326f1c7b50dae79f8c963568e5720",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
@@ -117,7 +117,7 @@
       "src": "https://github.com/zaldih/themery.nvim"
     },
     "tree-sitter-manager.nvim": {
-      "rev": "9dc4ffc4fb010e7abb976a92360c2c5a7d324c15",
+      "rev": "023590c8f068788a0513a4409bf37ff7f9d1deff",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "tree-sitter-norg": {
