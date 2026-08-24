@@ -1,2 +1,6 @@
 [diff "fcinfo"]
 textconv = /usr/bin/fcinfo
+
+# Secrets
+[include]
+path = ~/.config/git/config.local
