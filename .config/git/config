@@ -4,3 +4,6 @@ textconv = /usr/bin/fcinfo
 # Secrets
 [include]
 path = ~/.config/git/config.local
+
+[core]
+excludesfile = /home/agj/.gitignore_global
