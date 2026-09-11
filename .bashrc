@@ -230,11 +230,17 @@ if [ -x "$(command -v yazi)" ]; then
   }
 fi
 
+# enable syntax high
+
 # enable syntax highlighting in the manpages (if you've installed batman)
 if [ -x "$(command -v batman)" ]; then
   alias man="batman"
 else
-  export MANPAGER="less -R --use-color -Dd+r -Du+b"
+  if [ -x "$(command -v bat)" ]; then
+    export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\\[[0-9;]*m//g; s/.\\x08//g\" | batcat -p -lman'"
+  else
+    export MANPAGER="less -R --use-color -Dd+r -Du+b"
+  fi
 fi
 
 # Set the default browser - prefer libre stuff.
