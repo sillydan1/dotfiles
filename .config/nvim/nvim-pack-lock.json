@@ -1,15 +1,15 @@
 {
   "plugins": {
     "arborist.nvim": {
-      "rev": "a34436d6b5efdc86e6f80f8c79844aae8d649a92",
+      "rev": "1a6b2cb16c72641e1311ceb165feb6e4bf30c8fa",
       "src": "https://github.com/arborist-ts/arborist.nvim"
     },
     "claudecode.nvim": {
-      "rev": "2390c6e45c4789072c293ac69de051d169668b29",
+      "rev": "af04fbf9c27c5c06b4d1ff022b551aa94e1df4aa",
       "src": "https://github.com/coder/claudecode.nvim"
     },
     "cmake-tools.nvim": {
-      "rev": "ee807ac4e62591720de2f6ad0abbfb966c4c7b97",
+      "rev": "782a254c62a61af1d4febddd0d6dbc5ea414a027",
       "src": "https://github.com/civitasv/cmake-tools.nvim"
     },
     "comment.nvim": {
@@ -33,7 +33,7 @@
       "src": "https://github.com/f-person/git-blame.nvim"
     },
     "gruvbox.nvim": {
-      "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
+      "rev": "48262cda6a8a921b159c8ec3e21b48ccd870b7b2",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
     "image.nvim": {
@@ -77,15 +77,15 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-tree.lua": {
-      "rev": "355bcc85a48f45b3e728219f10b880d569928965",
+      "rev": "7e1da84aaffb413e1fa47b3895e5caa12501142d",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-treesitter": {
-      "rev": "ca581c3436fc2b236847f5b739ebc263739e5ca6",
+      "rev": "19bdfc04f40ed2ccb3340591d125f759b0406875",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
-      "rev": "ec309a0eaff6ea967e58c275996155ab5c16938d",
+      "rev": "0dc0cfb0c6858041174a53c7aa4adaf65e994b3c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "olive-crt.nvim": {
@@ -109,7 +109,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "telescope.nvim": {
-      "rev": "40aedd8a68c78a656a10a8d62d80c54af59420fb",
+      "rev": "1e1bab730218eaf97fce743be3f56e51075928ac",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "themery.nvim": {
@@ -117,7 +117,7 @@
       "src": "https://github.com/zaldih/themery.nvim"
     },
     "tree-sitter-manager.nvim": {
-      "rev": "d93782393d7d4b48ddbdbcb0fdff6f8cb8d7043a",
+      "rev": "06c90a3af8eb471f4a4ff979d681312284a8583a",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "tree-sitter-norg": {
