@@ -123,11 +123,15 @@ vim.api.nvim_create_autocmd("BufRead", {
 
 vim.lsp.config.clangd = {
   root_markers = { "compile_commands.json", "compile_flags.txt" },
-  filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "arduino" },
   -- All of this bullshit is just because .clangd can't add `--query-driver`.
   cmd = function(dispatchers, config)
     local root_dir = config.root_dir or vim.uv.cwd()
-    local query_driver = vim.fs.joinpath(root_dir, "sdk-toolchain", "gcc-arm-none-eabi-*", "bin", "arm-none-eabi-*")
+    local query_driver = table.concat({
+      vim.fs.joinpath(root_dir, "sdk-toolchain", "gcc-arm-none-eabi-*", "bin", "arm-none-eabi-*"),
+      -- ESP32 toolchain installed by arduino-cli / Arduino IDE
+      vim.fs.joinpath(vim.env.HOME, ".arduino15", "packages", "esp32", "tools", "**", "bin", "xtensa-esp32-elf-*"),
+    }, ",")
 
     return vim.lsp.rpc.start({
       "clangd",
