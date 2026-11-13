@@ -23,6 +23,7 @@ local menu = "wmenu-run -f \"Meslo 11\""
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar & ~/.config/hypr/random_wallpaper.sh & hyprpaper")
     hl.exec_cmd("dbus-update-activation-environment --systemd HYPRLAND_INSTANCE_SIGNATURE")
+    hl.exec_cmd("hyprpolkitagent")
 end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
